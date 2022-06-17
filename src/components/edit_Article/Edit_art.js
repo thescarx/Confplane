@@ -1,96 +1,162 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./edit_art.css";
-import { useNavigate ,useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { saveAs } from "file-saver";
 import axios from "axios";
-import DownloadIcon from '@mui/icons-material/Download';
-var idd='x'
+import DownloadIcon from "@mui/icons-material/Download";
+import Popup from "../popup/Popup";
+var idd = "x";
+
+var objett = {};
 
 function Edit_art() {
-    axios.interceptors.request.use(
-        (config) => {
-          config.headers.authorization =
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MjUxMDg2LCJpYXQiOjE2NTUyMTUwODYsImp0aSI6ImNjMmI2MzA2ZjhiNjRmMTBhZjE4ZTg3ZDIzMThiYjM5IiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.dSea2jjy08WS3ce7aIIBJO1Eq7jcIUsm49zU5UTcVa4";
-          return config;
-        },
-        (error) => {
-          return Promise.reject(error);
-        }
-      );
-    const{id}=useParams();
-    console.log(id)
-    let host = "http://127.0.0.1:8000";
+  var [dics, setDics] = useState([]);
+  const [dic, setDic] = useState([
+    //   {
+    //   question:"",
+    //   answer:null,
+    // }
+  ]);
+
+  axios.interceptors.request.use(
+    (config) => {
+      config.headers.authorization =
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NTA5NTY4LCJpYXQiOjE2NTU0NzM1NjgsImp0aSI6IjZlZWM1ODdhZWQwZTQzMTk5NzJhNjIyZWJmZTEyNWI1IiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.c5dEQp8Xx7dseQvDHYxqZLtDOB9skS5LBDleliccxgc";
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+  const { id } = useParams();
+  let host = "http://127.0.0.1:8000";
   let navigate = useNavigate();
   let navigate_2 = useNavigate();
-////////first part right
+  const [isOpen, setIsOpen] = useState(false);
 
-  const [item,setartt]=useState({});
-  useEffect(()=>{
-    let url2=host+"/articles/"+id
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+  ////////first part righ
+
+  const [item, setartt] = useState({});
+  useEffect(() => {
+    let url2 = host + "/articles/" + id;
     axios
-    .get(url2)
-    .then((artts)=>{
-        idd = artts["data"].conference_id
-        setartt(artts["data"])
-        let url=host+"/report/question/"+idd
-        axios.get(url)
-        .then((resp)=>{
-            setqst(resp["data"])
-            console.log(resp["data"])
-        })
-    })
-    .catch((err)=>{
-        console.log(err)
-    });
-  },[])
+      .get(url2)
+      .then((artts) => {
+        idd = artts["data"].conference_id;
+        setartt(artts["data"]);
+        let url = host + "/report/question/" + idd;
+        axios.get(url).then((resp) => {
+          setqst(resp["data"]);
+          console.log(resp["data"]);
+          for (let i = 0; i < resp["data"].length; i++) {
+            let x = {};
+            dic.push({ question: resp["data"][i].id, answer: null });
+            console.log(dic);
+          }
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const saveFile = (urlll) => {
     saveAs(urlll, "article.pdf");
   };
 
+  const [qst, setqst] = useState([]);
+  const [valeur, setvaleur] = useState(false);
 
+  const changeetat = (e, i) => {
+    
+    dic[i].answer = e;
+    setDics(dic);
 
+    //  console.log(valeur);
+  };
 
-  const [qst,setqst]=useState([])
-//   useEffect(()=>{
-//     let url=host+"/report/question/"+idd
-//     console.log(url)
-//     axios.get(url)
-//     .then((hh)=>{
-//         setqst(hh["data"]);
-//         console.log(hh["data"])
-//         console.log(qst)
-//     }
-//     ).catch((err)=>{
-//         console.log(err)
-//     }
-//     )
-//   },[])
- 
-const Question =({data})=>{
-    return(
-        <div>
-        {data.map((q)=>{
-            return(
-                <div className="qst_box">
-                    <div className="qs">
-                {q.question}
+  const Question = ({ data }) => {
+    return (
+      <div>
+        {data.map((q, i) => {
+          return (
+            <form>
+              <div className="qst_box">
+                <div className="qs">
+                  <p>. {q.question}</p>
                 </div>
                 <div className="chek">
-                <form action="" method="post">
-                    <input type="radio" name="joke" value="YES" /> YES
-                    <input type="radio" name="joke" value="No" /> NO
-                </form>
+                  <input
+                    type="radio"
+                    id="html"
+                    name="answer"
+                    value="true"
+                    onChange={() => changeetat(true,i)}
+                  />
+                    <label for="html">YES</label> {" "}
+                  <input
+                    type="radio"
+                    id="css"
+                    name="answer"
+                    value="false"
+                    onChange={() => changeetat(false, i)}
+                  />
+                    <label for="css">NO</label>
                 </div>
-                </div>
-            )
+              </div>
+            </form>
+          );
         })}
-        </div>
-    )
-}
+      </div>
+    );
+  };
 
+  const tabletri = () => {
+    let x = dics.filter((item) => item.answer != null);
+    setDics(x);
+    console.log(x);
+    objett = dics;
+    console.log(objett);
+    return x;
+  };
 
+  const [cmnt, setcmnt] = useState("");
+  const [score, setscore] = useState(0);
+  const [done, setdone] = useState(false);
+
+  const changecmnt = (e) => {
+    e.preventDefault()
+    setcmnt(e.target.value);
+  };
+
+  useEffect(() => {
+    let objet = {
+      remark: cmnt.toString(),
+      score: score,
+      review_done: done,
+      article: id,
+      answers: tabletri(),
+    };
+    console.log(objet);
+    axios.post(host + "/report/report/", objet).then((rr) => {
+      console.log(rr);
+    });
+  }, [done]);
+
+  // const calculescore=()=>{
+  //   let cpt=0;
+  //   let val=50/dic.length;
+  //   for(let i=0;i<dics.length;i++){
+  //     if(dics[i].answer===true){
+  //       cpt=cpt+val;
+  //     }
+  //   }
+  //   return cpt;
+  // }
 
   return (
     <div className="edit_page">
@@ -131,39 +197,75 @@ const Question =({data})=>{
 
       <div className="edit_content">
         <div className="edit_r">
-            <div className="infoart">
-                <div className="titre_art">
-                    {item.title}
-                    </div>
-                     <div className="down_art">
-                     <div className="down_f"><DownloadIcon className="hh"/></div><div className="pp"><p onClick={()=>saveFile(item.article_url)}>Download article</p> </div> 
-                     </div>
-                     <div className="descrep_part">
-                        {item.description}
-                     </div>
+          <div className="infoart">
+            <div className="titre_art">
+              <p>{item.title}</p>
+            </div>
+            <div className="down_art">
+              <div className="down_f">
+                <DownloadIcon id="hh" />
+              </div>
+              <div className="pp">
+                <p onClick={() => saveFile(item.article_url)}>
+                  Download article
+                </p>{" "}
+              </div>
+            </div>
+            <div className="descrep_part">
+              <p>{item.description}</p>
+            </div>
 
-                     <div className="catego">
-                        {item.categories}
-                     </div>
-
-                     <div className="autho">
-                        {/* {item.authors.map(
-                            (cle)=>{
-                           
-                            }
-                        )} */}
-                       
-                     </div>
-                </div>
+            <div className="catego">
+              <p>{item.categories}</p>
+            </div>
+          </div>
         </div>
         <div className="edit_l">
-            <div className="qsss">
-            <Question data={qst}/>
+          <div className="qsss">
+            <div className="give_qst">
+              <Question data={qst} />
+              <div className="scr_50">
+                <div className="scr_p">
+                  <p>. From 0 to 50 whats your rating for the article ?</p>
+                </div>
+                <div className="scr_inp">
+                  <div className="scr_inp_inp">
+                    <input
+                      type="number"
+                      max={100}
+                      min={0}
+                      className="innp"
+                      onChange={(event) => setscore(event.target.value)}
+                    />
+                  </div>
+                  <div className="scr_inp_50">/100</div>
+                </div>
+              </div>
             </div>
-            <div className="cmm">
-                jj
+          </div>
+          <div className="cmm">
+            <div className="space_cmnt">
+              <textarea
+                name="description"
+                className="spec_art"
+                onChange={changecmnt}
+                placeholder="Comment"
+              />
             </div>
-           
+            <div className="space_btn">
+              <div className="Submit_div">
+                <button className="Submit_btn" onClick={() => setdone(true)}>
+                  <p>Submit result</p>
+                </button>
+              </div>
+              <div className="Edit_div">
+                <button className="Edit_btn" onClick={togglePopup}>
+                  <p>Ask Edit article</p>
+                </button>
+                {isOpen && <Popup handelclickclose={togglePopup} />}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

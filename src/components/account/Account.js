@@ -21,7 +21,9 @@ function Account() {
   let navigate_2 = useNavigate();
   let navigate_4 = useNavigate();
   const hiddenFileInput = React.useRef(null);
+
   const token = localStorage.getItem("token");
+
   axios.interceptors.request.use(
     (config) => {
       config.headers.authorization = `Bearer ${token}`;
@@ -249,46 +251,6 @@ function Account() {
 
   return (
     <div className="account_page" id="account">
-      {/* <div className="navv">
-        <div className="navbar_11">
-          <ul className="navbar_list_11">
-            <Link to="/" className="link">
-              <div className="list_item_11">
-                <p>Home</p>
-              </div>
-            </Link>
-
-            <div
-              className="list_item_11"
-              onClick={() => {
-                navigate_2("/MainConf");
-              }}
-            >
-              <p>Conferences</p>
-            </div>
-
-            <Link to="/#footer" smooth className="link">
-              <div className="list_item_11">
-                <p>About us</p>{" "}
-              </div>
-            </Link>
-            <Link to="/#footer" smooth className="link">
-              <div className="list_item_11">
-                <p>Contact us</p>{" "}
-              </div>
-            </Link>
-
-            <div
-              className="list_item_11"
-              onClick={() => {
-                navigate("/account");
-              }}
-            >
-              <p>Account</p>
-            </div>
-          </ul>
-        </div>
-      </div> */}
       <nav className="navbar_1">
         <ul className="navbar_list_1">
           <Link to="/" className="link">
