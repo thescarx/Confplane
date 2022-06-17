@@ -81,10 +81,11 @@ function AssignArticles() {
               { row.reviewers.length!==0 
                 ? <td className="column_reviewer">
                   {row.reviewers.map((reviewer, key) => (
-                    <div key={key} className="review">
+                    <div key={key} className="xrev">
                       <div className="rev" >
                         {reviewer.first_name} {reviewer.family_name}
                       </div>
+                    
                       <ClearIcon
                         className="x"
                         onClick={() => {
@@ -92,7 +93,8 @@ function AssignArticles() {
                           handleDeleteRev(row.id, reviewer.id);
                         }}
                       />
-                    </div>
+                      </div>
+                      
                   ))}
                 </td>
                 : <td> <div></div> </td>}
