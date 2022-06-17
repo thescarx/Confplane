@@ -145,7 +145,7 @@
 
 .originalReviewer {
     min-height: 10%;
-    min-width: 70%;
+    min-width: 60%;
     display: flex;
     flex-direction: column;
     /* color: rgba(0, 78, 100, 0.92); */
@@ -165,7 +165,7 @@
 .userDiv{
         cursor: pointer;
         background-color: black;
-        min-width: 97%;
+        min-width: 90%;
         min-height: 15%;
         display: flex;
         flex-direction: row;
@@ -214,7 +214,7 @@
     flex-direction: row;
     /* margin-left: 30%; */
     justify-content: center;
-    margin-left: 10%;
+    margin-left: 20%;
     margin-bottom: 2%;
 }
 .btn3{
