@@ -3,9 +3,12 @@ import '../components/admin/Admin.css'
 import AdminUsers from '../components/admin/AdminUsers'
 import AdminConferences from '../components/admin/AdminConferences'
 import { useNavigate } from 'react-router-dom'
+import LoadingSpinner from "../components/LoadingSpinner"
 
 
 function AdminMain() {
+
+  const [loading,setLoading]=useState(false)
   const [bool, setBool] = useState(true);
   const navigate= useNavigate()
   const handleUsers = ()=>{
@@ -49,20 +52,16 @@ const handleSignout = ()=>{
           <div className='adminsidebarmenu' >
             
             <div className='menulist' >
-              <div className='item  active' id='i1' onClick={()=>{setBool(true);handleUsers()}} >Users Management</div>
-              <div className='item' id='i2'  onClick={()=>{setBool(false);handleConferences()}} >Conferences Management</div>
+              <div className='item  active' id='i1' onClick={()=>{setBool(true);handleUsers();setLoading(true)}} >Users Management</div>
+              <div className='item' id='i2'  onClick={()=>{setBool(false);handleConferences();setLoading(true)}} >Conferences Management</div>
               <div className='item' id='i3' onClick={()=>{handleSignout()}} >Log out</div>
 
             </div>
           </div>
         </div>
       <div className='cont' >
-        {bool ? <AdminUsers /> : <AdminConferences />}
-
-        {/* <button className='btn-logout'  onClick={()=>{
-          localStorage.removeItem('token')
-          navigate('../login')
-  }} > logout </button> */}
+        {bool ? loading ?<LoadingSpinner/>  :<AdminUsers loading={loading} setLoading={setLoading} /> 
+              : loading ?<LoadingSpinner/>  :<AdminConferences loading={loading} setLoading={setLoading} />}
 
       </div>
     </div>

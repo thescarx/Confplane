@@ -12,9 +12,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-function AdminUsers() {
+function AdminUsers({loading,setLoading}) {
   const navigate=useNavigate()
-  const [loading,setLoading]=useState(false)
   const [bool, setBool] = useState(false);
   const accesToken = localStorage.getItem("token");
 
@@ -64,7 +63,7 @@ const VerifyToken=(token)=>{
 
     axios
       .get("http://localhost:8000/users/listforadmin/path")
-      .then((response) => setData(response["data"]))
+      .then((response) => {setData(response["data"]);setLoading(false)})
     
   }, [bool]);
 
@@ -131,9 +130,8 @@ const VerifyToken=(token)=>{
 
 
  <div className="page-users">
-      <div className="filter_user">
+     
         <div className="inputcomplet-users">
-          <SearchIcon />
           <input
             placeholder="Search"
             className="inputfilter-users"
@@ -144,7 +142,7 @@ const VerifyToken=(token)=>{
             }}
           />
         </div>
-      </div>
+   
 
      <div className="table-users" >
      <table className="sss" cellPadding="0" cellSpacing="0" >

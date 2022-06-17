@@ -9,7 +9,7 @@ import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 
-function AdminConferences() {
+function AdminConferences({loading,setLoading}) {
   const accesToken = localStorage.getItem("token");
   const [bool, setBool] = useState(false);
   // const [bool3,setBool3]= useState(false);
@@ -32,13 +32,13 @@ function AdminConferences() {
   useEffect(() => {
     axios
       .get("http://localhost:8000/conferences/admin/list/path")
-      .then((response) => setData(response["data"]));
+      .then((response) => {setData(response["data"]);setLoading(false)});
   }, [bool]);
 
 
   useEffect(() => {  
     axios.get("http://localhost:8000/conferences/list/path").then(response=>
-      setData2(response["data"]))
+      {setData2(response["data"]);setLoading(false)})
   }, [bool]);
 
 
@@ -107,7 +107,6 @@ function AdminConferences() {
       <div className="table1">
         <div className="filter1">
           <div className="inputcomplet">
-            <SearchIcon />
             <input
               placeholder="Search"
               className="inputfilter"
@@ -132,8 +131,8 @@ function AdminConferences() {
             <tbody>
               {data.map((column, i) => (
                 <tr key={i}>
-                  <td> {column.title}</td>
-                  <td>{column.name_of_host}</td>
+                  <td> <div>{column.title}</div> </td>
+                  <td> <div>{column.name_of_host}</div> </td>
                   <td className="icons">
                     <div className="actions" >
                       <div className="act" ><FontAwesomeIcon
@@ -150,7 +149,7 @@ function AdminConferences() {
                     </div>
                     
                   </td>
-                  <td>lien vers conference</td>
+                  <td> <div>lien vers conference</div> </td>
                 </tr>
               ))}
             </tbody>
@@ -159,7 +158,6 @@ function AdminConferences() {
       <div className="table2">
         <div className="filter2">
           <div className="inputcomplet">
-            <SearchIcon />
             <input
               placeholder="Search"
               className="inputfilter"
@@ -186,8 +184,8 @@ function AdminConferences() {
             <tbody>
               {data2.map((column, i) => (
                 <tr key={i}>
-                  <td> {column.title}</td>
-                  <td>{column.name_of_host}</td>
+                  <td> <div>{column.title}</div> </td>
+                  <td> <div>{column.name_of_host}</div> </td>
                   <td className="icons">
                     <div className="actions2" >
                     <div className="act2" >
@@ -201,7 +199,7 @@ function AdminConferences() {
                    
                     
                   </td>
-                  <td>lien vers conference</td>
+                  <td> <div> lien vers conference</div> </td>
                 </tr>
               ))}
             </tbody>

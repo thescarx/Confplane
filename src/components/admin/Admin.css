@@ -162,33 +162,37 @@ tr{
     align-items: center;
 }
 
-.filter_user {
-    top:5%;
+/* .filter_user {
     min-width: 80%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    flex: 30%;
-    background-color: #FF0909;
+    flex: 20%;
     
+
+
+
+} */
+
+.inputcomplet-users {
+     
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 4vh;
+    justify-content: center;
+    width: 50%;
+    flex: 30%;
+    width: 80%;
 
 }
 .inputfilter-users {
     padding: 1rem 1rem 1rem 3.5rem;
-    width: 100%;
+    width: 80%;
     background: rgba(0, 78, 100, 0.12);
     border-radius: 15px;
 }
-.inputcomplet-users {
-     
-    padding: .5rem;
-    position: sticky;
-    display: flex;
-    align-items: center;
-    width: 70%;
-    flex: 20%;
-}
+
 
 
 .tb{
@@ -234,13 +238,15 @@ tr{
     background-color: #004E64;
     display: block;
     width: 100%;
+    border-top-left-radius:15px ;
+    border-top-right-radius:15px ;
   
 }
 
 .tb tbody{
     display: block;
     overflow: auto;
-    height: 30vh;
+    height: 26vh;
  
     
 }
@@ -409,12 +415,11 @@ tr{
     background-color: #deecef;
     border-bottom-left-radius:15px ;
     border-bottom-right-radius:15px ;
-    max-height: 30vh;
+    max-height: 34vh;
 }
 
 .table-users{
-  background-color: #0AA122;
-  flex: 60%;
+  flex: 70%;
  
  
 
