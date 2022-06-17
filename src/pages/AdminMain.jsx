@@ -36,6 +36,7 @@ const handleSignout = ()=>{
     element3.classList.add('active')
     localStorage.removeItem('token');
     localStorage.removeItem('is_admin');
+    localStorage.removeItem('id');
 
     navigate('/login')
 }

@@ -126,7 +126,7 @@
 .form_inputs1::-webkit-input-placeholder {
   font-family: "Poppins", sans-serif;
   color: red;
-  font-size: 1.5vW;
+  font-size: 1vw;
   opacity: 0.5;
   font-weight: 500;
   padding: 15px;
@@ -134,7 +134,7 @@
 .form_inputs2::-webkit-input-placeholder {
   font-family: "Poppins", sans-serif;
   color: rgba(0, 78, 100, 0.92);
-  font-size: 20px;
+  font-size: 1vw;
   opacity: 0.8;
   font-weight: 500;
   padding: 15px;
@@ -143,6 +143,8 @@
 .footer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .body {
   width: 100%;
@@ -193,5 +195,5 @@
 }
 .err {
   color: red;
-  font-size: 20px;
+  font-size: 10px;
 }

@@ -153,12 +153,6 @@ tr{
 
 }
 
-/* ----------------------------------------------------------------------------------------------------- */
-
-
-/* .table::-webkit-scrollbar {
-    display: none; 
-} */
 .page-users {
     display: flex;
     flex-direction: column;
@@ -167,12 +161,7 @@ tr{
     justify-content: center;
     align-items: center;
 }
-/* .table{
-    width: 100%;
-    flex: 90%;  
-    display: flex;
-    justify-content: center;           
-} */
+
 .filter_user {
     top:5%;
     min-width: 80%;
@@ -180,7 +169,10 @@ tr{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    flex: 10%;
+    flex: 30%;
+    background-color: #FF0909;
+    
+
 }
 .inputfilter-users {
     padding: 1rem 1rem 1rem 3.5rem;
@@ -198,20 +190,7 @@ tr{
     flex: 20%;
 }
 
-/* --------------------------------------------table */
 
-.sss{
-    margin: 25px;
-    font-size: 0.9em;
-    font-weight: bold;
-    min-width: 1000px;
-    max-width: 1000px;
-    position: sticky;
-    margin-top: 0;
-    height: fit-content;
-    border-radius: 20px;
-    
-}
 .tb{
     margin: 25px;
   font-size: 0.9em;
@@ -227,7 +206,7 @@ tr{
   }
   
   
-  th{
+.tb  th{
  
     padding: 30px 15px;
     min-width: 333px;
@@ -237,38 +216,27 @@ tr{
     
  
  }
- td{
+.tb td{
     padding: 30px 15px;
     min-width: 333px;
     max-width: 333px;
     height: 30px;
 
  }
- td div{
+.tb td div{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
-.sss thead tr{
-    background-color: #004E64;
-    display: block;
-    width: 100%;
- 
-}
+
 .tb thead tr{
     background-color: #004E64;
     display: block;
     width: 100%;
   
 }
-.sss tbody{
-    display: block;
-    overflow: auto;
-    height: 70vh;
 
- 
-}
 .tb tbody{
     display: block;
     overflow: auto;
@@ -278,9 +246,7 @@ tr{
 }
 
 
-.sss tbody::-webkit-scrollbar {
-    display: none; 
-} 
+
 .tb tbody::-webkit-scrollbar {
     display: none; 
 } 
@@ -339,15 +305,6 @@ tr{
 .accepted{
     color: #0AA122;
 }
-/* .icon-close{
-    color: #FF9900;
-    font-weight: bolder;
-}
-
-.icon-delete{
-    color: #FF0909;
-    font-weight: bolder;
-} */
 .icon-check{
     color: #0AA122;
     font-size: 18px;
@@ -365,10 +322,11 @@ tr{
     font-size: 25px;
 }
 
-/* _________________________________________ last adjustements */
 
-tbody{
+.tb tbody{
     background-color: #deecef;
+    border-bottom-left-radius:15px ;
+    border-bottom-right-radius:15px ;
 }
 
 .actions2{
@@ -380,4 +338,84 @@ tbody{
 .hdr{
     display: flex;
     justify-content: center;
+}
+
+
+
+
+
+/* ---------------------sss------------- */
+
+.sss tbody{
+    display: block;
+    overflow: auto;
+    height: 70vh;
+
+ 
+}
+
+.sss tbody::-webkit-scrollbar {
+    display: none; 
+} 
+
+.sss thead tr{
+    background-color: #004E64;
+    display: block;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+ 
+}
+
+.sss{
+    margin: 25px;
+    font-size: 0.9em;
+    font-weight: bold;
+    min-width: 1000px;
+    max-width: 1000px;
+    position: sticky;
+    margin-top: 0;
+    height: fit-content;
+    border-radius: 20px;
+   
+    
+}
+
+.sss  th{
+ 
+    padding: 30px 15px;
+    min-width: 333px;
+    max-width: 333px;
+    height: 40px;
+    color: white;
+    
+ 
+ }
+.sss td{
+    padding: 30px 15px;
+    min-width: 333px;
+    max-width: 333px;
+    height: 30px;
+
+ }
+.sss td div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.sss tbody{
+    background-color: #deecef;
+    border-bottom-left-radius:15px ;
+    border-bottom-right-radius:15px ;
+    max-height: 30vh;
+}
+
+.table-users{
+  background-color: #0AA122;
+  flex: 60%;
+ 
+ 
+
 }

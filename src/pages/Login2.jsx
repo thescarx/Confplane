@@ -49,6 +49,10 @@ function Login2() {
             password: pwd,
           })
           .then((response) => {
+            // if (response.status!==200){
+
+            //   setFormErrors({...formErrors,other:"invalid email or password"})
+            // }
             const accessToken = response?.data?.access;
             const is_admin=response?.data?.is_admin
 
@@ -73,6 +77,8 @@ function Login2() {
             //     })}
 
             // if (err.response.data.status==401) setFormErrors(err.response.data.detail)
+          }).catch(err=>{console.log(err.response.data.detail);
+            setFormErrors({...formErrors,other:"invalid email or password"})
           });
       }
     }

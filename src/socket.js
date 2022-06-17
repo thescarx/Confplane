@@ -8,3 +8,4 @@ export const SocketContext = React.createContext();
 socket.onopen = function (e) {
   console.log(e);
 };
+
