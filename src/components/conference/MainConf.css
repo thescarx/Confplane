@@ -130,11 +130,14 @@
                 /* margin-top: 2%; */
                 margin-bottom: 1%;
 }
-.fimage{
-        margin: 2%;
-        width: 12%;
-        height: 90%;
-        border-radius: 7px;
+.imgDiv{
+        margin:1%;
+}
+.image{
+        background-color: black;
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
 }
 .host{ 
         text-overflow: ellipsis;

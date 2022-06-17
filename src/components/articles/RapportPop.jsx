@@ -2,7 +2,7 @@ import React from 'react'
 import "../Notification.css"
 
 function RapportPop({data,trigger,pop,setPop}) {
-                  console.log(data);
+                  console.log(data)
 
     return trigger ? (
         <div className="popup">

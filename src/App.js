@@ -34,19 +34,23 @@ import Check from "./components/Signup/Check";
 function App() {
 
   // const socket = useContext(SocketContext);
-  const [not, setNot] = useState([]);
+  const [not, setNot] = useState(notifications);
 
   useEffect(() => {
     socket.onmessage = function (e) {
-      console.log(e["data"]);
-      setNot(e["data"]);
+      // let x = e.json();
+      // console.log(x);
+      // console.log(e["data"]);
+      const obj = JSON.parse(e["data"]);
+      // console.log(obj.notifications);
+      setNot(obj.notifications);
       console.log(not);
     };
 
-    socket.onopen = function (e) {
-      console.log(e["data"]);
-      setNot();
-    };
+    // socket.onopen = function (e) {
+    //   console.log(e);
+    //   // setNot();
+    // };
   }, [socket]);
   const [bool, setBool] = useState(false);
   return (

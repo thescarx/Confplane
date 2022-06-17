@@ -12,6 +12,7 @@ import axios from "axios";
 import { format } from "date-fns";
 
 function MainConf() {
+  const [loading, setLoading] = useState(true);
   const [confs, setConfs] = useState(conferences);
   const token = localStorage.getItem("token");
   axios.interceptors.request.use(
@@ -31,6 +32,7 @@ function MainConf() {
     axios.get(url).then((resp) => {
       console.log(resp["data"]);
       setConfs(resp["data"]);
+      setLoading(false);
     });
   }, []);
 
@@ -68,50 +70,55 @@ function MainConf() {
           </li>
         </ul>
       </nav>
-      <div className="dv">
-        <button className="btnn" onClick={() => navigate("/CreateCOnf")}>
-          {" "}
-          <p className="txt">Create Conference</p>
-        </button>
-        <button className="search   ">
-          <SearchIcon fontSize="large"></SearchIcon>
-        </button>
-        <input type="text" className="inp" placeholder="Search"></input>
-        <button className="filter">
-          <FilterListIcon fontSize="large"></FilterListIcon>
-          {/* <ReorderIcon fontSize="large"></ReorderIcon> */}
-        </button>
-      </div>
-      <div className="originalConf">
-        {confs.map((conf) => {
-          const { id } = conf;
-          return (
-            <div
-              className="confDiv"
-              key={id}
-              onClick={() => navigate_3("/Conf/" + id)}
-            >
-              <div className="test">
-                <div className="title">{conf.title}</div>
+      {loading && <div>Loading...</div>}
+      {!loading && (
+        <div className="dv">
+          <button className="btnn" onClick={() => navigate("/CreateCOnf")}>
+            {" "}
+            <p className="txt">Create Conference</p>
+          </button>
+          <button className="search   ">
+            <SearchIcon fontSize="large"></SearchIcon>
+          </button>
+          <input type="text" className="inp" placeholder="Search"></input>
+          <button className="filter">
+            <FilterListIcon fontSize="large"></FilterListIcon>
+            {/* <ReorderIcon fontSize="large"></ReorderIcon> */}
+          </button>
+        </div>
+      )}
+      {!loading && (
+        <div className="originalConf">
+          {confs.map((conf) => {
+            const { id } = conf;
+            return (
+              <div
+                className="confDiv"
+                key={id}
+                onClick={() => navigate_3("/Conf/" + id)}
+              >
+                <div className="test">
+                  <div className="title">{conf.title}</div>
 
-                <div className="host">Hosted by {conf.name_of_host}</div>
+                  <div className="host">Hosted by {conf.name_of_host}</div>
 
-                <div className="host">
-                  Date : {conf.start_date.substring(0, 10)} to{" "}
-                  {conf.end_date.substring(0, 10)}
+                  <div className="host">
+                    Date : {conf.start_date.substring(0, 10)} to{" "}
+                    {conf.end_date.substring(0, 10)}
+                  </div>
+
+                  <div className="host">Location : {conf.location}</div>
+
+                  <div className="category"> Category : {conf.categories}</div>
                 </div>
-
-                <div className="host">Location : {conf.location}</div>
-
-                <div className="category"> Category : {conf.categories}</div>
+                <div className="imgDiv">
+                  <img className="image" src={conf.logo} alt={conf.logo} />
+                </div>
               </div>
-              <div>
-                <img className="image" src={conf.logo} alt={conf.logo} />
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </>
   );
 }

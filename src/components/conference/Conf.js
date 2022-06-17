@@ -16,6 +16,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Conf() {
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("token");
+  axios.interceptors.request.use(
+    (config) => {
+      config.headers.authorization = `Bearer ${token}`;
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
   const userId = localStorage.getItem("id");
   console.log("this is" + userId);
 
@@ -47,6 +58,7 @@ function Conf() {
     axios.get(url).then((resp) => {
       // if (resp.statusText === 200) {
       setConf(resp["data"]);
+      setLoading(false);
       if (userId === id) {
         console.log("yes");
       }
@@ -91,80 +103,86 @@ function Conf() {
           </li>
         </ul>
       </nav>
-      <div className="origDiv">
-        <div className="confInfos">
-          <img src={host + conf.logo} alt={host + conf.logo} />
+      {loading && <div className="loading">Loading...</div>}
+      {!loading && (
+        <div className="origDiv">
+          <div className="confInfos">
+            <img src={host + conf.logo} alt={host + conf.logo} />
 
-          {userId === conf.creator && (
-            <div
-              className="editArticle"
-              onClick={() => {
-                navigate("/EditConf/" + conf.id);
-              }}
-            >
-              <EditIcon className="iconn"></EditIcon>
-              <p>Edit Conference</p>
+            {userId === conf.creator && (
+              <div
+                className="editArticle"
+                onClick={() => {
+                  navigate("/EditConf/" + conf.id);
+                }}
+              >
+                <EditIcon className="iconn"></EditIcon>
+                <p>Edit Conference</p>
+              </div>
+            )}
+            <div className="infoDetails">
+              <LocationOnIcon className="iconn"></LocationOnIcon>
+              <p>{conf.location}</p>
             </div>
-          )}
-          <div className="infoDetails">
-            <LocationOnIcon className="iconn"></LocationOnIcon>
-            <p>{conf.location}</p>
-          </div>
-          {/* <div className="infoDetails">
+            {/* <div className="infoDetails">
             <AlternateEmailIcon className="iconn"></AlternateEmailIcon>
             <p>{conf.adresse}</p>
           </div> */}
-          <div className="infoDetails">
-            <LanguageIcon className="iconn"></LanguageIcon>
-            <p>{conf.site}</p>
-          </div>
-          <div className="infoDetails">
-            <AccountBalanceIcon className="iconn"></AccountBalanceIcon>
-            <p>{conf.name_of_host}</p>
-          </div>
-          <div className="infoDetails">
-            <AccessTimeIcon className="iconn"></AccessTimeIcon>
-            <p>{conf.start_date.substring(0, 10)}</p>
-          </div>
-          <div className="infoDetails">
-            <AccessTimeFilledIcon className="iconn"></AccessTimeFilledIcon>
-            <p>{conf.end_date.substring(0, 10)}</p>
-          </div>
-          <hr></hr>
-          {userId === conf.creator && (
-            <div className="articles">
-              <div className="pa" onClick={() => navigate("/pending/" + id)}>
-                Pending articles
-              </div>
-              <div className="rr" onClick={() => navigate("/reviewing/" + id)}>
-                Reviews results
-              </div>
-              <div className="aa" onClick={() => navigate("/accepted/" + id)}>
-                Accepted articles
-              </div>
-              <div className="asa" onClick={() => navigate("/table/" + id)}>
-                Assign articles
-              </div>
+            <div className="infoDetails">
+              <LanguageIcon className="iconn"></LanguageIcon>
+              <p>{conf.site}</p>
             </div>
-          )}
-
-          {userId !== conf.creator && (
-            <div className="btnparam">
-              <button
-                className="apply-to-join"
-                onClick={() => navigate("/Conf/" + id + "/ApplyForm")}
-              >
-                <p className="txt">Apply to join</p>
-              </button>
+            <div className="infoDetails">
+              <AccountBalanceIcon className="iconn"></AccountBalanceIcon>
+              <p>{conf.name_of_host}</p>
             </div>
-          )}
-        </div>
+            <div className="infoDetails">
+              <AccessTimeIcon className="iconn"></AccessTimeIcon>
+              <p>{conf.start_date.substring(0, 10)}</p>
+            </div>
+            <div className="infoDetails">
+              <AccessTimeFilledIcon className="iconn"></AccessTimeFilledIcon>
+              <p>{conf.end_date.substring(0, 10)}</p>
+            </div>
+            <hr></hr>
+            {userId === conf.creator && (
+              <div className="articles">
+                <div className="pa" onClick={() => navigate("/pending/" + id)}>
+                  Pending articles
+                </div>
+                <div
+                  className="rr"
+                  onClick={() => navigate("/reviewing/" + id)}
+                >
+                  Reviews results
+                </div>
+                <div className="aa" onClick={() => navigate("/accepted/" + id)}>
+                  Accepted articles
+                </div>
+                <div className="asa" onClick={() => navigate("/table/" + id)}>
+                  Assign articles
+                </div>
+              </div>
+            )}
 
-        <div className="confdesc">
-          <h1>{conf.title}</h1>
-          <p>{conf.description}</p>
+            {userId !== conf.creator && (
+              <div className="btnparam">
+                <button
+                  className="apply-to-join"
+                  onClick={() => navigate("/Conf/" + id + "/ApplyForm")}
+                >
+                  <p className="txt">Apply to join</p>
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div className="confdesc">
+            <h1>{conf.title}</h1>
+            <p>{conf.description}</p>
+          </div>
         </div>
-      </div>
+      )}
     </main>
   );
 }

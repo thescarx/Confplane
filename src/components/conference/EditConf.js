@@ -34,10 +34,11 @@ let isSubmit = false;
 let isImage = false;
 
 function EditConf() {
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("token");
   axios.interceptors.request.use(
     (config) => {
-      config.headers.authorization =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzQ2OTE0LCJpYXQiOjE2NTUzMTA5MTQsImp0aSI6Ijk2YWI2ZGFmNGE4MTQwZDE5N2Y3MDRiYmM4NWNmMzllIiwidXNlcl9pZCI6IjNlNDJiYWJjLWI3YTUtNGZjZC1hNTVlLWM2YjY3NmFiZGI1NiJ9.E-pAlNCh8Soy0QJ0n0qFUlgMIccFNrWPMeU-c2pJk2o";
+      config.headers.authorization = `Bearer ${token}`;
       return config;
     },
     (error) => {
@@ -256,6 +257,7 @@ function EditConf() {
       setEndDate(new Date(resp.data.end_date));
       setsubSd(new Date(resp.data.start_submition_date));
       setsubDead(new Date(resp.data.submition_deadline));
+      setLoading(false);
     });
   }, []);
 
@@ -306,14 +308,17 @@ function EditConf() {
         start_submition_date: format(subSd, "yyyy-MM-dd hh:mm:ss.sss"),
         location: formValues.location.toString(),
         site: formValues.site.toString(),
+        reviewers: [],
       };
       console.log(logo);
 
-      // console.log(bodyFormData)
+      console.log(bodyFormData);
       try {
         let url = "http://127.0.0.1:8000/conferences/" + id;
         console.log(url);
         axios.put(url, bodyFormData).then((response) => {
+          console.log("1 done");
+          console.log(response);
           if (isImage) {
             let data = new FormData();
             data.append("logo", logo);
@@ -378,7 +383,8 @@ function EditConf() {
       <div className="testDiv">
         {isOpenModal && <Modal setOpenModal={setOpenModal}></Modal>}
         {!isOpenModal && <h1 className="crtext">Modify your conference</h1>}
-        {!isOpenModal && (
+        {loading && <div>Loading...</div>}
+        {!loading && !isOpenModal && (
           <form className="principalDiv" onSubmit={handleSubmit}>
             <input
               name="title"
@@ -502,7 +508,7 @@ function EditConf() {
 
             <p>{isImage && image.name}</p>
 
-            <p className="pp">{reviewerTotal}</p>
+            {/* <p className="pp">{reviewerTotal}</p> */}
 
             <button type="submit" className="btnn">
               <p className="txt">Modify Conference</p>
