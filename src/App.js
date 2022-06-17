@@ -29,6 +29,7 @@ import Unauthorized from "./pages/Unauthorized";
 import ApplyForm from "./components/conference/ApplyForm";
 import { socket, SocketContext } from "./socket";
 import { notifications } from "./data";
+import Edit_art from "./components/edit_Article/Edit_art";
 
 function App() {
   // const socket = useContext(SocketContext);
@@ -65,6 +66,7 @@ function App() {
             <Route path="/Conf/:id/ApplyForm" element={<ApplyForm />} />
             <Route path="CreateConf" element={<CreateConf />} />
             <Route path="/EditConf/:id" element={<EditConf />} />
+            <Route path="/Edit_art/:id" element={<Edit_art />} />
           </Route>
 
           <Route element={<RequireAuth bool={!bool} />}>
