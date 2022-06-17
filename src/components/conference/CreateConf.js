@@ -15,6 +15,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 
 import { format } from "date-fns";
+import { questions } from "./data.js";
 
 import Modal from "../Notification/Modal";
 
@@ -34,6 +35,10 @@ let isSubmit = false;
 let isImage = false;
 
 function CreateConf() {
+  let [questionss, setQuestionss] = useState([]);
+  const handleQuest = (e) => {
+    e.preventDefault();
+  };
   const token = localStorage.getItem("token");
   axios.interceptors.request.use(
     (config) => {
@@ -241,6 +246,7 @@ function CreateConf() {
     axios
       .get(url)
       .then((resp) => {
+        console.log(resp.data);
         if (resp.status >= 200 && resp.status <= 299) {
           setCandidates(resp.data);
         } else {
@@ -300,12 +306,22 @@ function CreateConf() {
               let data = new FormData();
               data.append("logo", logo);
               console.log(data);
-              axios
-                .put(
-                  "http://127.0.0.1:8000/conferences/" + response.data["id"],
-                  data
-                )
-                .then((res) => console.log(res.toString()));
+              axios.put(
+                "http://127.0.0.1:8000/conferences/" + response.data["id"],
+                data
+              );
+
+              for (let i = 0; i < questionss.length; i++) {
+                let objet = {
+                  question: questionss[i],
+                  conference: response.data["id"],
+                };
+                axios
+                  .post("http://127.0.0.1:8000/report/question/", objet)
+                  .then((resp) => {
+                    console.log(resp);
+                  });
+              }
             }
             // console.log(response['data'])
           });
@@ -322,6 +338,54 @@ function CreateConf() {
   }, [isSubmit]);
 
   const [isOpenModal, setOpenModal] = useState(false);
+  const [indexx, setIndexx] = useState(questions.length);
+  const [showAuthors, setShowAuthors] = useState(false);
+  const [authorErrors, setauthorErrors] = useState([]);
+
+  const removeAuthor = (id) => {
+    console.log(index);
+    console.log(indexx);
+    console.log("yahaahah " + questionss.length);
+    let newQuest = [];
+    for (let i = 0; i < questionss.length; i++) {
+      if (i !== id) {
+        newQuest.push(questionss[i]);
+      }
+    }
+    if (questionss.length === 0) {
+      setShowAuthors(false);
+    }
+    // questionss = questionss.filter((author) => author.id !== id);
+    setQuestionss(newQuest);
+    index--;
+    setIndexx(index - 1);
+    authorErrors.pop();
+  };
+  const handleAdd = (e) => {
+    e.preventDefault();
+    index++;
+    setIndexx(index - 1);
+
+    let newQuest = questionss;
+    newQuest.push({
+      question: "",
+    });
+    let newError = authorErrors;
+    newError.push({});
+    setQuestionss(newQuest);
+    setauthorErrors(newError);
+    setShowAuthors(true);
+
+    console.log("yahaahah " + questionss.length);
+  };
+
+  const handleq = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...questionss];
+    list[index] = value;
+    setQuestionss(list);
+    console.log(questionss);
+  };
 
   return (
     <main>
@@ -512,16 +576,19 @@ function CreateConf() {
                   return (
                     <div className="userDiv" key={id}>
                       <div className="test">
-                        <div className="title">{user.first_name}</div>
-
-                        <div className="host">
-                          Hosted by {user.id}, Location -{" "}
-                          {user.linked_in_username} to {user.id}
+                        <div className="title">
+                          {user.first_name} {user.family_name}
                         </div>
+
+                        <div className="host">Email : {user.email}</div>
 
                         <div className="category">
                           {" "}
-                          Category: {user.family_name}
+                          LinkedIn : {user.linked_in_username}
+                        </div>
+                        <div className="category">
+                          {" "}
+                          Interests : {user.fields_of_interssts}
                         </div>
 
                         <div className="addremove">
@@ -535,11 +602,11 @@ function CreateConf() {
                         </div>
                       </div>
 
-                      <img
+                      {/* <img
                         className="image"
                         src={user.profile_picture}
                         alt={user.profile_picture}
-                      />
+                      /> */}
                     </div>
                   );
                 })}
@@ -580,7 +647,7 @@ function CreateConf() {
                     </div>
                   );
                 })}
-
+              {showReview && <h5>Add reviewers here</h5>}
               {showReview && (
                 <button className="add" onClick={switche}>
                   <AddOutlinedIcon fontSize="large" />
@@ -592,6 +659,41 @@ function CreateConf() {
                   <p>DONE</p>
                 </button>
               )}
+            </div>
+            <div className="originalReviewer">
+              {indexx != index &&
+                questionss.map((author, index) => {
+                  const { id } = author;
+                  return (
+                    <div className="authorDiv" key={id}>
+                      <div className="author-info">
+                        <input
+                          name="first_name"
+                          type="text"
+                          className="author-info-input"
+                          placeholder="Question"
+                          value={author.first_name}
+                          onChange={(e) => handleq(e, index)}
+                        ></input>
+                        <div className="errorDiv">
+                          {/* {authorErrors[index].first_name} */}
+                        </div>
+                      </div>
+                      <div className="logo">
+                        <button
+                          className="removebtn2"
+                          onClick={() => removeAuthor(index)}
+                        >
+                          <p>Remove</p>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              {!showAuthors && <h5>Add questions here</h5>}
+              <button className="add" onClick={handleAdd}>
+                <AddOutlinedIcon fontSize="large" />
+              </button>
             </div>
 
             <p className="pp">{reviewerTotal}</p>

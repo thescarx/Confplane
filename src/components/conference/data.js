@@ -124,3 +124,4 @@ export const users = [
 ];
 
 export const authors = [];
+export const questions = [];
