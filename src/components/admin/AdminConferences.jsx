@@ -9,7 +9,7 @@ import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 
-function AdminConferences({loading,setLoading}) {
+function AdminConferences() {
   const accesToken = localStorage.getItem("token");
   const [bool, setBool] = useState(false);
   // const [bool3,setBool3]= useState(false);
@@ -32,13 +32,13 @@ function AdminConferences({loading,setLoading}) {
   useEffect(() => {
     axios
       .get("http://localhost:8000/conferences/admin/list/path")
-      .then((response) => {setData(response["data"]);setLoading(false)});
+      .then((response) => {setData(response["data"])});
   }, [bool]);
 
 
   useEffect(() => {  
     axios.get("http://localhost:8000/conferences/list/path").then(response=>
-      {setData2(response["data"]);setLoading(false)})
+      {setData2(response["data"])})
   }, [bool]);
 
 

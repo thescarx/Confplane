@@ -36,9 +36,9 @@ function PopUp({id,refresh,setRefresh,trigger,pop,setPop,articleN}) {
   return trigger ? (
     <div className="popup">
       <div className="popup-inner">
-        <div className="div_input">
+        {/* <div className="div_input">
           <input type="text" className="input_noti" placeholder="Search" />
-        </div>
+        </div> */}
         <div className="div_items">
           {data.map((item, i) => (
             <div

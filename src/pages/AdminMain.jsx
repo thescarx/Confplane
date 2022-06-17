@@ -8,7 +8,6 @@ import LoadingSpinner from "../components/LoadingSpinner"
 
 function AdminMain() {
 
-  const [loading,setLoading]=useState(false)
   const [bool, setBool] = useState(true);
   const navigate= useNavigate()
   const handleUsers = ()=>{
@@ -52,16 +51,16 @@ const handleSignout = ()=>{
           <div className='adminsidebarmenu' >
             
             <div className='menulist' >
-              <div className='item  active' id='i1' onClick={()=>{setBool(true);handleUsers();setLoading(true)}} >Users Management</div>
-              <div className='item' id='i2'  onClick={()=>{setBool(false);handleConferences();setLoading(true)}} >Conferences Management</div>
+              <div className='item  active' id='i1' onClick={()=>{setBool(true);handleUsers()}} >Users Management</div>
+              <div className='item' id='i2'  onClick={()=>{setBool(false);handleConferences()}} >Conferences Management</div>
               <div className='item' id='i3' onClick={()=>{handleSignout()}} >Log out</div>
 
             </div>
           </div>
         </div>
       <div className='cont' >
-        {bool ? loading ?<LoadingSpinner/>  :<AdminUsers loading={loading} setLoading={setLoading} /> 
-              : loading ?<LoadingSpinner/>  :<AdminConferences loading={loading} setLoading={setLoading} />}
+        {bool ? <AdminUsers /> 
+              : <AdminConferences />}
 
       </div>
     </div>

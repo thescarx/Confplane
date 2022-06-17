@@ -18,11 +18,10 @@ function Edit_art() {
     //   answer:null,
     // }
   ]);
-
+  const token = localStorage.getItem("token");
   axios.interceptors.request.use(
     (config) => {
-      config.headers.authorization =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NTA5NTY4LCJpYXQiOjE2NTU0NzM1NjgsImp0aSI6IjZlZWM1ODdhZWQwZTQzMTk5NzJhNjIyZWJmZTEyNWI1IiwidXNlcl9pZCI6IjQ4ZWYyMGU3LWQwNWItNGYxMS1iZmUxLTFhMTU1MjFkNDA3OSJ9.c5dEQp8Xx7dseQvDHYxqZLtDOB9skS5LBDleliccxgc";
+      config.headers.authorization = `Bearer ${token}`;
       return config;
     },
     (error) => {
@@ -72,7 +71,6 @@ function Edit_art() {
   const [valeur, setvaleur] = useState(false);
 
   const changeetat = (e, i) => {
-    
     dic[i].answer = e;
     setDics(dic);
 
@@ -95,7 +93,7 @@ function Edit_art() {
                     id="html"
                     name="answer"
                     value="true"
-                    onChange={() => changeetat(true,i)}
+                    onChange={() => changeetat(true, i)}
                   />
                     <label for="html">YES</label> {" "}
                   <input
@@ -129,7 +127,7 @@ function Edit_art() {
   const [done, setdone] = useState(false);
 
   const changecmnt = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setcmnt(e.target.value);
   };
 

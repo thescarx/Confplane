@@ -5,13 +5,16 @@
 }
 
 
-table,tr,td{
+ /* table,tr,td{
     border: none;
-}
+} */
 
-tr{
+.sss tr{
     border-bottom: 1px solid rgba(0, 0, 0,0.1) ;
-}
+} 
+.tb tr{
+    border-bottom: 1px solid rgba(0, 0, 0,0.1) ;
+} 
 
 .front {
     display: flex;

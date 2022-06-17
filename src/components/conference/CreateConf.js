@@ -34,10 +34,10 @@ let isSubmit = false;
 let isImage = false;
 
 function CreateConf() {
+  const token = localStorage.getItem("token");
   axios.interceptors.request.use(
     (config) => {
-      config.headers.authorization =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzQ2OTE0LCJpYXQiOjE2NTUzMTA5MTQsImp0aSI6Ijk2YWI2ZGFmNGE4MTQwZDE5N2Y3MDRiYmM4NWNmMzllIiwidXNlcl9pZCI6IjNlNDJiYWJjLWI3YTUtNGZjZC1hNTVlLWM2YjY3NmFiZGI1NiJ9.E-pAlNCh8Soy0QJ0n0qFUlgMIccFNrWPMeU-c2pJk2o";
+      config.headers.authorization = `Bearer ${token}`;
       return config;
     },
     (error) => {
@@ -285,8 +285,9 @@ function CreateConf() {
         location: formValues.location.toString(),
         // logo:logo,
         site: formValues.site.toString(),
-        reviewers: ["605f7435-6edf-4d2c-a141-6192e7c1f0a4"],
-        // reviewerIds,
+        reviewers:
+          //  ["605f7435-6edf-4d2c-a141-6192e7c1f0a4"],
+          reviewerIds,
       };
       console.log(logo);
 

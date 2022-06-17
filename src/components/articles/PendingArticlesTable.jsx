@@ -7,8 +7,6 @@ import { useParams } from "react-router-dom";
 
 function PendingArticlesTable() {
   const {id} = useParams();
-  console.log(id)
-  const [state, setState] = useState({});
   const [data, setData] = useState([]);
   const [bool, setBool] = useState(false);
   const accesToken = localStorage.getItem("token");
@@ -46,8 +44,8 @@ function PendingArticlesTable() {
   const handleDecline = (id) => {
     axios
       .put("http://localhost:8000/articles/" + id, { status: "refused" })
-      .then(() => {
-        console.log("done");
+      .then((response) => {
+        setBool(!bool)
       });
   };
   const handleAccept = (id) => {
@@ -55,39 +53,45 @@ function PendingArticlesTable() {
       .put("http://localhost:8000/articles/" + id, {
         status: "accepted to review",
       })
-      .then(() => {
-        console.log("done");
+      .then((response) => {
+        setBool(!bool)
       });
   };
 
   return (
     <div className="page" >
-     <h2 className="title" >Pending articles</h2> 
+     <div  className="text-pend" ><h2 className="title" >Pending articles</h2> </div> 
+    <div className="table-pend" >
     <table className="table-content">
       <thead>
         <tr>
-          <th>Articles</th>
-          <th>Author name</th>
-          <th>Upload date</th>
-          <th>Decision</th>
+          <th> <div> Articles</div></th>
+          <th> <div>Author name</div> </th>
+          <th><div>Upload date</div></th>
+          <th><div>Decision</div></th>
         </tr>
       </thead>
 
       <tbody>
         {data.map((column, i) => (
           <tr key={i}>
-            <td> {column.title} </td>
-            <td> {column.user_id} </td>
-            <td>{dateFormat(column.date_of_creation, "mmmm dS, yyyy")}</td>
+            <td> <div>{column.title}</div>  </td>
+            <td><div> {column.user_id}</div> </td>
+            <td> <div>{dateFormat(column.date_of_creation, "mmmm dS, yyyy")}</div> </td>
             <td className="decision" >
-            
+              <div className="decline-accept" >
+
               <div  onClick={()=>{handleAccept(column.id)}} >pass to review</div> 
               <div onClick={()=>{handleDecline(column.id)}} >Decline</div>
+              </div>
+            
+             
             </td>
           </tr>
         ))}
       </tbody>
     </table>
+    </div>
     </div>
   );
 

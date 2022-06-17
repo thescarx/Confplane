@@ -22,6 +22,22 @@ function ReviewResultTable() {
   );
 
   const {id} = useParams();
+   const handleDecline = (id) => {
+    axios
+      .put("http://localhost:8000/articles/" + id, { status: "refused" })
+      .then((response) => {
+        setBool(!bool)
+      });
+  };
+  const handleAccept = (id) => {
+    axios
+      .put("http://localhost:8000/articles/" + id, {
+        status: "accepted",
+      })
+      .then((response) => {
+        setBool(!bool)
+      });
+  };
 
 
   useEffect(() => {
@@ -32,32 +48,34 @@ function ReviewResultTable() {
 
   return (
     <div className="page" >
-      <h2 className="title" >Review results</h2>
-       <table className="table-content">
+      <div className="text-pend" ><h2 className="title" >Review results</h2></div> 
+      <div className="table-pend" >
+      <table className="table-content">
       <thead>
         <tr>
-          <th>Articles</th>
-          <th>Author name</th>
-          <th>Score</th>
-          <th>Accept/Decline</th>
+          <th> <div>Articles</div> </th>
+          <th> <div>Author name</div> </th>
+          <th> <div>Score</div> </th>
+          <th> <div>Accept/Decline</div> </th>
         </tr>
       </thead>
 
       <tbody>
         {data.map((column, i) => (
           <tr key={i}>
-            <td> {column.title} </td>
-            <td> {column.user_id} </td>
+            <td> <div>{column.title}</div>  </td>
+            <td> <div>{column.user_id}</div>  </td>
              <td  >
+              <div>
              
-               {column.report_set.length===3 
+               {column.report_set.length===column.reviewers.length 
                 ?  <div className="column_note" > 
                   {column.report_set.map(rep=>rep.score).reduce((prev,curr)=>prev+curr  ,0)}/100 
                   <CommentIcon onClick={()=>{setPop(true)}} />
                   <RapportPop data={column.reviewers} trigger={pop} pop={pop} setPop={setPop} />
                   </div>
                 :  <div className="column_note" >
-                  { column.report_set.length}/3
+                  { column.report_set.length}/{column.reviewers.length}
                   <CommentIcon onClick={()=>{setPop(true)}}  />
                   <RapportPop data={column.reviewers} trigger={pop} pop={pop} setPop={setPop} />
                 </div>
@@ -65,17 +83,23 @@ function ReviewResultTable() {
               
                
                  }
+                 </div>
   
 
 
             </td>
             <td className="decision" >
-              <div>Accept</div> <div>Decline</div>
+              <div className="decline-accept" >
+              <div  onClick={ ()=> handleAccept(column.id)} >Accept</div> <div onClick={()=> handleDecline(column.id)} >Decline</div>
+              </div>
+              
             </td>
           </tr>
         ))}
       </tbody>
     </table>
+      </div>
+       
      </div>
   );
 }

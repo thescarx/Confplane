@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-function AdminUsers({loading,setLoading}) {
+function AdminUsers() {
   const navigate=useNavigate()
   const [bool, setBool] = useState(false);
   const accesToken = localStorage.getItem("token");
@@ -63,7 +63,7 @@ const VerifyToken=(token)=>{
 
     axios
       .get("http://localhost:8000/users/listforadmin/path")
-      .then((response) => {setData(response["data"]);setLoading(false)})
+      .then((response) => {setData(response["data"])})
     
   }, [bool]);
 

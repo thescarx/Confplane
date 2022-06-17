@@ -30,6 +30,7 @@ import ApplyForm from "./components/conference/ApplyForm";
 import { socket, SocketContext } from "./socket";
 import { notifications } from "./data";
 import Check from "./components/Signup/Check";
+import Edit_art from "./components/edit_Article/Edit_art";
 
 function App() {
 
@@ -68,6 +69,7 @@ function App() {
             <Route path="/Conf/:id/ApplyForm" element={<ApplyForm />} />
             <Route path="CreateConf" element={<CreateConf />} />
             <Route path="/EditConf/:id" element={<EditConf />} />
+            <Route path="/Edit_art/:id" element={<Edit_art />} />
           </Route>
 
           <Route element={<RequireAuth bool={!bool} />}>
