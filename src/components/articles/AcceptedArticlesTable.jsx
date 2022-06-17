@@ -52,7 +52,7 @@ function AcceptedArticlesTable() {
 
 
     <div className="page" >
-     <div className='text-pend' > <h2 className="title" > articles</h2></div> 
+     <div className='text-pend' > <h2 className="title" >Accepted articles</h2></div> 
      <div className='table-pend' >
      <table className="table-content">
       <thead>
