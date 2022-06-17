@@ -1,0 +1,52 @@
+.container{
+    color: red;
+    background-color: red;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    height: 30vh;
+    width: 80%;
+}
+
+.left_item{
+    flex: 40%;
+    background-repeat: no-repeat;
+    height: 30vh;
+    text-align: right;
+}
+.left_item .photo{
+    background-color: red;
+    background-size: cover;
+    width: 60%;
+    height: 100%;
+}
+
+.right_item{
+    margin-left: 2%;
+    flex: 60%;
+    justify-content: center ;
+}
+
+.right_item h4{
+    margin-top: 10%;
+    font-family:'Poppins';
+    font-style:normal;
+    font-weight: 900;
+    justify-content: center;
+    text-align: center;
+
+}
+.right_item_text{
+    margin: 20%;
+    margin-top: 3%;
+    justify-content: center;
+    text-align: center;
+    font-family:'Poppins';
+    font-weight: 100;
+    font-size: 100%;
+}
+
+

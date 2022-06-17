@@ -1,0 +1,169 @@
+import React, { useEffect, useState } from "react";
+import Form1 from "../components/Signup/Form1";
+import Form2 from "../components/Signup/Form2";
+import Check from "../components/Signup/Check";
+import "../components/Signup/Form.css";
+import axios from "axios";
+
+function Form() {
+  const [res, setRes] = useState(0);
+  const [page, setPage] = useState(0);
+  // const [isPrevious,setIsPrevious]= useState(false)
+  const [isNext, setIsNext] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    firstname: "",
+    familyname: "",
+    email: "",
+    password: "",
+    passwordconfirmation: "",
+    phonenumber: "",
+    address: "",
+    linkedin: "",
+    interests: "",
+  });
+  const [formErrors, setFormErrors] = useState({});
+
+  const DisplayComponent = () => {
+    if (page === 0) {
+      return (
+        <Form1
+          formData={formData}
+          setFormData={setFormData}
+          formErrors={formErrors}
+          setFormErrors={setFormErrors}
+        />
+      );
+    } else if (page == 1)
+      return (
+        <Form2
+          formData={formData}
+          setFormData={setFormData}
+          formErrors={formErrors}
+          setFormErrors={setFormErrors}
+        />
+      );
+    else console.log({ page });
+    return <Check />;
+  };
+
+  const handleNext = () => {
+    setFormErrors(validate(formData));
+    setIsNext(true);
+  };
+
+  const handleSubmit = () => {
+    setFormErrors(validate(formData));
+    setIsSubmitted(true);
+    //request
+    axios
+      .post("http://localhost:8000/users/register/", {
+        first_name: formData.firstname,
+        family_name: formData.familyname,
+        email: formData.email,
+        password: formData.password,
+        phone_number: formData.phonenumber,
+        full_adress: formData.address,
+        linked_in_username: formData.linkedin,
+        fields_of_interssts: formData.interests,
+      })
+      .then((response) => {
+        setRes(response.status);
+        console.log(response);
+      });
+  };
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length == 4 && isNext && page == 0) {
+      setPage((currPage) => currPage + 1);
+      setFormErrors({
+        avoid_render: "",
+      });
+    }
+    if (Object.keys(formErrors).length == 0 && page == 1 && isSubmitted) {
+      setPage((currPage) => currPage + 1);
+    }
+  });
+
+  const validate = (values) => {
+    let errors = {};
+    if (!values.firstname.trim()) {
+      errors.firstname = "Required";
+    }
+    if (!values.familyname.trim()) {
+      errors.familyname = "Required";
+    }
+    if (!values.email) {
+      errors.email = "Required";
+    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+      errors.email = "Email invalid";
+    }
+    if (!values.phonenumber) {
+      errors.phonenumber = "Required";
+    }
+
+    if (!values.address) {
+      errors.address = "Required";
+    }
+    if (!values.linkedin) {
+      errors.linkedin = "Required";
+    }
+    if (!values.interests) {
+      errors.interests = "Required";
+    }
+    if (!values.password) {
+      errors.password = "Required";
+    } else if (values.password.length < 6) {
+      errors.password = "password invalid";
+    }
+
+    if (!values.passwordconfirmation) {
+      errors.passwordconfirmation = "Required";
+    } else if (values.password !== values.passwordconfirmation) {
+      errors.passwordconfirmation = "password do not match";
+    }
+
+    return errors;
+  };
+  return (
+    <div className="form">
+      <div className="form-container">
+        <div className="leftSide">
+          <div className="header">
+            <h3>CREATE NEW ACCOUNT</h3>
+          </div>
+          <div className="body">{DisplayComponent()}</div>
+
+          {page == 0 || page == 1 ? (
+            <div className="footer">
+              <div className="buttons">
+                <button
+                  className="btn_next"
+                  onClick={() => {
+                    if (page == 0) {
+                      handleNext();
+                    } else {
+                      handleSubmit();
+                    }
+                  }}
+                >
+                  {page == 0 ? <p>next</p> : <p>signIn</p>}
+                </button>
+              </div>
+              <span className="login_text">
+                <a href="http://localhost:3000/login">
+                  Already have an account?
+                </a>
+              </span>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div className="rightSide"></div>
+      </div>
+    </div>
+  );
+}
+
+export default Form;

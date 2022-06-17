@@ -1,0 +1,184 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+ /* table,th,td{
+    border: 1px solid #ffffff;
+    padding: 20px;
+
+}  */
+.table-content thead tr{
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 999;
+    background-color: #004E64;
+    text-align: center;
+    font-weight: bolder;
+    color: #ffffff;
+    overflow-y: auto;
+
+
+
+}
+.table-content{
+    flex: 90%;
+    max-width: 1200px;
+    margin: 25px;
+  font-size: 0.9em;
+  font-weight: bold;
+  position: sticky;
+  margin-top: 0;
+  border-radius: 15px;
+
+ 
+}
+.table-content thead tr{
+    display: block;
+
+}
+.table-content tbody{
+    overflow: auto;
+    display: block;
+    max-height: 600px;
+}
+.table-content tbody::-webkit-scrollbar {
+    display: none; 
+}
+
+
+
+.page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+
+}
+
+
+
+
+
+.decision{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100%;
+}
+.decision div{
+    font-size: 1vw;
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.title{
+    flex: 10%;
+}
+
+
+.btn{
+    background: rgba(0, 78, 100, 0.9);
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    width: 10%;
+    height: 5vh;
+
+}
+.btn p{
+    color: white;
+    font-size: 25px;
+    vertical-align: middle;
+   
+
+}
+.buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+}
+.tableandtitle{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+.pop{
+
+  width: 100%;
+  height: 100vh;
+ 
+
+}
+
+.icon-add:hover{
+    cursor: pointer;
+    color: chartreuse;
+}
+
+
+  .column_reviewer{
+ max-width: 400px;
+ display: flex;
+ height: 100%;
+    
+}
+
+.reviewer{
+   
+    background-color: #004e6475;
+    display: flex;
+    width: 20%;
+    max-height: 50px;
+    border-radius: 5px;
+    align-items: center; 
+    gap: 5px;
+    margin: 3px;
+
+}
+
+.rev{
+    flex: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+   
+    }
+    
+.x{
+    flex: 20%;
+}
+.x:hover{
+    color: red;
+
+}
+
+
+
+.tableAssign{
+    flex: 70%;
+    overflow-y: auto;
+    
+    }
+
+
+  .c{
+      background-color: aqua;
+  }  
+
+
+
+  .column_note{
+      display: flex;
+      justify-content: space-around;
+    
+      
+  }
