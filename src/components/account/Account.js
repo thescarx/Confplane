@@ -14,6 +14,7 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import LogoutIcon from "@mui/icons-material/Logout";
+import EditIcon from "@mui/icons-material/Edit";
 
 function Account() {
   let host = "http://127.0.0.1:8000";
@@ -23,7 +24,7 @@ function Account() {
   const hiddenFileInput = React.useRef(null);
 
   const token = localStorage.getItem("token");
-  const navigate2=useNavigate()
+  const navigate2 = useNavigate();
 
   axios.interceptors.request.use(
     (config) => {
@@ -288,7 +289,6 @@ function Account() {
       <div className="proff">
         <div className="container_acc">
           <div className="container_acc_l">
-            {/*  ////////////////////////////// */}
             <div className="container_acc_l_logo">
               <div className="form-controll">
                 <input
@@ -299,28 +299,19 @@ function Account() {
                   }}
                   name="file_up"
                 />
-                 <img
-                ref={hiddenFileInput}
-                src={host + data_profile.profile_picture}
-                alt={host + data_profile.profile_picture}
-              />
+                <img
+                  ref={hiddenFileInput}
+                  src={host + data_profile.profile_picture}
+                  alt={host + data_profile.profile_picture}
+                />
               </div>
-             
-
-              {/* <input type="file" onClick={uploadImage} />
-
-
-
-            <img src={host+data_profile.profile_picture}/> */}
             </div>
-
-            {/* //////////////////////////////////////////////////// */}
 
             <div className="container_acc_l_info">
               <div className="profile_info_sta">
                 <h1 className="nom">
                   {data_profile.family_name} {data_profile.first_name}
-                </h1>
+                </h1> 
                 <h6 className="bioo">{data_profile.bio}</h6>
               </div>
               <div className="profile_info_det">
@@ -341,12 +332,20 @@ function Account() {
                   <p>{data_profile.linked_in_username}</p>
                 </div>
                 <div className="profile_info_det_div">
-                  <LogoutIcon className="icon_p"  ></LogoutIcon>
-                  <p className="pppp"  
-                  onClick={()=>{
-                       localStorage.clear();
-                       navigate2("/login")
-                  }}>Logout</p>
+                  <EditIcon className="icon_p"></EditIcon>
+                  <p className="edit_p">Edit Profile</p>
+                </div>
+                <div className="profile_info_det_div">
+                  <LogoutIcon className="icon_p"></LogoutIcon>
+                  <p
+                    className="pppp"
+                    onClick={() => {
+                      localStorage.clear();
+                      navigate2("/login");
+                    }}
+                  >
+                    Logout
+                  </p>
                 </div>
               </div>
             </div>

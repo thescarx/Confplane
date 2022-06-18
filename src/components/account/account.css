@@ -40,6 +40,8 @@
   flex: 70%;
   display: flex;
   flex-direction: column;
+  /* background-color: #0FEC3F; */
+
 }
 
 .container_conf {
@@ -147,11 +149,17 @@ h1 {
   text-shadow: 1px 1px 2px  gray;
 }
 
+.edit_p:hover{
+  color: #0FEC3F;
+  cursor: pointer;
+}
+
 .nom{
   font-weight: bolder;
   font-size: 35px;
   text-shadow: 1px 1px 3px gray;
   color: black;
+  /* background-color: #FF8514; */
 }
 
 .profile_info_det {
@@ -167,7 +175,6 @@ display: flex;
 flex-direction: row;}
 .icon_p {
   margin-right: 3%;
-  /* shad */
 
 }
 
