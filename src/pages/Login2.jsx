@@ -69,7 +69,7 @@ function Login2() {
             if (response.data.is_admin === true) {
               navigate("/admin");
             } else {
-              navigate("/account");
+              navigate("/");
             }
             //verifyAdmin(accessToken)
             //navigate(from , ({replace:true}))

@@ -33,7 +33,7 @@ function Modal({ setOpenModal }) {
                     fontSize="large"
                   />
                 </div>
-                <div className="subject">test+{nott.subject}</div>
+                <div className="subject">{nott.subject}</div>
 
                 {nott.type === "invitation" && (
                   <div className="icons">

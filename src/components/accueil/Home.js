@@ -8,7 +8,9 @@ import Navbar from "../navbar/Navbar";
 
 
 
+
 function Home (){
+   
     return (
          <div className="home" id="home">
              <div className="home_page">

@@ -389,320 +389,316 @@ function CreateConf() {
 
   return (
     <main>
-      <button onClick={() => setOpenModal(true)}>fjfh</button>
-      {!isOpenModal && (
-        <nav className="navbar_1">
-          <ul className="navbar_list_1">
-            <Link to="/" className="link">
-              <li className="list_item_1">Home</li>
-            </Link>
+      {/* <button onClick={() => setOpenModal(true)}>fjfh</button> */}
 
-            <li
-              className="list_item_1"
-              onClick={() => {
-                navigate_2("/MainConf");
-              }}
-            >
-              Conferences
-            </li>
+      <nav className="navbar_1">
+        <ul className="navbar_list_1">
+          <Link to="/" className="link">
+            <li className="list_item_1">Home</li>
+          </Link>
 
-            <Link to="/#footer" smooth className="link">
-              <li className="list_item_1">About us</li>
-            </Link>
-            <Link to="/#footer" smooth className="link">
-              <li className="list_item_1">Contact us</li>{" "}
-            </Link>
+          <li
+            className="list_item_1"
+            onClick={() => {
+              navigate_2("/MainConf");
+            }}
+          >
+            Conferences
+          </li>
 
-            <li
-              className="list_item_1"
-              onClick={() => {
-                navigate("/account");
-              }}
-            >
-              Account
-            </li>
-          </ul>
-        </nav>
-      )}
+          <Link to="/#footer" smooth className="link">
+            <li className="list_item_1">About us</li>
+          </Link>
+          <Link to="/#footer" smooth className="link">
+            <li className="list_item_1">Contact us</li>{" "}
+          </Link>
+
+          <li
+            className="list_item_1"
+            onClick={() => {
+              navigate("/account");
+            }}
+          >
+            Account
+          </li>
+        </ul>
+      </nav>
+
       <div className="testDiv">
-        {isOpenModal && <Modal setOpenModal={setOpenModal}></Modal>}
-        {!isOpenModal && <h1 className="crtext">Create new conference</h1>}
-        {!isOpenModal && (
-          <form className="principalDiv" onSubmit={handleSubmit}>
-            <input
-              name="title"
-              type="text"
-              className="inp2"
-              placeholder="Conference title"
-              value={formValues.title}
-              onChange={handle}
-            ></input>
-            <p className="pp">{formErrors.title}</p>
-            <textarea
-              name="description"
-              className="spec"
-              value={textarea}
-              onChange={handleChange}
-              placeholder="Description"
-            />
-            <p className="pp">{descErrors}</p>
-            <input
-              name="hostName"
-              type="text"
-              className="inp2"
-              placeholder="Name of Host"
-              value={formValues.hostName}
-              onChange={handle}
-            />
-            <p className="pp">{formErrors.hostName}</p>
+        {/* {isOpenModal && <Modal setOpenModal={setOpenModal}></Modal>} */}
+        <h1 className="crtext">Create new conference</h1>
 
-            <input
-              name="categories"
-              type="text"
-              className="inp2"
-              placeholder="Categories"
-              value={formValues.Categories}
-              onChange={handle}
-            ></input>
-            <p className="pp">{formErrors.categories}</p>
+        <form className="principalDiv" onSubmit={handleSubmit}>
+          <input
+            name="title"
+            type="text"
+            className="inp2"
+            placeholder="Conference title"
+            value={formValues.title}
+            onChange={handle}
+          ></input>
+          <p className="pp">{formErrors.title}</p>
+          <textarea
+            name="description"
+            className="spec"
+            value={textarea}
+            onChange={handleChange}
+            placeholder="Description"
+          />
+          <p className="pp">{descErrors}</p>
+          <input
+            name="hostName"
+            type="text"
+            className="inp2"
+            placeholder="Name of Host"
+            value={formValues.hostName}
+            onChange={handle}
+          />
+          <p className="pp">{formErrors.hostName}</p>
 
-            <div className="inp3">
-              <div className="datehandling">
-                <DatePicker
-                  className="dates"
-                  placeholderText="Start date"
-                  name="sDate"
-                  selected={startDate}
-                  onChange={handlesDate}
-                  // value={formValues.startDate}
-                />
+          <input
+            name="categories"
+            type="text"
+            className="inp2"
+            placeholder="Categories"
+            value={formValues.Categories}
+            onChange={handle}
+          ></input>
+          <p className="pp">{formErrors.categories}</p>
 
-                <p className="pp">{dateErrors.startDate}</p>
-              </div>
-              <div className="datehandling">
-                <DatePicker
-                  className="dates"
-                  placeholderText="End date"
-                  name="eDate"
-                  selected={endDate}
-                  onChange={handleEDate}
-                  // value={formValues.endDate}
-                />
-                <p className="pp">{dateErrors.endDate}</p>
-              </div>
+          <div className="inp3">
+            <div className="datehandling">
+              <DatePicker
+                className="dates"
+                placeholderText="Start date"
+                name="sDate"
+                selected={startDate}
+                onChange={handlesDate}
+                // value={formValues.startDate}
+              />
+
+              <p className="pp">{dateErrors.startDate}</p>
             </div>
-            <div className="inp3">
-              <div className="datehandling">
-                <DatePicker
-                  name="subSD"
-                  className="dates"
-                  placeholderText="Submition start date"
-                  selected={subSd}
-                  onChange={handlesubSd}
-                  // value={formValues.submitionSD}
-                />
-                <p className="pp">{dateErrors.submitionSd}</p>
-              </div>
-              <div className="datehandling">
-                <DatePicker
-                  name="subDead"
-                  className="dates"
-                  placeholderText="Submition deadline"
-                  selected={subDead}
-                  onChange={handlesubDead}
-                  // value={formValues.submitiondead}
-                />
-                <p className="pp">{dateErrors.submitionDead}</p>
-              </div>
+            <div className="datehandling">
+              <DatePicker
+                className="dates"
+                placeholderText="End date"
+                name="eDate"
+                selected={endDate}
+                onChange={handleEDate}
+                // value={formValues.endDate}
+              />
+              <p className="pp">{dateErrors.endDate}</p>
             </div>
-            <input
-              name="location"
-              type="text"
-              className="inp2"
-              placeholder="Conference location"
-              value={formValues.location}
-              onChange={handle}
-            />
-            <p className="pp">{formErrors.location}</p>
+          </div>
+          <div className="inp3">
+            <div className="datehandling">
+              <DatePicker
+                name="subSD"
+                className="dates"
+                placeholderText="Submition start date"
+                selected={subSd}
+                onChange={handlesubSd}
+                // value={formValues.submitionSD}
+              />
+              <p className="pp">{dateErrors.submitionSd}</p>
+            </div>
+            <div className="datehandling">
+              <DatePicker
+                name="subDead"
+                className="dates"
+                placeholderText="Submition deadline"
+                selected={subDead}
+                onChange={handlesubDead}
+                // value={formValues.submitiondead}
+              />
+              <p className="pp">{dateErrors.submitionDead}</p>
+            </div>
+          </div>
+          <input
+            name="location"
+            type="text"
+            className="inp2"
+            placeholder="Conference location"
+            value={formValues.location}
+            onChange={handle}
+          />
+          <p className="pp">{formErrors.location}</p>
 
-            <input
-              name="site"
-              type="text"
-              className="inp2"
-              placeholder="Conference site"
-              value={formValues.site}
-              onChange={handle}
-            />
-            <p className="pp">{formErrors.site}</p>
+          <input
+            name="site"
+            type="text"
+            className="inp2"
+            placeholder="Conference site"
+            value={formValues.site}
+            onChange={handle}
+          />
+          <p className="pp">{formErrors.site}</p>
 
-            {/* <button >hiihaha</button> */}
-            <button className="inp2" onClick={handleClick}>
-              <p className="upload">
-                Conference logo (image) <span></span>{" "}
-                {<CloudUploadOutlinedIcon fontSize="large" />}
-              </p>
-            </button>
-            <input
-              ref={hiddenFileInput}
-              type="file"
-              onChange={handleUpload}
-              style={{ display: "none" }}
-            ></input>
+          {/* <button >hiihaha</button> */}
+          <button className="inp2" onClick={handleClick}>
+            <p className="upload">
+              Conference logo (image) <span></span>{" "}
+              {<CloudUploadOutlinedIcon fontSize="large" />}
+            </p>
+          </button>
+          <input
+            ref={hiddenFileInput}
+            type="file"
+            onChange={handleUpload}
+            style={{ display: "none" }}
+          ></input>
 
-            <p>{isImage && image.name}</p>
+          <p>{isImage && image.name}</p>
 
-            <div className="originalReviewer">
-              {!showReview && (
-                <div className="searchReviewer">
-                  <button className="search">
-                    <SearchIcon fontSize="large"></SearchIcon>
-                  </button>
-                  <input
-                    type="text"
-                    className="searchBar"
-                    placeholder="Search for reviewers"
-                  ></input>
-                </div>
-              )}
-              {error && (
-                <div className="error">
-                  <p>You cannot choose more than 3 reviewers</p>
-                </div>
-              )}
+          <div className="originalReviewer">
+            {!showReview && (
+              <div className="searchReviewer">
+                <button className="search">
+                  <SearchIcon fontSize="large"></SearchIcon>
+                </button>
+                <input
+                  type="text"
+                  className="searchBar"
+                  placeholder="Search for reviewers"
+                ></input>
+              </div>
+            )}
+            {error && (
+              <div className="error">
+                <p>You cannot choose more than 3 reviewers</p>
+              </div>
+            )}
 
-              {!showReview &&
-                candidates.map((user) => {
-                  const { id } = user;
-                  return (
-                    <div className="userDiv" key={id}>
-                      <div className="test">
-                        <div className="title">
-                          {user.first_name} {user.family_name}
-                        </div>
-
-                        <div className="host">Email : {user.email}</div>
-
-                        <div className="category">
-                          {" "}
-                          LinkedIn : {user.linked_in_username}
-                        </div>
-                        <div className="category">
-                          {" "}
-                          Interests : {user.fields_of_interssts}
-                        </div>
-
-                        <div className="addremove">
-                          <button
-                            className="btn2"
-                            onClick={() => removeItem(id)}
-                          >
-                            {" "}
-                            <p>Add</p>{" "}
-                          </button>
-                        </div>
+            {!showReview &&
+              candidates.map((user) => {
+                const { id } = user;
+                return (
+                  <div className="userDiv" key={id}>
+                    <div className="test">
+                      <div className="title">
+                        {user.first_name} {user.family_name}
                       </div>
 
-                      {/* <img
+                      <div className="host">Email : {user.email}</div>
+
+                      <div className="category">
+                        {" "}
+                        LinkedIn : {user.linked_in_username}
+                      </div>
+                      <div className="category">
+                        {" "}
+                        Interests : {user.fields_of_interssts}
+                      </div>
+
+                      <div className="addremove">
+                        <button className="btn2" onClick={() => removeItem(id)}>
+                          {" "}
+                          <p>Add</p>{" "}
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* <img
                         className="image"
                         src={user.profile_picture}
                         alt={user.profile_picture}
                       /> */}
-                    </div>
-                  );
-                })}
+                  </div>
+                );
+              })}
 
-              {showReview &&
-                reviewers.map((reviewer) => {
-                  const { id } = reviewer;
-                  return (
-                    <div className="userDiv" key={id}>
-                      <div className="test">
-                        <div className="title">{reviewer.first_name}</div>
+            {showReview &&
+              reviewers.map((reviewer) => {
+                const { id } = reviewer;
+                return (
+                  <div className="userDiv" key={id}>
+                    <div className="test">
+                      <div className="title">{reviewer.first_name}</div>
 
-                        <div className="host">
-                          Hosted by {reviewer.id}, Location -{" "}
-                          {reviewer.linked_in_username} to {reviewer.id}
-                        </div>
-
-                        <div className="category">
-                          {" "}
-                          Category: {reviewer.family_name}
-                        </div>
-
-                        {/* <div className="addremove"> */}
-                        <button
-                          className="removebtn"
-                          onClick={() => removeReviewer(id)}
-                        >
-                          <p>Remove</p>{" "}
-                        </button>
-                        {/* </div> */}
+                      <div className="host">
+                        Hosted by {reviewer.id}, Location -{" "}
+                        {reviewer.linked_in_username} to {reviewer.id}
                       </div>
 
-                      <img
-                        className="image"
-                        src={reviewer.profile_picture}
-                        alt={reviewer.profile_picture}
-                      />
-                    </div>
-                  );
-                })}
-              {showReview && <h5>Add reviewers here</h5>}
-              {showReview && (
-                <button className="add" onClick={switche}>
-                  <AddOutlinedIcon fontSize="large" />
-                </button>
-              )}
+                      <div className="category">
+                        {" "}
+                        Category: {reviewer.family_name}
+                      </div>
 
-              {!showReview && (
-                <button className="btn3" onClick={switche}>
-                  <p>DONE</p>
-                </button>
-              )}
-            </div>
-            <div className="originalReviewer">
-              {indexx != index &&
-                questionss.map((author, index) => {
-                  const { id } = author;
-                  return (
-                    <div className="authorDiv" key={id}>
-                      <div className="author-info">
-                        <input
-                          name="first_name"
-                          type="text"
-                          className="author-info-input"
-                          placeholder="Question"
-                          value={author.first_name}
-                          onChange={(e) => handleq(e, index)}
-                        ></input>
-                        <div className="errorDiv">
-                          {/* {authorErrors[index].first_name} */}
-                        </div>
-                      </div>
-                      <div className="logo">
-                        <button
-                          className="removebtn2"
-                          onClick={() => removeAuthor(index)}
-                        >
-                          <p>Remove</p>
-                        </button>
-                      </div>
+                      {/* <div className="addremove"> */}
+                      <button
+                        className="removebtn"
+                        onClick={() => removeReviewer(id)}
+                      >
+                        <p>Remove</p>{" "}
+                      </button>
+                      {/* </div> */}
                     </div>
-                  );
-                })}
-              {!showAuthors && <h5>Add questions here</h5>}
-              <button className="add" onClick={handleAdd}>
+
+                    <img
+                      className="image"
+                      src={reviewer.profile_picture}
+                      alt={reviewer.profile_picture}
+                    />
+                  </div>
+                );
+              })}
+            {showReview && <h5>Add reviewers here</h5>}
+            {showReview && (
+              <button className="add" onClick={switche}>
                 <AddOutlinedIcon fontSize="large" />
               </button>
-            </div>
+            )}
 
-            <p className="pp">{reviewerTotal}</p>
-
-            <button type="submit" className="btnn">
-              <p className="txt">Create Conference</p>
+            {!showReview && (
+              <button className="btn3" onClick={switche}>
+                <p>DONE</p>
+              </button>
+            )}
+          </div>
+          <div className="originalReviewer">
+            {indexx != index &&
+              questionss.map((author, index) => {
+                const { id } = author;
+                return (
+                  <div className="authorDiv" key={id}>
+                    <div className="author-info">
+                      <input
+                        name="first_name"
+                        type="text"
+                        className="author-info-input"
+                        placeholder="Question"
+                        value={author.first_name}
+                        onChange={(e) => handleq(e, index)}
+                      ></input>
+                      <div className="errorDiv">
+                        {/* {authorErrors[index].first_name} */}
+                      </div>
+                    </div>
+                    <div className="logo">
+                      <button
+                        className="removebtn2"
+                        onClick={() => removeAuthor(index)}
+                      >
+                        <p>Remove</p>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            {!showAuthors && <h5>Add questions here</h5>}
+            <button className="add" onClick={handleAdd}>
+              <AddOutlinedIcon fontSize="large" />
             </button>
-          </form>
-        )}
+          </div>
+
+          <p className="pp">{reviewerTotal}</p>
+
+          <button type="submit" className="btnn">
+            <p className="txt">Create Conference</p>
+          </button>
+        </form>
       </div>
 
       {/* <Popup trigger={open}>

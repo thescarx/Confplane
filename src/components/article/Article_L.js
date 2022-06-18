@@ -4,7 +4,7 @@ import img from "../../img/Rectangle 5.png";
 
 function ArticleL(props) {
   return (
-    <div className="container">
+    <div className="container_l">
       <div className="left_item">
         <img src={img} className="photo" />
       </div>
