@@ -177,7 +177,6 @@ flex-direction: row;}
   margin-right: 3%;
 
 }
-
 .profile_info_det_div p{
   font-size: 21px;
     
@@ -497,3 +496,7 @@ button {
   display: block;
 }
 
+.nnn{
+  height: 100vh;
+  width: 100vw;
+}
