@@ -29,10 +29,16 @@ import Unauthorized from "./pages/Unauthorized";
 import ApplyForm from "./components/conference/ApplyForm";
 import { socket, SocketContext } from "./socket";
 import { notifications } from "./data";
+import Check from "./components/Signup/Check";
 import Edit_art from "./components/edit_Article/Edit_art";
 let nots = [];
 
 function App() {
+<<<<<<< HEAD
+=======
+
+  // const socket = useContext(SocketContext);
+>>>>>>> 13865b76de193568f160b4331c9a7efcb6d6ab05
   const [not, setNot] = useState(notifications);
 
   socket.onmessage = function (e) {
@@ -69,6 +75,7 @@ function App() {
   // }, [socket]);
   const [bool, setBool] = useState(false);
   return (
+
     <SocketContext.Provider value={socket}>
       <Routes>
         <Route exact path="/" element={<Layout />}>
@@ -95,6 +102,8 @@ function App() {
           <Route path="/signup" element={<Form />} />
           <Route path="/login" element={<Login2 />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="/check" element={<Check />} />
+
 
           <Route path="MainConf" element={<MainConf />} />
           {/* <Route path="/account" element={<Account/>}/> */}

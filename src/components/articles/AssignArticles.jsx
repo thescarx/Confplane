@@ -61,13 +61,14 @@ function AssignArticles() {
 
   return (
     <div className="page">
-      <h2 className="title">Assign Articles</h2>
+      <div className="text-pend" ><h2 className="title">Assign Articles</h2></div>  
+      <div className="table-pend" >
       <table className="table-content">
         <thead>
           <tr>
-            <th>Articles</th>
-            <th>Author name</th>
-            <th>Accept/Decline</th>
+            <th> <div>Articles</div> </th>
+            <th><div>Author name</div></th>
+            <th><div>Accept/Decline</div></th>
           </tr>
         </thead>
         <tbody>
@@ -75,14 +76,16 @@ function AssignArticles() {
             <tr  key={i}>
               
               
-              <td className="acteur">{row.title}</td>
+              <td className="acteur"> <div>{row.title}</div> </td>
+
               { row.reviewers.length!==0 
                 ? <td className="column_reviewer">
                   {row.reviewers.map((reviewer, key) => (
-                    <div key={key} className="reviewer">
+                    <div key={key} className="xrev">
                       <div className="rev" >
                         {reviewer.first_name} {reviewer.family_name}
                       </div>
+                    
                       <ClearIcon
                         className="x"
                         onClick={() => {
@@ -90,7 +93,8 @@ function AssignArticles() {
                           handleDeleteRev(row.id, reviewer.id);
                         }}
                       />
-                    </div>
+                      </div>
+                      
                   ))}
                 </td>
                 : <td> <div></div> </td>}
@@ -119,6 +123,8 @@ function AssignArticles() {
           ))}
         </tbody>
       </table>
+      </div>
+      
     </div>
   );
 }

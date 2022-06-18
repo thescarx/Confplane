@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./Admin.css";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router-dom";
+
 import {
   faLock,
   faLockOpen,
@@ -11,7 +13,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 function AdminUsers() {
+  const navigate=useNavigate()
+  const [bool, setBool] = useState(false);
   const accesToken = localStorage.getItem("token");
+
+
+const VerifyToken=(token)=>{
+   
+    axios.post("http://localhost:8000/api/token/verify/",{token:token}).then(
+        response=>{
+          if (response.status===401){
+            console.log('expired')
+            
+          }else {console.log('still valable')}
+        
+        
+        }
+    ).catch(err=>{
+      localStorage.removeItem("token");
+      localStorage.removeItem("is_admin");
+      localStorage.removeItem("id");
+
+      navigate("/login")
+     
+
+    }) 
+  }
+
+
+
+
+
+
 
   axios.interceptors.request.use(
     (config) => {
@@ -27,36 +60,50 @@ function AdminUsers() {
   const [q, setQ] = useState("");
 
   useEffect(() => {
+
     axios
       .get("http://localhost:8000/users/listforadmin/path")
-      .then((response) => setData(response["data"]));
-  }, []);
+      .then((response) => {setData(response["data"])})
+    
+  }, [bool]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:8000/users/listforadmin/path")
+  //     .then((response) => setData(response["data"]));
+  // }, []);
+
+
+
   useEffect(() => {
     axios
       .get("http://localhost:8000/users/listforadmin/path?search=" + q)
       .then((response) => setData(response["data"]));
   }, [q]);
 
-  const [bool, setBool] = useState(false);
+
   
-  const handleDelete = (id) => {
+  const handleDelete = (e,id) => {
+  
     axios.delete("http://localhost:8000/users/admin/" + id).then((response) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         setBool(!bool);
-        console.log("done");
       }
     });
   };
   const handleBlock = (id) => {
+    VerifyToken(accesToken)
     axios
       .put("http://localhost:8000/users/admin/" + id, { is_active: false })
       .then((response) => {
         if (response.status == 200) {
           setBool(!bool);
+  
         }
       });
   };
   const handleDeblock = (id) => {
+    VerifyToken(accesToken)
     axios
       .put("http://localhost:8000/users/admin/" + id, { is_active: true })
       .then((response) => {
@@ -66,17 +113,25 @@ function AdminUsers() {
       });
   };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/users/listforadmin/path")
-      .then((response) => setData(response["data"]));
-  }, [bool]);
+  
+  // useEffect(()=>{
+    
+  //   // if (VerifyToken(accesToken)!==200){
+  //   //   navigate("/login")
+
+  //   // }
+  //  VerifyToken(accesToken)
+
+   
+  //  },[verify])
+   
 
   return (
-    <div className="page-users">
-      <div className="filter_user">
+
+
+ <div className="page-users">
+     
         <div className="inputcomplet-users">
-          <SearchIcon />
           <input
             placeholder="Search"
             className="inputfilter-users"
@@ -87,10 +142,10 @@ function AdminUsers() {
             }}
           />
         </div>
-      </div>
-
    
-      <table className="sss" cellPadding="0" cellSpacing="0" >
+
+     <div className="table-users" >
+     <table className="sss" cellPadding="0" cellSpacing="0" >
       <thead>
         <tr>
           <th> <div className="hdr" >Username</div> </th>
@@ -139,7 +194,17 @@ function AdminUsers() {
         ))}
       </tbody>
     </table>
+
+
+
+
+
+
+
+     </div>
+     
     </div>
   );
 }
+
 export default AdminUsers;

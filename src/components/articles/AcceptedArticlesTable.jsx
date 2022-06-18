@@ -27,6 +27,13 @@ function AcceptedArticlesTable() {
   );
   const {id} = useParams();
 
+  const handleDelete = (id) => {
+    axios
+      .put("http://localhost:8000/articles/" + id, { status: "refused" })
+      .then((response) => {
+        setBool(!bool)
+      });
+  };
 
   useEffect(() => {
     let url ="http://localhost:8000/articles/listforchairman/path/?conference_id="+id+"&status=accepted"; 
@@ -37,22 +44,7 @@ function AcceptedArticlesTable() {
 
   }, [bool]);
 
-  // const handleDecline = (id) => {
-  //   axios
-  //     .put("http://localhost:8000/articles/" + id, { status: "refused" })
-  //     .then(() => {
-  //       console.log("done");
-  //     });
-  // };
-  // const handleAccept = (id) => {
-  //   axios
-  //     .put("http://localhost:8000/articles/" + id, {
-  //       status: "accepted to review",
-  //     })
-  //     .then(() => {
-  //       console.log("done");
-  //     });
-  // };
+ 
 
 
 
@@ -60,46 +52,50 @@ function AcceptedArticlesTable() {
 
 
     <div className="page" >
-     <h2 className="title" > articles</h2> 
-    <table className="table-content">
+     <div className='text-pend' > <h2 className="title" >Accepted articles</h2></div> 
+     <div className='table-pend' >
+     <table className="table-content">
       <thead>
         <tr>
-          <th>Articles</th>
-          <th>Author name</th>
-          <th>Upload date</th>
-          <th>Decision</th>
+          <th><div>Articles</div> </th>
+          <th> <div>Author name</div> </th>
+          <th><div>Score</div></th>
+          <th><div>Upload date</div></th>
         </tr>
       </thead>
 
       <tbody>
         {data.map((column, i) => (
           <tr key={i}>
-            <td> {column.title} </td>
-            <td> {column.user_id} </td>
+            <td> <div>{column.title}</div>  </td>
+            <td><div>{column.user_id}</div>  </td>
+
+
             <td>
-              {column.report_set.map((report,key)=>{
-                 <div>
-                   {column.report_set.length} /3
-                 </div>
- 
-
- 
-
-              })}
+              <div>
+              {column.report_set.map(rep=>rep.score).reduce((prev,curr)=>prev+curr  ,0)}/100 
+              </div>
+            
+              
+  
 
 
 
 
             </td>
             <td className="decision" >
+              <div className='decline-accept' >
+              <div onClick={()=>{handleDelete(column.id)}} >Decline</div>
+              </div>
             
-              <div >pass to review</div> 
-              <div >Decline</div>
+              
             </td>
           </tr>
         ))}
       </tbody>
     </table>
+     </div>
+    
     </div>
 
     

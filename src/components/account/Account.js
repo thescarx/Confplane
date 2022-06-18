@@ -42,6 +42,7 @@ function Account() {
   const hiddenFileInput = React.useRef(null);
 
   const token = localStorage.getItem("token");
+  const navigate2=useNavigate()
 
   axios.interceptors.request.use(
     (config) => {
@@ -408,6 +409,7 @@ function Account() {
                 >
                   <Getconfs data={confs} />
                 </div>
+<<<<<<< HEAD
 
                 <div
                   className={
@@ -415,6 +417,24 @@ function Account() {
                   }
                 >
                   <Getwait data={waiting} />
+=======
+                <div className="profile_info_det_div">
+                  <PhoneIcon className="icon"></PhoneIcon>
+                  <p>{data_profile.phone_number}</p>
+                </div>
+                <div className="profile_info_det_div">
+                  <LinkedInIcon className="icon"></LinkedInIcon>
+                  <p>{data_profile.linked_in_username}</p>
+                </div>
+                <div className="profile_info_det_div">
+                  <LogoutIcon className="icon" onClick={()=>{
+                       localStorage.clear();
+                       navigate2("/login")
+ 
+
+                  }} ></LogoutIcon>
+                  <p>Logout</p>
+>>>>>>> 13865b76de193568f160b4331c9a7efcb6d6ab05
                 </div>
               </div>
             </div>

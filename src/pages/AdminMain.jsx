@@ -3,9 +3,11 @@ import '../components/admin/Admin.css'
 import AdminUsers from '../components/admin/AdminUsers'
 import AdminConferences from '../components/admin/AdminConferences'
 import { useNavigate } from 'react-router-dom'
+import LoadingSpinner from "../components/LoadingSpinner"
 
 
 function AdminMain() {
+
   const [bool, setBool] = useState(true);
   const navigate= useNavigate()
   const handleUsers = ()=>{
@@ -36,6 +38,7 @@ const handleSignout = ()=>{
     element3.classList.add('active')
     localStorage.removeItem('token');
     localStorage.removeItem('is_admin');
+    localStorage.removeItem('id');
 
     navigate('/login')
 }
@@ -56,12 +59,8 @@ const handleSignout = ()=>{
           </div>
         </div>
       <div className='cont' >
-        {bool ? <AdminUsers /> : <AdminConferences />}
-
-        {/* <button className='btn-logout'  onClick={()=>{
-          localStorage.removeItem('token')
-          navigate('../login')
-  }} > logout </button> */}
+        {bool ? <AdminUsers /> 
+              : <AdminConferences />}
 
       </div>
     </div>

@@ -4,9 +4,13 @@ import Form2 from "../components/Signup/Form2";
 import Check from "../components/Signup/Check";
 import "../components/Signup/Form.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function Form() {
-  const [res, setRes] = useState(0);
+
+  const navigate=useNavigate()
+  const [loading,setLoading]= useState(false)
   const [page, setPage] = useState(0);
   // const [isPrevious,setIsPrevious]= useState(false)
   const [isNext, setIsNext] = useState(false);
@@ -43,8 +47,6 @@ function Form() {
           setFormErrors={setFormErrors}
         />
       );
-    else console.log({ page });
-    return <Check />;
   };
 
   const handleNext = () => {
@@ -68,8 +70,15 @@ function Form() {
         fields_of_interssts: formData.interests,
       })
       .then((response) => {
-        setRes(response.status);
-        console.log(response);
+       
+           setLoading(false)
+           navigate('/check')
+      
+      }).catch(err=>{
+        setLoading(false)
+        console.log("err")
+
+
       });
   };
 
@@ -80,9 +89,9 @@ function Form() {
         avoid_render: "",
       });
     }
-    if (Object.keys(formErrors).length == 0 && page == 1 && isSubmitted) {
-      setPage((currPage) => currPage + 1);
-    }
+    // if (Object.keys(formErrors).length == 0 && page == 1 && isSubmitted) {
+    //   setPage((currPage) => currPage + 1);
+    // }
   });
 
   const validate = (values) => {
@@ -144,12 +153,19 @@ function Form() {
                       handleNext();
                     } else {
                       handleSubmit();
+                      setLoading(true)
                     }
                   }}
                 >
                   {page == 0 ? <p>next</p> : <p>signIn</p>}
                 </button>
               </div>
+              <div className="loading-bar" >
+
+              { loading &&  <LoadingSpinner/>}
+              </div>
+              
+
               <span className="login_text">
                 <a href="http://localhost:3000/login">
                   Already have an account?

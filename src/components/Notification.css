@@ -7,7 +7,7 @@
     width: 100%;
     height: 100vh;
     
-  background-color: rgba(0,0,0,0.2); 
+  background-color: rgba(0,0,0,0.8);
 
 }
 h1{
@@ -22,7 +22,7 @@ h1{
    padding: 32px;
    width: 100%;
    max-width: 640px;
-   background: rgba(0, 78, 100, 0.8);
+   background: rgb(0, 78, 100);
 
    display: flex;
    flex-direction: column;
@@ -53,8 +53,7 @@ ul{
     border-radius: 10px;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    
+    align-items: center; 
     
 }
 .icon{
@@ -81,19 +80,19 @@ h4{
  display: flex;
  justify-content: space-between;
  align-items: center;
- width: 90%;
- margin-top: 2%;
+ width: 100%;
  background-color: #FFFDFD;
  flex-direction: column;
- border-radius: 10px;
+ border-radius: 8px;
  min-height: 50px;
+ height: 7vh;
  
  
  
 
 }
 
-.input_noti{
+/* .input_noti{
     width: 80%;
     padding: 1rem 1rem 1rem 3.5rem;
     background: rgba(0, 78, 100, 0.12);
@@ -101,21 +100,23 @@ h4{
     border-radius: 15px;
     background-color: #FFFDFD;
 
-}
+
+
+} */
 
 .row_noti:hover{
     cursor: pointer;
-    background-color: #004E64;
+    background-color: rgb(0, 78, 100,0.8);
 
 }
 
-.div_input{
+/* .div_input{
     width: 100%;
     flex: 20%;
     display: flex;
     justify-content: center;
 
-}
+} */
 .div_items{
     flex: 70%;
     width: 100%;
@@ -156,7 +157,7 @@ h4{
   }
   .email{
      flex: 60%;
-     font-size: 10px;
+     font-size: 15px;
   }
   .categories{
       flex: 40%;
@@ -168,4 +169,33 @@ h4{
   .clicked{
        opacity: 0.1; 
        pointer-events: none;
+  }
+
+  .plus-reviewer-complet{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+
+
+  }
+  .plus-reviewer{
+    color: white;
+    height: 7vh;
+    font-weight: bold;
+    width: 10%;
+  }
+  .xx{
+ font-size: 10px;
+ cursor: pointer;
+
+  }
+  .xx:hover{
+    color: #000;
+
+
+  
+  
+
   }
