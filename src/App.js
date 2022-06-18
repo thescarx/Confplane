@@ -37,6 +37,25 @@ function App() {
   const [not, setNot] = useState(notifications);
 
   const [bool, setBool] = useState(false);
+//   socket.onmessage=function(e){
+//     console.log(e)
+//     const obj = JSON.parse(e["data"]);
+
+// for (let i = 0; i < obj.notifications.length; i++) {
+// console.log("here");
+// notifications.push(obj.notifications[i]);
+// console.log(notifications);
+// }
+// setNot(obj.notifications);
+// }
+//   useEffect(()=>{
+
+
+      
+     
+
+
+//   },[socket])
   return (
     <SocketContext.Provider value={socket}>
       <Routes>

@@ -22,19 +22,19 @@ import EditIcon from "@mui/icons-material/Edit";
 import Modifier from "../modifier/Modifer";
 
 function Account() {
-  const socket = useContext(SocketContext);
   const [not, setNot] = useState(notifications);
+  const socket = useContext(SocketContext)
 
-  socket.onmessage = function (e) {
-    const obj = JSON.parse(e["data"]);
-
-    for (let i = 0; i < obj.notifications.length; i++) {
-      console.log("here");
-      notifications.push(obj.notifications[i]);
-      console.log(notifications);
-    }
-    setNot(obj.notifications);
-  };
+  // socket.onmessage=function(e){
+  //   const obj = JSON.parse(e["data"]);
+  //   for (let i = 0; i < obj.notifications.length; i++) {
+  //     notifications.push(obj.notifications[i]);
+  //     console.log(notifications);
+  //   }
+  //   setNot(notifications);
+  //   console.log("done");
+    
+  // }
 
   // console.log("this is the data " + data);
   let host = "http://127.0.0.1:8000";
@@ -94,6 +94,7 @@ function Account() {
   }
 
   useEffect(() => {
+    
     axios
       .get(host + "/users/profile")
       .then((reponse) => {
@@ -108,6 +109,20 @@ function Account() {
   //my articles
   const [article, setarticle] = useState([]);
   useEffect(() => {
+    const socket = new WebSocket(
+      "ws://127.0.0.1:8000/ws/socket-server/?token=" + token
+    );
+    socket.onmessage = function (e) {
+      const obj = JSON.parse(e["data"]);
+      console.log(obj.notifications.length)
+  
+      for (let i = 0; i < obj.notifications.length; i++) {
+        notifications.push(obj.notifications[i]);
+      }
+      // console.log("all notifications");
+
+      setNot(obj.notifications);
+    };  
     axios
       .get(host + "/articles/list/path")
       .then((artc) => {
