@@ -6,8 +6,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useIsMount } from "../hooks/UseIsMount";
 import useAuth from "../hooks/useAuth";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function Login2() {
+  const [loading,setLoading]=useState(false)
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const navigate2 = useNavigate();
@@ -42,6 +44,7 @@ function Login2() {
   //   }
   useEffect(() => {
     if (!isMount) {
+      // setLoading(false)
       if (Object.keys(formErrors) == 0) {
         axios
           .post("http://localhost:8000/users/login/token/", {
@@ -55,6 +58,7 @@ function Login2() {
             // }
             const accessToken = response?.data?.access;
             const is_admin=response?.data?.is_admin
+            setLoading(false)
 
             localStorage.setItem("is_admin", response.data.is_admin);
             localStorage.setItem("token", response.data.access);
@@ -79,6 +83,7 @@ function Login2() {
             // if (err.response.data.status==401) setFormErrors(err.response.data.detail)
           }).catch(err=>{console.log(err.response.data.detail);
             setFormErrors({...formErrors,other:"invalid email or password"})
+            setLoading(false)
           });
       }
     }
@@ -99,6 +104,7 @@ function Login2() {
   const handleSubmit = () => {
     setFormErrors(validate(user, pwd));
     setBool(!bool);
+
     // if(Object.keys(formErrors).length==0){
     //     axios.post('http://localhost:8000/users/login/token/', {
     //   email: user,
@@ -156,12 +162,17 @@ function Login2() {
           setPwd={setPwd}
           formErrors={formErrors}
         />
-        <button className="btn_login" onClick={handleSubmit}>
-          {" "}
-          <p>Sign in</p>{" "}
+        <button className="btn_login" onClick={()=>{handleSubmit();setLoading(true)}}>
+          <p>Sign in</p>
+          
         </button>
+        {/* <div className="loading" >
+        {loading && <LoadingSpinner/>}
+
+        </div> */}
+        
+        
         <span className="login_text">
-          {" "}
           <a href="http://localhost:3000/signup">don't have an account?</a>{" "}
         </span>
       </div>
