@@ -325,24 +325,25 @@ function Account() {
               </div>
               <div className="profile_info_det">
                 <div className="profile_info_det_div">
-                  <LocationOnIcon className="icon"></LocationOnIcon>
+                  <LocationOnIcon className="icon_p"></LocationOnIcon>
                   <p>{data_profile.full_adress}</p>
                 </div>
                 <div className="profile_info_det_div">
-                  <AlternateEmailIcon className="icon"></AlternateEmailIcon>
+                  <AlternateEmailIcon className="icon_p"></AlternateEmailIcon>
                   <p>{data_profile.email}</p>
                 </div>
                 <div className="profile_info_det_div">
-                  <PhoneIcon className="icon"></PhoneIcon>
+                  <PhoneIcon className="icon_p"></PhoneIcon>
                   <p>{data_profile.phone_number}</p>
                 </div>
                 <div className="profile_info_det_div">
-                  <LinkedInIcon className="icon"></LinkedInIcon>
+                  <LinkedInIcon className="icon_p"></LinkedInIcon>
                   <p>{data_profile.linked_in_username}</p>
                 </div>
                 <div className="profile_info_det_div">
-                  <LogoutIcon className="icon"  ></LogoutIcon>
-                  <p  onClick={()=>{
+                  <LogoutIcon className="icon_p"  ></LogoutIcon>
+                  <p className="pppp"  
+                  onClick={()=>{
                        localStorage.clear();
                        navigate2("/login")
                   }}>Logout</p>
