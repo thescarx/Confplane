@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import "./account.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -14,8 +14,27 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { SocketContext } from "../../socket";
+import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
+import Modal from "../Notification/Modal";
+import { notifications } from "../../data";
 
 function Account() {
+  const socket = useContext(SocketContext);
+  const [not, setNot] = useState(notifications);
+
+  socket.onmessage = function (e) {
+    const obj = JSON.parse(e["data"]);
+
+    for (let i = 0; i < obj.notifications.length; i++) {
+      console.log("here");
+      notifications.push(obj.notifications[i]);
+      console.log(notifications);
+    }
+    setNot(obj.notifications);
+  };
+
+  // console.log("this is the data " + data);
   let host = "http://127.0.0.1:8000";
   let navigate = useNavigate();
   let navigate_2 = useNavigate();
@@ -66,13 +85,10 @@ function Account() {
     axios
       .get(host + "/users/profile")
       .then((reponse) => {
-        console.log(reponse.data);
         setdata_profile(reponse["data"]);
         setimage(true);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [image]);
 
   // const refreshPage = ()=>{
@@ -84,12 +100,9 @@ function Account() {
     axios
       .get(host + "/articles/list/path")
       .then((artc) => {
-        console.log(artc["data"]);
         setarticle(artc["data"]);
       })
-      .catch((err) => {
-        console.log("failed");
-      });
+      .catch((err) => {});
   }, []);
 
   const saveFile = (urll) => {
@@ -103,7 +116,7 @@ function Account() {
         {data.map((cle) => {
           return (
             <>
-              <div className="confDiv_1" ref={ref}>
+              <div className="confDiv_1" ref={ref} key={cle.conference_id}>
                 <div className="info">
                   <div className="test_1">
                     <div className="title_1">{cle.title}</div>
@@ -148,7 +161,6 @@ function Account() {
     axios
       .get(host + "/conferences/conferences_creator/list/path")
       .then((conf) => {
-        console.log(conf["data"]);
         setconfs(conf["data"]);
       });
   }, []);
@@ -160,7 +172,7 @@ function Account() {
         {data.map((cle) => {
           return (
             <>
-              <div className="confDiv_2" ref={ref}>
+              <div className="confDiv_2" ref={ref} key={cle.id}>
                 <div className="info_2">
                   <div className="test_2">
                     <div className="title_2">{cle.title}</div>
@@ -199,7 +211,6 @@ function Account() {
   const [waiting, setwaiting] = useState([]);
   useEffect(() => {
     axios.get(host + "/articles/listforreviewer/path").then((reslt) => {
-      console.log(reslt["data"]);
       setwaiting(reslt["data"]);
     });
   }, []);
@@ -248,151 +259,167 @@ function Account() {
   const toggleTab = (index) => {
     setToggleState(index);
   };
+  const [isOpenModal, setOpenModal] = useState(false);
 
   return (
     <div className="account_page" id="account">
-      <nav className="navbar_1">
-        <ul className="navbar_list_1">
-          <Link to="/" className="link">
-            <li className="list_item_1">Home</li>
-          </Link>
+      {!isOpenModal && (
+        <nav className="navbar_1">
+          <ul className="navbar_list_1">
+            <Link to="/" className="link">
+              <li className="list_item_1">Home</li>
+            </Link>
 
-          <li
-            className="list_item_1"
-            onClick={() => {
-              navigate_2("/MainConf");
-            }}
-          >
-            Conferences
-          </li>
+            <li
+              className="list_item_1"
+              onClick={() => {
+                navigate_2("/MainConf");
+              }}
+            >
+              Conferences
+            </li>
 
-          <Link to="/#footer" smooth className="link">
-            <li className="list_item_1">About us</li>
-          </Link>
-          <Link to="/#footer" smooth className="link">
-            <li className="list_item_1">Contact us</li>{" "}
-          </Link>
+            <Link to="/#footer" smooth className="link">
+              <li className="list_item_1">About us</li>
+            </Link>
+            <Link to="/#footer" smooth className="link">
+              <li className="list_item_1">Contact us</li>{" "}
+            </Link>
 
-          <li
-            className="list_item_1"
-            onClick={() => {
-              navigate("/account");
-            }}
-          >
-            Account
-          </li>
-        </ul>
-      </nav>
+            <li
+              className="list_item_1"
+              onClick={() => {
+                navigate("/account");
+              }}
+            >
+              Account
+            </li>
+            <li
+              className="list_item_1"
+              onClick={() => {
+                navigate("/account");
+              }}
+            >
+              <CircleNotificationsIcon
+                onClick={() => setOpenModal(true)}
+              ></CircleNotificationsIcon>
+            </li>
+          </ul>
+        </nav>
+      )}
 
       <div className="proff">
-        <div className="container_acc">
-          <div className="container_acc_l">
-            {/*  ////////////////////////////// */}
-            <div className="container_acc_l_logo">
-              <div className="form-controll">
-                <input
-                  type="file"
-                  onChange={() => {
-                    setbool(!bool);
-                  }}
-                  name="file_up"
+        {isOpenModal && <Modal setOpenModal={setOpenModal}></Modal>}
+        {!isOpenModal && (
+          <div className="container_acc">
+            <div className="container_acc_l">
+              {/*  ////////////////////////////// */}
+              <div className="container_acc_l_logo">
+                <div className="form-controll">
+                  <input
+                    type="file"
+                    onChange={() => {
+                      setbool(!bool);
+                    }}
+                    name="file_up"
+                  />
+                </div>
+                <img
+                  ref={hiddenFileInput}
+                  src={host + data_profile.profile_picture}
+                  alt={host + data_profile.profile_picture}
                 />
-              </div>
-              <img
-                ref={hiddenFileInput}
-                src={host + data_profile.profile_picture}
-                alt={host + data_profile.profile_picture}
-              />
 
-              {/* <input type="file" onClick={uploadImage} />
+                {/* <input type="file" onClick={uploadImage} />
 
 
 
             <img src={host+data_profile.profile_picture}/> */}
+              </div>
+
+              {/* //////////////////////////////////////////////////// */}
+
+              <div className="container_acc_l_info">
+                <div className="profile_info_sta">
+                  <h1 className="nom">
+                    {data_profile.family_name} {data_profile.first_name}
+                  </h1>
+                  <h6 className="bioo">{data_profile.bio}</h6>
+                </div>
+                <div className="profile_info_det">
+                  <div className="profile_info_det_div">
+                    <LocationOnIcon className="icon"></LocationOnIcon>
+                    <p>{data_profile.full_adress}</p>
+                  </div>
+                  <div className="profile_info_det_div">
+                    <AlternateEmailIcon className="icon"></AlternateEmailIcon>
+                    <p>{data_profile.email}</p>
+                  </div>
+                  <div className="profile_info_det_div">
+                    <PhoneIcon className="icon"></PhoneIcon>
+                    <p>{data_profile.phone_number}</p>
+                  </div>
+                  <div className="profile_info_det_div">
+                    <LinkedInIcon className="icon"></LinkedInIcon>
+                    <p>{data_profile.linked_in_username}</p>
+                  </div>
+                  <div className="profile_info_det_div">
+                    <LogoutIcon className="icon"></LogoutIcon>
+                    <p>Logout</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* //////////////////////////////////////////////////// */}
-
-            <div className="container_acc_l_info">
-              <div className="profile_info_sta">
-                <h1 className="nom">
-                  {data_profile.family_name} {data_profile.first_name}
-                </h1>
-                <h6 className="bioo">{data_profile.bio}</h6>
+            <div className="container_acc_r">
+              <div className="bloc-tabs">
+                <div
+                  className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
+                  onClick={() => toggleTab(1)}
+                >
+                  My Articles
+                </div>
+                <div
+                  className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
+                  onClick={() => toggleTab(2)}
+                >
+                  Conferences
+                </div>
+                <div
+                  className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
+                  onClick={() => toggleTab(3)}
+                >
+                  waiting for review
+                </div>
               </div>
-              <div className="profile_info_det">
-                <div className="profile_info_det_div">
-                  <LocationOnIcon className="icon"></LocationOnIcon>
-                  <p>{data_profile.full_adress}</p>
+              <div className="content-tabs">
+                <div
+                  className={
+                    toggleState === 1 ? "content  active-content" : "content"
+                  }
+                >
+                  <Getartcl data={article} />
                 </div>
-                <div className="profile_info_det_div">
-                  <AlternateEmailIcon className="icon"></AlternateEmailIcon>
-                  <p>{data_profile.email}</p>
+
+                <div
+                  className={
+                    toggleState === 2 ? "content  active-content" : "content"
+                  }
+                >
+                  <Getconfs data={confs} />
                 </div>
-                <div className="profile_info_det_div">
-                  <PhoneIcon className="icon"></PhoneIcon>
-                  <p>{data_profile.phone_number}</p>
-                </div>
-                <div className="profile_info_det_div">
-                  <LinkedInIcon className="icon"></LinkedInIcon>
-                  <p>{data_profile.linked_in_username}</p>
-                </div>
-                <div className="profile_info_det_div">
-                  <LogoutIcon className="icon"></LogoutIcon>
-                  <p>Logout</p>
+
+                <div
+                  className={
+                    toggleState === 3 ? "content  active-content" : "content"
+                  }
+                >
+                  <Getwait data={waiting} />
                 </div>
               </div>
             </div>
           </div>
-
-          <div className="container_acc_r">
-            <div className="bloc-tabs">
-              <div
-                className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
-                onClick={() => toggleTab(1)}
-              >
-                My Articles
-              </div>
-              <div
-                className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
-                onClick={() => toggleTab(2)}
-              >
-                Conferences
-              </div>
-              <div
-                className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
-                onClick={() => toggleTab(3)}
-              >
-                waiting for review
-              </div>
-            </div>
-            <div className="content-tabs">
-              <div
-                className={
-                  toggleState === 1 ? "content  active-content" : "content"
-                }
-              >
-                <Getartcl data={article} />
-              </div>
-
-              <div
-                className={
-                  toggleState === 2 ? "content  active-content" : "content"
-                }
-              >
-                <Getconfs data={confs} />
-              </div>
-
-              <div
-                className={
-                  toggleState === 3 ? "content  active-content" : "content"
-                }
-              >
-                <Getwait data={waiting} />
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

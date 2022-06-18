@@ -30,34 +30,50 @@ import ApplyForm from "./components/conference/ApplyForm";
 import { socket, SocketContext } from "./socket";
 import { notifications } from "./data";
 import Edit_art from "./components/edit_Article/Edit_art";
+let nots = [];
 
 function App() {
-  // const socket = useContext(SocketContext);
   const [not, setNot] = useState(notifications);
 
-  useEffect(() => {
-    socket.onmessage = function (e) {
-      // let x = e.json();
-      // console.log(x);
-      // console.log(e["data"]);
-      const obj = JSON.parse(e["data"]);
-      // console.log(obj.notifications);
-      setNot(obj.notifications);
-      console.log(not);
-    };
+  socket.onmessage = function (e) {
+    const obj = JSON.parse(e["data"]);
 
-    // socket.onopen = function (e) {
-    //   console.log(e);
-    //   // setNot();
-    // };
-  }, [socket]);
+    for (let i = 0; i < obj.notifications.length; i++) {
+      console.log("here");
+      notifications.push(obj.notifications[i]);
+      console.log(notifications);
+    }
+    console.log(e);
+    console.log(obj.notifications);
+    setNot(obj.notifications);
+  };
+  // const socket = useContext(SocketContext);
+
+  // useEffect(() => {
+  //   socket.onmessage = function (e) {
+  //     // let x = e.json();
+  //     // console.log(x);
+  //     // console.log(e["data"]);
+  //     const obj = JSON.parse(e["data"]);
+  //     // console.log(obj.notifications);
+  //     setNot(obj.notifications);
+  //     // console.log(not);
+  //     nots = not;
+  //     // console.log("ababa " + nots);
+  //   };
+
+  //   // socket.onopen = function (e) {
+  //   //   console.log(e);
+  //   //   // setNot();
+  //   // };
+  // }, [socket]);
   const [bool, setBool] = useState(false);
   return (
     <SocketContext.Provider value={socket}>
       <Routes>
         <Route exact path="/" element={<Layout />}>
           <Route element={<RequireAuth bool={bool} />}>
-            <Route path="/account" element={<Account />} />
+            <Route path="/account" element={<Account data={not} />} />
             <Route path="/pending/:id" element={<PendingArticlesTable />} />
             <Route path="/reviewing/:id" element={<ReviewResultTable />} />
             <Route path="/accepted/:id" element={<AcceptedArticlesTable />} />
