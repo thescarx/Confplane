@@ -21,7 +21,7 @@
     padding: 30px 15px;
     min-width: 333px;
     max-width: 333px;
-    height: 30px;
+    max-height: 30px;
 
  }
  .table-content td div{
@@ -193,12 +193,12 @@
     
 }
 
-.review{
-   
+.xrev{
+    
     background-color: #004e6475;
     display: flex;
-    width: 20%;
-    max-height: 50px;
+    width: 30%;
+    height: fit-content;
     border-radius: 5px;
     align-items: center; 
     gap: 5px;
@@ -207,18 +207,19 @@
 }
 
 .rev{
-    background-color: #004e6475;
     border-radius: 5px;
     flex: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 8px;
+    font-size: 10px;
    
     }
     
 .x{
     flex: 20%;
+    height: 1vh;
+    width: 10px;
 }
 .x:hover{
     color: red;
@@ -251,4 +252,8 @@
   .decline-accept div:hover{
    background-color: rgb(0, 78, 100,0.7);
    border-radius: 5px;
+  }
+
+  .rapport-x{
+    cursor: pointer;
   }
