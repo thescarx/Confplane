@@ -293,17 +293,19 @@ function Account() {
               <div className="form-controll">
                 <input
                   type="file"
+                  className="inpp"
                   onChange={() => {
                     setbool(!bool);
                   }}
                   name="file_up"
                 />
-              </div>
-              <img
+                 <img
                 ref={hiddenFileInput}
                 src={host + data_profile.profile_picture}
                 alt={host + data_profile.profile_picture}
               />
+              </div>
+             
 
               {/* <input type="file" onClick={uploadImage} />
 
@@ -339,13 +341,11 @@ function Account() {
                   <p>{data_profile.linked_in_username}</p>
                 </div>
                 <div className="profile_info_det_div">
-                  <LogoutIcon className="icon" onClick={()=>{
+                  <LogoutIcon className="icon"  ></LogoutIcon>
+                  <p  onClick={()=>{
                        localStorage.clear();
                        navigate2("/login")
- 
-
-                  }} ></LogoutIcon>
-                  <p>Logout</p>
+                  }}>Logout</p>
                 </div>
               </div>
             </div>
