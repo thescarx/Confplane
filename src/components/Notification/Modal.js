@@ -10,8 +10,30 @@ import CircleNotificationsRoundedIcon from "@mui/icons-material/CircleNotificati
 
 import { notifications } from "../../data";
 import { useState } from "react";
+import axios from "axios";
 
 function Modal({ setOpenModal }) {
+  const [accepted, setAccepted] = useState(false);
+  const [refused, setRefused] = useState(false);
+  const host = "http://127.0.0.1:8000";
+  const handleAccept = (conf_id, id) => {
+    axios
+      .post(host + "/conferences/accept_to_review/" + conf_id, {
+        status: "accepted",
+        // id: id,
+      })
+      .then((resp) => console.log("this is the resp " + resp));
+    setAccepted(true);
+  };
+  const handleRefuse = (conf_id, id) => {
+    axios
+      .post(host + "/conferences/accept_to_review/" + conf_id, {
+        status: "accepted",
+        // id: id,
+      })
+      .then((resp) => console.log("this is the resp " + resp));
+    setRefused(true);
+  };
   const [notif, setNotif] = useState(notifications);
   return (
     <div className="modalBackground">
@@ -24,7 +46,9 @@ function Modal({ setOpenModal }) {
         </div>
         <div className="gg">
           {notif.map((nott) => {
-            console.log(nott.subject);
+            const { conference_id, id } = nott;
+            console.log(conference_id);
+            console.log(id);
             return (
               <div className="notificationDiv">
                 <div className="icon">
@@ -37,12 +61,28 @@ function Modal({ setOpenModal }) {
 
                 {nott.type === "invitation" && (
                   <div className="icons">
-                    <div className="check">
-                      <CheckCircleRoundedIcon fontSize="large" />
-                    </div>
-                    <div className="uncheck">
-                      <CancelRoundedIcon fontSize="large" />
-                    </div>
+                    {!refused && (
+                      <div className="check">
+                        <CheckCircleRoundedIcon
+                          onClick={() => {
+                            handleAccept(conference_id, id);
+                            // console.log("clicked");
+                          }}
+                          color="red"
+                          fontSize="large"
+                        />
+                      </div>
+                    )}
+                    {!accepted && (
+                      <div className="uncheck">
+                        <CancelRoundedIcon
+                          onClick={() => {
+                            handleRefuse(conference_id, id);
+                          }}
+                          fontSize="large"
+                        />
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

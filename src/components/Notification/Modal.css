@@ -96,6 +96,7 @@
     align-items: center;
 }
 .icon{
+    /* background-color: red; */
     max-width: 6%;
     max-height:50%;
     cursor: pointer;
@@ -110,7 +111,9 @@
 }
 
 .subject{
-    text-overflow: ellipsis;
+    font-weight: bold;
+    text-overflow:clip;
+    max-width: 80%;
     min-width: 80%;
     max-height: 50%;
 }
