@@ -24,7 +24,7 @@ import logo from "./ profile.png"
 
 function Account() {
   const [not, setNot] = useState(notifications);
-  const socket = useContext(SocketContext)
+  const socket = useContext(SocketContext);
 
   // socket.onmessage=function(e){
   //   const obj = JSON.parse(e["data"]);
@@ -34,7 +34,7 @@ function Account() {
   //   }
   //   setNot(notifications);
   //   console.log("done");
-    
+
   // }
 
   // console.log("this is the data " + data);
@@ -67,7 +67,7 @@ function Account() {
   const [bool, setbool] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [bool2,setbool2]=useState(false)
+  const [bool2, setbool2] = useState(false);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -95,11 +95,10 @@ function Account() {
   // }
 
   useEffect(() => {
-    
     axios
       .get(host + "/users/profile")
       .then((reponse) => {
-        setdata_profile(reponse["data"])
+        setdata_profile(reponse["data"]);
       })
       .catch((err) => {});
   }, [bool2]);
@@ -115,23 +114,35 @@ function Account() {
     );
     socket.onmessage = function (e) {
       const obj = JSON.parse(e["data"]);
-      console.log(obj.notifications.length)
-  
+      console.log(obj.notifications.length);
+
       for (let i = 0; i < obj.notifications.length; i++) {
         notifications.push(obj.notifications[i]);
       }
       // console.log("all notifications");
-
+      // for(let i = 0;i<obj.notifications.length-1;i++){
+      //   for(let y = 0; y<obj.notifications)
+      // }
+      if (notifications.length > 1) {
+        for (let i = 0; i < notifications.length; i++) {
+          for (let x = 0; x < obj.notifications.length; x++) {
+            if (notifications[i].id === obj.notifications[x].id) {
+              notifications.pop(obj.notifications[x]);
+            }
+          }
+        }
+      }
       setNot(obj.notifications);
-    };  
+
+      console.log(not);
+    };
     axios
       .get(host + "/articles/list/path")
       .then((artc) => {
         setarticle(artc["data"]);
-        console.log(artc["data"]);
       })
       .catch((err) => {});
-  }, []);
+  }, [socket]);
 
   const saveFile = (urll) => {
     saveAs(urll, "article.pdf");
@@ -298,186 +309,199 @@ function Account() {
 
   return (
     <div className="nnn">
-        {isOpen && <Modifier setbool2={setbool2} bool2={bool2} objet={data_profile} handelclickclose={togglePopup} />}
-        {!isOpen &&
-    <div className="account_page" id="account">
-      
-      {!isOpenModal && (
-        <nav className="navbar_1">
-          <ul className="navbar_list_1">
-            <Link to="/" className="link">
-              <li className="list_item_1">Home</li>
-            </Link>
-
-            <li
-              className="list_item_1"
-              onClick={() => {
-                navigate_2("/MainConf");
-              }}
-            >
-              Conferences
-            </li>
-
-            <Link to="/#footer" smooth className="link">
-              <li className="list_item_1">About us</li>
-            </Link>
-            <Link to="/#footer" smooth className="link">
-              <li className="list_item_1">Contact us</li>{" "}
-            </Link>
-
-            <li
-              className="list_item_1"
-              onClick={() => {
-                navigate("/account");
-              }}
-            >
-              Account
-            </li>
-            <li
-              className="list_item_1"
-              onClick={() => {
-                navigate("/account");
-              }}
-            >
-              <CircleNotificationsIcon
-                onClick={() => setOpenModal(true)}
-              ></CircleNotificationsIcon>
-            </li>
-          </ul>
-        </nav>
+      {isOpen && (
+        <Modifier
+          setbool2={setbool2}
+          bool2={bool2}
+          objet={data_profile}
+          handelclickclose={togglePopup}
+        />
       )}
-   
-      <div className="proff">
-      {isOpenModal && <Modal setOpenModal={setOpenModal}></Modal>}
-       
-     {/* {isOpen && <Modifier handelclickclose={togglePopup} />} */}
-        {(!isOpenModal) && (
-          <div className="container_acc">
-            <div className="container_acc_l">
-              {/*  ////////////////////////////// */}
-              <div className="container_acc_l_logo">
-                <div className="form-controll">
-                  <input
-                    type="file"
-                    onChange={() => {
-                      setbool(!bool);
-                    }}
-                    name="file_up"
-                  />
-                </div>
-                {data_profile.profile_picture === null &&<img
-                  ref={hiddenFileInput}
-                  src={logo}
-                  alt={logo}
-                /> }
-                { data_profile.profile_picture !== null &&<img
-                  ref={hiddenFileInput}
-                  src={host + data_profile.profile_picture}
-                  alt={host + data_profile.profile_picture}
-                />}
-              </div>
+      {!isOpen && (
+        <div className="account_page" id="account">
+          {!isOpenModal && (
+            <nav className="navbar_1">
+              <ul className="navbar_list_1">
+                <Link to="/" className="link">
+                  <li className="list_item_1">Home</li>
+                </Link>
 
-              {/* //////////////////////////////////////////////////// */}
-
-              <div className="container_acc_l_info">
-                <div className="profile_info_sta">
-                  <h1 className="nom">
-                    {data_profile.family_name} {data_profile.first_name}
-                  </h1>
-                  <h6 className="bioo">{data_profile.bio}</h6>
-                </div>
-                <div className="profile_info_det">
-                  <div className="profile_info_det_div">
-                    <LocationOnIcon className="icon"></LocationOnIcon>
-                    <p>{data_profile.full_adress}</p>
-                  </div>
-                  <div className="profile_info_det_div">
-                    <AlternateEmailIcon className="icon_p"></AlternateEmailIcon>
-                    <p>{data_profile.email}</p>
-                  </div>
-                  <div className="profile_info_det_div">
-                    <PhoneIcon className="icon_p"></PhoneIcon>
-                    <p>{data_profile.phone_number}</p>
-                  </div>
-                  <div className="profile_info_det_div">
-                    <LinkedInIcon className="icon_p"></LinkedInIcon>
-                    <p>{data_profile.linked_in_username}</p>
-                  </div>
-                  <div className="profile_info_det_div">
-                    <EditIcon className="icon_p"></EditIcon>
-                    <p className="edit_p" onClick={togglePopup}>
-                      Edit Profile
-                    </p>
-                  </div>
-                  <div className="profile_info_det_div">
-                    <LogoutIcon className="icon_p"></LogoutIcon>
-                    <p
-                      className="pppp"
-                      onClick={() => {
-                        localStorage.clear();
-                        navigate_6("/login");
-                        window.location.reload();
-                      }}
-                    >
-                      Logout
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="container_acc_r">
-            {/* {isOpen && <Modifier handelclickclose={togglePopup} />} */}
-              <div className="bloc-tabs">
-                <div
-                  className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
-                  onClick={() => toggleTab(1)}
-                >
-                  My Articles
-                </div>
-                <div
-                  className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
-                  onClick={() => toggleTab(2)}
+                <li
+                  className="list_item_1"
+                  onClick={() => {
+                    navigate_2("/MainConf");
+                  }}
                 >
                   Conferences
-                </div>
-                <div
-                  className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
-                  onClick={() => toggleTab(3)}
+                </li>
+
+                <Link to="/#footer" smooth className="link">
+                  <li className="list_item_1">About us</li>
+                </Link>
+                <Link to="/#footer" smooth className="link">
+                  <li className="list_item_1">Contact us</li>{" "}
+                </Link>
+
+                <li
+                  className="list_item_1"
+                  onClick={() => {
+                    navigate("/account");
+                  }}
                 >
-                  waiting for review
-                </div>
-              </div>
-              <div className="content-tabs">
-                <div
-                  className={
-                    toggleState === 1 ? "content  active-content" : "content"
-                  }
+                  Account
+                </li>
+                <li
+                  className="list_item_1"
+                  onClick={() => {
+                    navigate("/account");
+                  }}
                 >
-                  <Getartcl data={article} />
+                  <CircleNotificationsIcon
+                    onClick={() => setOpenModal(true)}
+                  ></CircleNotificationsIcon>
+                </li>
+              </ul>
+            </nav>
+          )}
+
+          <div className="proff">
+            {isOpenModal && <Modal setOpenModal={setOpenModal}></Modal>}
+
+            {/* {isOpen && <Modifier handelclickclose={togglePopup} />} */}
+            {!isOpenModal && (
+              <div className="container_acc">
+                <div className="container_acc_l">
+                  {/*  ////////////////////////////// */}
+                  <div className="container_acc_l_logo">
+                    <div className="form-controll">
+                      <input
+                        type="file"
+                        onChange={() => {
+                          setbool(!bool);
+                        }}
+                        name="file_up"
+                      />
+                    </div>
+                    <img
+                      ref={hiddenFileInput}
+                      src={host + data_profile.profile_picture}
+                      alt={host + data_profile.profile_picture}
+                    />
+                  </div>
+
+                  {/* //////////////////////////////////////////////////// */}
+
+                  <div className="container_acc_l_info">
+                    <div className="profile_info_sta">
+                      <h1 className="nom">
+                        {data_profile.family_name} {data_profile.first_name}
+                      </h1>
+                      <h6 className="bioo">{data_profile.bio}</h6>
+                    </div>
+                    <div className="profile_info_det">
+                      <div className="profile_info_det_div">
+                        <LocationOnIcon className="icon"></LocationOnIcon>
+                        <p>{data_profile.full_adress}</p>
+                      </div>
+                      <div className="profile_info_det_div">
+                        <AlternateEmailIcon className="icon_p"></AlternateEmailIcon>
+                        <p>{data_profile.email}</p>
+                      </div>
+                      <div className="profile_info_det_div">
+                        <PhoneIcon className="icon_p"></PhoneIcon>
+                        <p>{data_profile.phone_number}</p>
+                      </div>
+                      <div className="profile_info_det_div">
+                        <LinkedInIcon className="icon_p"></LinkedInIcon>
+                        <p>{data_profile.linked_in_username}</p>
+                      </div>
+                      <div className="profile_info_det_div">
+                        <EditIcon className="icon_p"></EditIcon>
+                        <p className="edit_p" onClick={togglePopup}>
+                          Edit Profile
+                        </p>
+                      </div>
+                      <div className="profile_info_det_div">
+                        <LogoutIcon className="icon_p"></LogoutIcon>
+                        <p
+                          className="pppp"
+                          onClick={() => {
+                            localStorage.clear();
+                            navigate_6("/login");
+                          }}
+                        >
+                          Logout
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div
-                  className={
-                    toggleState === 2 ? "content  active-content" : "content"
-                  }
-                >
-                  <Getconfs data={confs} />
-                </div>
+                <div className="container_acc_r">
+                  {/* {isOpen && <Modifier handelclickclose={togglePopup} />} */}
+                  <div className="bloc-tabs">
+                    <div
+                      className={
+                        toggleState === 1 ? "tabs active-tabs" : "tabs"
+                      }
+                      onClick={() => toggleTab(1)}
+                    >
+                      My Articles
+                    </div>
+                    <div
+                      className={
+                        toggleState === 2 ? "tabs active-tabs" : "tabs"
+                      }
+                      onClick={() => toggleTab(2)}
+                    >
+                      Conferences
+                    </div>
+                    <div
+                      className={
+                        toggleState === 3 ? "tabs active-tabs" : "tabs"
+                      }
+                      onClick={() => toggleTab(3)}
+                    >
+                      waiting for review
+                    </div>
+                  </div>
+                  <div className="content-tabs">
+                    <div
+                      className={
+                        toggleState === 1
+                          ? "content  active-content"
+                          : "content"
+                      }
+                    >
+                      <Getartcl data={article} />
+                    </div>
 
-                <div
-                  className={
-                    toggleState === 3 ? "content  active-content" : "content"
-                  }
-                >
-                  <Getwait data={waiting} />
+                    <div
+                      className={
+                        toggleState === 2
+                          ? "content  active-content"
+                          : "content"
+                      }
+                    >
+                      <Getconfs data={confs} />
+                    </div>
+
+                    <div
+                      className={
+                        toggleState === 3
+                          ? "content  active-content"
+                          : "content"
+                      }
+                    >
+                      <Getwait data={waiting} />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
-        )}
-      </div>
-    </div>}
+        </div>
+      )}
     </div>
   );
 }

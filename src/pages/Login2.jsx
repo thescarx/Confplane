@@ -136,7 +136,7 @@ function Login2() {
     }
     if (!pwd) {
       errors.password = "Required";
-    } else if (pwd.length < 1) {
+    } else if (pwd.length < 5) {
       errors.password = "password is too short";
     }
     return errors;
