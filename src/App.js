@@ -32,6 +32,7 @@ import { socket, SocketContext } from "./socket";
 import { notifications } from "./data";
 import Edit_art from "./components/edit_Article/Edit_art";
 import EditFromRev from "./components/editfromrev/EditFromRev";
+import Raport from "./components/raport/Raport";
 
 function App() {
   // const socket = useContext(SocketContext);
@@ -58,7 +59,7 @@ function App() {
         <Route exact path="/" element={<Layout />}>
           <Route element={<RequireAuth bool={bool} />}>
             <Route path="/account" element={<Account />} />
-            {/* <Route path="/gg/:id" element={<Raport/>} /> */}
+            <Route path="/report/:id" element={<Raport/>} />
             <Route path="/account/EditArticle/:id" element={<EditArticle />} />
             <Route path="/pending/:id" element={<PendingArticlesTable />} />
             <Route path="/reviewing/:id" element={<ReviewResultTable />} />
