@@ -6,6 +6,7 @@ import dateFormat from "dateformat";
 import "react-circular-progressbar/dist/styles.css";
 import { useParams } from "react-router-dom";
 import uzCyrl from 'date-fns/locale/uz-Cyrl/index';
+import { saveAs } from "file-saver";
 
 
 function AcceptedArticlesTable() {
@@ -44,7 +45,9 @@ function AcceptedArticlesTable() {
 
   }, [bool]);
 
- 
+  const saveFile = (urll,title) => {
+    saveAs(urll, title);
+  };
 
 
 
@@ -67,7 +70,7 @@ function AcceptedArticlesTable() {
       <tbody>
         {data.map((column, i) => (
           <tr key={i}>
-            <td> <div>{column.title}</div>  </td>
+            <td> <div className="telecharger" onDoubleClick={()=>saveFile(column.article_url,column.title)} >{column.title}</div>  </td>
             <td><div>{column.user_id}</div>  </td>
 
 

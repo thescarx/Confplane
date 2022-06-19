@@ -56,6 +56,7 @@ function Account() {
     (error) => {
       return Promise.reject(error);
     }
+
   );
 
   // for upload image
@@ -115,9 +116,13 @@ function Account() {
       const obj = JSON.parse(e["data"]);
       console.log(obj.notifications.length);
 
-      for (let i = 0; i < obj.notifications.length; i++) {
-        notifications.push(obj.notifications[i]);
+      for (let t = 0; t < obj.notifications.length; t++) {
+        notifications.push(obj.notifications[t]);
+
+
       }
+      console.log(notifications)
+
       // console.log("all notifications");
       // for(let i = 0;i<obj.notifications.length-1;i++){
       //   for(let y = 0; y<obj.notifications)
@@ -131,7 +136,7 @@ function Account() {
           }
         }
       }
-      setNot(obj.notifications);
+      setNot(not);
 
       console.log(not);
     };
@@ -427,6 +432,7 @@ function Account() {
                           onClick={() => {
                             localStorage.clear();
                             navigate_6("/login");
+                            window.location.reload()
                           }}
                         >
                           Logout

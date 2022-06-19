@@ -9,6 +9,7 @@ import LoadingSpinner from "../components/LoadingSpinner"
 function AdminMain() {
 
   const [bool, setBool] = useState(true);
+  const [bool2,setBool2]=useState(false)
   const navigate= useNavigate()
   const handleUsers = ()=>{
     const element1 = document.getElementById('i1');
@@ -51,16 +52,16 @@ const handleSignout = ()=>{
           <div className='adminsidebarmenu' >
             
             <div className='menulist' >
-              <div className='item  active' id='i1' onClick={()=>{setBool(true);handleUsers()}} >Users Management</div>
-              <div className='item' id='i2'  onClick={()=>{setBool(false);handleConferences()}} >Conferences Management</div>
-              <div className='item' id='i3' onClick={()=>{handleSignout()}} >Log out</div>
+              <div className='item  active' id='i1' onClick={()=>{setBool2(!bool2);setBool(true);handleUsers()}} >Users Management</div>
+              <div className='item' id='i2'  onClick={()=>{setBool2(!bool2);setBool(false);handleConferences()}} >Conferences Management</div>
+              <div className='item' id='i3' onClick={()=>{handleSignout();window.location.reload()}} >Log out</div>
 
             </div>
           </div>
         </div>
       <div className='cont' >
-        {bool ? <AdminUsers /> 
-              : <AdminConferences />}
+        {bool ? <AdminUsers bool2={bool2} setBool2={setBool2} /> 
+              : <AdminConferences bool2={bool2} setBool2={setBool2}  />}
 
       </div>
     </div>

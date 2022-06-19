@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-function AdminUsers() {
+function AdminUsers({setBool2,bool2}) {
   const navigate=useNavigate()
   const [bool, setBool] = useState(false);
   const accesToken = localStorage.getItem("token");
@@ -65,7 +65,7 @@ const VerifyToken=(token)=>{
       .get("http://localhost:8000/users/listforadmin/path")
       .then((response) => {setData(response["data"])})
     
-  }, [bool]);
+  }, [bool,bool2]);
 
   // useEffect(() => {
   //   axios
@@ -76,9 +76,22 @@ const VerifyToken=(token)=>{
 
 
   useEffect(() => {
-    axios
+    if (q===""){
+      axios
+      .get("http://localhost:8000/users/listforadmin/path")
+      .then((response) => setData(response["data"]));
+      console.log('sans search')
+
+    }
+    else {
+      axios
       .get("http://localhost:8000/users/listforadmin/path?search=" + q)
       .then((response) => setData(response["data"]));
+      console.log('search')
+    }
+    // axios
+    //   .get("http://localhost:8000/users/listforadmin/path?search=" + q)
+    //   .then((response) => setData(response["data"]));
   }, [q]);
 
 

@@ -4,6 +4,7 @@ import axios from "axios";
 import dateFormat from "dateformat";
 import "react-circular-progressbar/dist/styles.css";
 import { useParams } from "react-router-dom";
+import { saveAs } from "file-saver";
 
 function PendingArticlesTable() {
   const {id} = useParams();
@@ -40,6 +41,7 @@ function PendingArticlesTable() {
     //  })
     // return await name
   // };
+  
 
   const handleDecline = (id) => {
     axios
@@ -56,6 +58,9 @@ function PendingArticlesTable() {
       .then((response) => {
         setBool(!bool)
       });
+  };
+  const saveFile = (urll,title) => {
+    saveAs(urll, title);
   };
 
   return (
@@ -75,7 +80,7 @@ function PendingArticlesTable() {
       <tbody>
         {data.map((column, i) => (
           <tr key={i}>
-            <td> <div>{column.title}</div>  </td>
+            <td> <div className="telecharger"  onDoubleClick={()=>saveFile(column.article_url,column.title)} >{column.title}</div>  </td>
             <td><div> {column.user_id}</div> </td>
             <td> <div>{dateFormat(column.date_of_creation, "mmmm dS, yyyy")}</div> </td>
             <td className="decision" >
