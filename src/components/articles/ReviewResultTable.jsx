@@ -76,12 +76,12 @@ function ReviewResultTable() {
                 ?  <div className="column_note" > 
                   {column.report_set.map(rep=>rep.score).reduce((prev,curr)=>prev+curr  ,0)}/100 
                   <CommentIcon className="rapport-x" onClick={()=>{setPop(true)}} />
-                  <RapportPop  data={column.reviewers} trigger={pop} pop={pop} setPop={setPop} />
+                  <RapportPop data2={column.report_set}  data={column.reviewers} trigger={pop} pop={pop} setPop={setPop} />
                   </div>
                 :  <div className="column_note" >
                   { column.report_set.length}/{column.reviewers.length}
                   <CommentIcon className="rapport-x" onClick={()=>{setPop(true)}}  />
-                  <RapportPop data={column.reviewers} trigger={pop} pop={pop} setPop={setPop} />
+                  <RapportPop data2={column.report_set} data={column.reviewers} trigger={pop} pop={pop} setPop={setPop} />
                 </div>
               
               
