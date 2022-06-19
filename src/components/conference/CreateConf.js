@@ -3,7 +3,7 @@ import "./MainConf.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
-// import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import { conferences } from "./data.js";
 import { users } from "./data.js";
@@ -535,7 +535,6 @@ function CreateConf() {
           />
           <p className="pp">{formErrors.site}</p>
 
-          {/* <button >hiihaha</button> */}
           <button className="inp2" onClick={handleClick}>
             <p className="upload">
               Conference logo (image) <span></span>{" "}

@@ -50,7 +50,7 @@ function Login() {
     }
     if (!values.password) {
       errors.password = "Required";
-    } else if (values.password.length < 6) {
+    } else if (values.password.length < 1) {
       errors.password = "password invalid";
     }
     return errors;
