@@ -382,11 +382,13 @@ function Account() {
                         name="file_up"
                       />
                     </div>
+                    {data_profile.profile_picture===null &&<img src={logo} alt={logo}/>}
+                    {data_profile.profile_picture!== null &&
                     <img
                       ref={hiddenFileInput}
                       src={host + data_profile.profile_picture}
                       alt={host + data_profile.profile_picture}
-                    />
+                    />}
                   </div>
 
                   {/* //////////////////////////////////////////////////// */}
