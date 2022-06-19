@@ -32,7 +32,6 @@
   width: 100%;
 }
 .rightSide {
-  background-color: blue;
   flex: 60%;
   background-image: url("../../../public/pics/login_bg.png");
   background-repeat: no-repeat;
