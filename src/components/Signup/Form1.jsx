@@ -11,7 +11,8 @@ function Form1({ formData, setFormData, formErrors, setFormErrors }) {
           name="firstname"
           value={formData.firstname}
           onChange={(e) => {
-            setFormData({ ...formData, firstname: e.target.value });
+            setFormData({ ...formData, firstname: e.target.value })
+            ;setFormErrors({})
           }}
         />
       ) : (
@@ -23,6 +24,7 @@ function Form1({ formData, setFormData, formErrors, setFormErrors }) {
           value={formData.firstname}
           onChange={(e) => {
             setFormData({ ...formData, firstname: e.target.value });
+            setFormErrors({})
           }}
         />
       )}
@@ -34,6 +36,7 @@ function Form1({ formData, setFormData, formErrors, setFormErrors }) {
           value={formData.familyname}
           onChange={(e) => {
             setFormData({ ...formData, familyname: e.target.value });
+            setFormErrors({})
           }}
         />
       ) : (
@@ -44,6 +47,7 @@ function Form1({ formData, setFormData, formErrors, setFormErrors }) {
           value={formData.familyname}
           onChange={(e) => {
             setFormData({ ...formData, familyname: e.target.value });
+            setFormErrors({})
           }}
         />
       )}
@@ -55,6 +59,7 @@ function Form1({ formData, setFormData, formErrors, setFormErrors }) {
           value={formData.email}
           onChange={(e) => {
             setFormData({ ...formData, email: e.target.value });
+            setFormErrors({})
           }}
         />
       ) : (
@@ -65,6 +70,7 @@ function Form1({ formData, setFormData, formErrors, setFormErrors }) {
           value={formData.email}
           onChange={(e) => {
             setFormData({ ...formData, email: e.target.value });
+            setFormErrors({})
           }}
         />
       )}
@@ -76,6 +82,7 @@ function Form1({ formData, setFormData, formErrors, setFormErrors }) {
           value={formData.password}
           onChange={(e) => {
             setFormData({ ...formData, password: e.target.value });
+            setFormErrors({})
           }}
         />
       ) : (
@@ -86,6 +93,7 @@ function Form1({ formData, setFormData, formErrors, setFormErrors }) {
           value={formData.password}
           onChange={(e) => {
             setFormData({ ...formData, password: e.target.value });
+            setFormErrors({})
           }}
         />
       )}
@@ -97,6 +105,7 @@ function Form1({ formData, setFormData, formErrors, setFormErrors }) {
           value={formData.passwordconfirmation}
           onChange={(e) => {
             setFormData({ ...formData, passwordconfirmation: e.target.value });
+            setFormErrors({})
           }}
         />
       ) : (
@@ -107,6 +116,7 @@ function Form1({ formData, setFormData, formErrors, setFormErrors }) {
           value={formData.passwordconfirmation}
           onChange={(e) => {
             setFormData({ ...formData, passwordconfirmation: e.target.value });
+            setFormErrors({})
           }}
         />
       )}

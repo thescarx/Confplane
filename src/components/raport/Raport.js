@@ -5,7 +5,11 @@ import { HashLink as Link } from "react-router-hash-link";
 import { saveAs } from "file-saver";
 import axios from "axios";
 import DownloadIcon from "@mui/icons-material/Download";
+<<<<<<< HEAD
 var idd = 0;
+=======
+var idd = "x";
+>>>>>>> 7ab11d1b348dc7f43f2afe17d0d45f8bd34033dd
 
 function Raport() {
   const { id } = useParams();
