@@ -1,23 +1,19 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./edit_art.css";
+import "./raport.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { saveAs } from "file-saver";
 import axios from "axios";
 import DownloadIcon from "@mui/icons-material/Download";
-import Popup from "../popup/Popup";
+<<<<<<< HEAD
+var idd = 0;
+=======
 var idd = "x";
-
-var objett = {};
+>>>>>>> 7ab11d1b348dc7f43f2afe17d0d45f8bd34033dd
 
 function Raport() {
-  var [dics, setDics] = useState([]);
-  const [dic, setDic] = useState([
-    //   {
-    //   question:"",
-    //   answer:null,
-    // }
-  ]);
+  const { id } = useParams();
+  console.log(id)
   const token = localStorage.getItem("token");
   axios.interceptors.request.use(
     (config) => {
@@ -28,21 +24,26 @@ function Raport() {
       return Promise.reject(error);
     }
   );
-  const { id } = useParams();
+
   let host = "http://127.0.0.1:8000";
   let navigate = useNavigate();
   let navigate_2 = useNavigate();
 
   const [raport, setraport] = useState({});
   const [art, setart] = useState({});
+  const [state,setstate]=useState([])
+
   useEffect(() => {
-    let url2 = host + "​/report​/report​/" + id;
-    axios
-      .get(url2)
+    // let url2 = host + "​/report​/report​/"+id ;
+    // console.log(url2)
+    axios.get("http://127.0.0.1:8000/report/report/"+id)
       .then((artts) => {
         idd = artts["data"].article;
+        console.log("ggg"+idd)
         setraport(artts["data"]);
-        let url = host + "/articles/" + idd;
+        setstate(artts["data"].answers)
+        console.log(artts["data"])
+        let url = host + "/articles/"+idd;
         axios.get(url).then((resp) => {
           setart(resp["data"]);
           console.log(resp["data"]);
@@ -57,30 +58,34 @@ function Raport() {
     saveAs(urlll, "article.pdf");
   };
 
+
   const Question = ({ data }) => {
     return (
       <div>
-        {data.map((q, i) => {
+        {data.map((q) => {
           return (
             <form>
               <div className="qst_box">
                 <div className="qs">
-                  <p>. {q.question}</p>
+                  <p>. {q.question.question}</p>
                 </div>
                 <div className="chek">
+                  {q.answer===true &&
                   <input
                     type="radio"
                     id="html"
                     name="answer"
-                    value="true"
-                  />
+                    value=""
+                    checked
+                  />}
                     <label for="html">YES</label> {" "}
+                  {q.answer===false&&
                   <input
                     type="radio"
                     id="css"
                     name="answer"
                     value="false"
-                  />
+                  />}
                     <label for="css">NO</label>
                 </div>
               </div>
@@ -156,17 +161,17 @@ function Raport() {
         <div className="edit_l">
           <div className="qsss">
             <div className="give_qst">
-              <Question data={raport.answers} />
+              <Question data={state} />
               <div className="scr_50">
                 <div className="scr_p">
                   <p>. From 0 to 50 whats your rating for the article ?</p>
                 </div>
                 <div className="scr_inp">
                   <div className="scr_inp_inp">
-                    <text
-                      value={raport.score}
-                      className="innp"
-                    />
+                    <p
+                      // value={raport.score}
+                      className="innpp"
+                    >{raport.score}</p>
                   </div>
                   <div className="scr_inp_50">/100</div>
                 </div>
@@ -178,7 +183,7 @@ function Raport() {
               <textarea
                 name="description"
                 className="spec_art"
-                placeholder={raport.remark}
+                value={raport.remark}
               />
             </div>
           </div>

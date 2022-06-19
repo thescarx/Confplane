@@ -44,20 +44,20 @@ function Login2() {
   useEffect(() => {
     if (!isMount) {
       // setLoading(false)
-      if (Object.keys(formErrors) == 0) {
+      if (Object.keys(formErrors).length !== 0){
+        setLoading(false)
+      }
+      // if(Object.keys(formErrors)!=0){setLoading(false)}
+      if (Object.keys(formErrors).length == 0) {
         axios
           .post("http://localhost:8000/users/login/token/", {
             email: user,
             password: pwd,
           })
           .then((response) => {
-            // if (response.status!==200){
-
-            //   setFormErrors({...formErrors,other:"invalid email or password"})
-            // }
             const accessToken = response?.data?.access;
             const is_admin=response?.data?.is_admin
-            // setLoading(false)
+            setLoading(false)
 
             localStorage.setItem("is_admin", response.data.is_admin);
             localStorage.setItem("token", response.data.access);
@@ -72,19 +72,9 @@ function Login2() {
               navigate("/");
               window.location.reload()
             }
-            //verifyAdmin(accessToken)
-            //navigate(from , ({replace:true}))
-            // }).catch((err)=>{{
-            //   if (err.response.status==401)
-            //   // if(err.response.data.detail="No active account found with the given credentials"){
-            //      setFormErrors({
-            //        password:"false email or password"
-            //     })}
-
-            // if (err.response.data.status==401) setFormErrors(err.response.data.detail)
           }).catch(err=>{console.log(err.response.data.detail);
             setFormErrors({...formErrors,other:"invalid email or password"})
-            // setLoading(false)
+            setLoading(false)
           });
       }
     }
@@ -105,30 +95,13 @@ function Login2() {
   const handleSubmit = () => {
     setFormErrors(validate(user, pwd));
     setBool(!bool);
+    console.log("submit")
 
-    // if(Object.keys(formErrors).length==0){
-    //     axios.post('http://localhost:8000/users/login/token/', {
-    //   email: user,
-    //   password: pwd
-    // }).then((response) => {
-    //   const accessToken = response.data.access;
-    //   localStorage.setItem('token', response.data.access);
-    //   console.log(response.data)
-    //   setAuth({ user, pwd, accessToken })
-    //   setUser('')
-    //   setPwd('')
-    //   //verifyAdmin(accessToken)
-    //   //navigate(from , ({replace:true}))
-    //   navigate('/account')
-    // }).catch((err)=>{
-
-    //   // if (err.response.data.status==401) setFormErrors(err.response.data.detail)
-    // })
-    // }
   };
 
   const validate = (user, pwd) => {
     const errors = {};
+
 
     if (!user) {
       errors.email = "Required";
@@ -137,16 +110,11 @@ function Login2() {
     }
     if (!pwd) {
       errors.password = "Required";
-    } else if (pwd.length < 5) {
+    } else if (pwd.length < 1) {
       errors.password = "password is too short";
     }
     return errors;
   };
-
-
-useEffect(()=>{
- 
-},[])
 
 
   
@@ -164,15 +132,19 @@ useEffect(()=>{
           setUser={setUser}
           setPwd={setPwd}
           formErrors={formErrors}
+          setFormErrors={setFormErrors}
         />
+         <div className="load" >
+        {loading && <LoadingSpinner/>}
+        </div>
         <button className="btn_login" onClick={()=>{handleSubmit();setLoading(true)}}>
           <p>Sign in</p>
           
         </button>
-        {/* <div className="loading" >
-        {loading && <LoadingSpinner/>}
+       
+        
 
-        </div> */}
+    
         
         
         <span className="login_text">

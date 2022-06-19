@@ -32,6 +32,8 @@ import { socket, SocketContext } from "./socket";
 import { notifications } from "./data";
 import Edit_art from "./components/edit_Article/Edit_art";
 import EditFromRev from "./components/editfromrev/EditFromRev";
+import Raport from "./components/raport/Raport";
+import Check from "./components/Signup/Check";
 
 function App() {
   // const socket = useContext(SocketContext);
@@ -58,6 +60,7 @@ function App() {
         <Route exact path="/" element={<Layout />}>
           <Route element={<RequireAuth bool={bool} />}>
             <Route path="/account" element={<Account />} />
+            <Route path="/report/:id" element={<Raport/>} />
             <Route path="/account/EditArticle/:id" element={<EditArticle />} />
             <Route path="/pending/:id" element={<PendingArticlesTable />} />
             <Route path="/reviewing/:id" element={<ReviewResultTable />} />
@@ -69,6 +72,8 @@ function App() {
             <Route path="/EditConf/:id" element={<EditConf />} />
             <Route path="/Edit_art/:id" element={<Edit_art />} />
             <Route path="/EditFromRev/:id" element={<EditFromRev />} />
+            
+
           </Route>
 
           <Route element={<RequireAuth bool={!bool} />}>
@@ -83,6 +88,7 @@ function App() {
           <Route path="/unauthorized" element={<Unauthorized />} />
 
           <Route path="MainConf" element={<MainConf />} />
+          <Route path="/check" element={<Check />} />
           {/* <Route path="/account" element={<Account/>}/> */}
         </Route>
       </Routes>

@@ -140,17 +140,16 @@
     /* background-color: #004E64; */
   } 
   .scr_inp_50{
+    padding: 3%;
     flex: 70%;
     /* background-color: #FF6B17; */
   }
-  .scr_inp input{
-    /* position: absolute; */
-    width: 45px;
-    height: 27px;
-    border-radius: 15%;
-
-background: rgba(0, 78, 100, 0.26);
-/* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+  .scr_inp p{
+    font-size: 20px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:lighter;
+    font-style: italic;
+    color: rgb(255, 47, 47);
   }
   .cmm{
     flex: 40%;
@@ -242,7 +241,7 @@ line-height: 100%;
     font-family:'Poppins';
     font-style: italic;
     /* background-color: gold; */
-    min-width: 100%;
+    max-width: 100%;
     height: 100%;
     justify-content: center;
     display: flex;
@@ -300,7 +299,7 @@ line-height: 100%;
     padding-top: 5%;
     flex: 10%;
     /* background: #004E64; */
-    min-width: 100%;
+   max-width: 100%;
     height: 100%;
     justify-content: center;
     display: flex;
@@ -315,7 +314,7 @@ line-height: 100%;
 .catego{
     flex: 1%;
     /* background-color: blue; */
-    min-width: 100%;
+    max-width: 100%;
     /* padding-top: 5%; */
     height: 100%;
     justify-content: center;

@@ -126,9 +126,16 @@ function Edit_art() {
   const [score, setscore] = useState(0);
   const [done, setdone] = useState(false);
 
+  const putscor=(e)=>{
+    // e.preventDefault();
+    
+    setscore(e)
+ 
+  }
+
   const changecmnt = (e) => {
-    e.preventDefault();
-    setcmnt(e.target.value);
+    // e.preventDefault();
+    setcmnt(e);
   };
 
   useEffect(() => {
@@ -145,16 +152,6 @@ function Edit_art() {
     });
   }, [done]);
 
-  // const calculescore=()=>{
-  //   let cpt=0;
-  //   let val=50/dic.length;
-  //   for(let i=0;i<dics.length;i++){
-  //     if(dics[i].answer===true){
-  //       cpt=cpt+val;
-  //     }
-  //   }
-  //   return cpt;
-  // }
 
   return (
     <div className="edit_page">
@@ -228,13 +225,14 @@ function Edit_art() {
                 </div>
                 <div className="scr_inp">
                   <div className="scr_inp_inp">
+                    <form>
                     <input
                       type="number"
                       max={100}
                       min={0}
                       className="innp"
-                      onChange={(event) => setscore(event.target.value)}
-                    />
+                      onChange={(event) => putscor(event.target.value)}
+                    /></form>
                   </div>
                   <div className="scr_inp_50">/100</div>
                 </div>
@@ -246,13 +244,13 @@ function Edit_art() {
               <textarea
                 name="description"
                 className="spec_art"
-                onChange={changecmnt}
+                onChange={(e)=>changecmnt(e.target.value)}
                 placeholder="Comment"
               />
             </div>
             <div className="space_btn">
               <div className="Submit_div">
-                <button className="Submit_btn" onClick={() => setdone(true)}>
+                <button className="Submit_btn" onClick={() => setdone(!done)}>
                   <p>Submit result</p>
                 </button>
               </div>
