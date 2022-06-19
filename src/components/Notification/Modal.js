@@ -18,7 +18,7 @@ function Modal({ setOpenModal }) {
   const host = "http://127.0.0.1:8000";
   const handleAccept = (conf_id, id) => {
     axios
-      .post(host + "/conferences/accept_to_review/" + conf_id, {
+      .post(host + "/conferences/accepte_to_review/" + id, {
         status: "accepted",
         // id: id,
       })
@@ -27,8 +27,8 @@ function Modal({ setOpenModal }) {
   };
   const handleRefuse = (conf_id, id) => {
     axios
-      .post(host + "/conferences/accept_to_review/" + conf_id, {
-        status: "accepted",
+      .post(host + "/conferences/accepte_to_review/" + id, {
+        status: "refused",
         // id: id,
       })
       .then((resp) => console.log("this is the resp " + resp));
