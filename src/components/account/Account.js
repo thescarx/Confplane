@@ -43,7 +43,6 @@ function Account() {
   let navigate_4 = useNavigate();
   let navigate_5 = useNavigate();
   let navigate_6 = useNavigate();
-  const hiddenFileInput = React.useRef(null);
 
   const token = localStorage.getItem("token");
   const navigate2 = useNavigate();
@@ -60,7 +59,6 @@ function Account() {
 
   // for upload image
 
-  const [image, setimage] = useState([]);
   const [data_profile, setdata_profile] = useState({});
   let path = "";
   const [bool, setbool] = useState(false);
@@ -72,6 +70,18 @@ function Account() {
     setIsOpen(!isOpen);
     // window.location.reload();
   };
+  const [image, setImage] = useState(null);
+  const handleUpload = (event) => {
+    // isImage = true;
+    setImage(event.target.files[0]);
+    // setLogo(event.target.files[0]);
+  };
+
+  const handleClick = (event) => {
+    hiddenFileInput.current.click();
+  };
+
+  const hiddenFileInput = React.useRef(null);
 
   // const uploadImage = (e) => {
   //   const data = new FormData();
@@ -108,6 +118,15 @@ function Account() {
   //  }
   //my articles
   const [article, setarticle] = useState([]);
+
+  const upload = (e) => {
+    e.preventDefault();
+    let data = new FormData();
+    data.append("profile_picture", image);
+    axios.put("http://127.0.0.1:8000/users/profile", data).then((resp) => {
+      console.log(resp["data"]);
+    });
+  };
   useEffect(() => {
     // const socket = new WebSocket(
     //   "ws://127.0.0.1:8000/ws/socket-server/?token=" + token
@@ -375,24 +394,40 @@ function Account() {
                   <div className="container_acc_l_logo">
                     <div className="form-controll">
                       <input
+                        style={{ display: "none" }}
+                        ref={hiddenFileInput}
                         type="file"
-                        onChange={() => {
-                          setbool(!bool);
-                        }}
+                        onChange={handleUpload}
                         name="file_up"
                       />
                     </div>
-                    {data_profile.profile_picture === null && (
-                      <img src={logo} alt={logo} />
-                    )}
+                    {data_profile.profile_picture === null &&
+                      image !== null && (
+                        <img
+                          src={URL.createObjectURL(image)}
+                          alt={URL.createObjectURL(image)}
+                        />
+                      )}
+                    {image === null &&
+                      data_profile.profile_picture === null && (
+                        <img onClick={handleClick} src={logo} alt={logo} />
+                      )}
                     {data_profile.profile_picture !== null && (
                       <img
-                        ref={hiddenFileInput}
+                        onClick={handleClick}
                         src={host + data_profile.profile_picture}
                         alt={host + data_profile.profile_picture}
                       />
                     )}
                   </div>
+
+                  <button
+                    onClick={(e) => {
+                      upload(e);
+                    }}
+                  >
+                    Upload photo
+                  </button>
 
                   {/* //////////////////////////////////////////////////// */}
 
