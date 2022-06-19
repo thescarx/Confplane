@@ -20,22 +20,21 @@ import Modal from "../Notification/Modal";
 import { notifications } from "../../data";
 import EditIcon from "@mui/icons-material/Edit";
 import Modifier from "../modifier/Modifer";
-import logo from "./ profile.png"
+import logo from "./ profile.png";
 
 function Account() {
   const [not, setNot] = useState(notifications);
   const socket = useContext(SocketContext);
 
-  // socket.onmessage=function(e){
-  //   const obj = JSON.parse(e["data"]);
-  //   for (let i = 0; i < obj.notifications.length; i++) {
-  //     notifications.push(obj.notifications[i]);
-  //     console.log(notifications);
-  //   }
-  //   setNot(notifications);
-  //   console.log("done");
-
-  // }
+  socket.onmessage = function (e) {
+    const obj = JSON.parse(e["data"]);
+    for (let i = 0; i < obj.notifications.length; i++) {
+      notifications.push(obj.notifications[i]);
+      console.log(obj.notifications[i]);
+    }
+    setNot(obj.notifications);
+    console.log("done");
+  };
 
   // console.log("this is the data " + data);
   let host = "http://127.0.0.1:8000";
@@ -71,6 +70,7 @@ function Account() {
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
+    window.location.reload();
   };
 
   // const uploadImage = (e) => {
@@ -109,33 +109,33 @@ function Account() {
   //my articles
   const [article, setarticle] = useState([]);
   useEffect(() => {
-    const socket = new WebSocket(
-      "ws://127.0.0.1:8000/ws/socket-server/?token=" + token
-    );
-    socket.onmessage = function (e) {
-      const obj = JSON.parse(e["data"]);
-      console.log(obj.notifications.length);
+    // const socket = new WebSocket(
+    //   "ws://127.0.0.1:8000/ws/socket-server/?token=" + token
+    // );
+    // socket.onmessage = function (e) {
+    //   const obj = JSON.parse(e["data"]);
+    //   console.log(obj.notifications.length);
 
-      for (let i = 0; i < obj.notifications.length; i++) {
-        notifications.push(obj.notifications[i]);
-      }
-      // console.log("all notifications");
-      // for(let i = 0;i<obj.notifications.length-1;i++){
-      //   for(let y = 0; y<obj.notifications)
-      // }
-      if (notifications.length > 1) {
-        for (let i = 0; i < notifications.length; i++) {
-          for (let x = 0; x < obj.notifications.length; x++) {
-            if (notifications[i].id === obj.notifications[x].id) {
-              notifications.pop(obj.notifications[x]);
-            }
-          }
-        }
-      }
-      setNot(obj.notifications);
+    //   for (let i = 0; i < obj.notifications.length; i++) {
+    //     notifications.push(obj.notifications[i]);
+    //   }
+    //   // console.log("all notifications");
+    //   // for(let i = 0;i<obj.notifications.length-1;i++){
+    //   //   for(let y = 0; y<obj.notifications)
+    //   // }
+    //   // if (notifications.length > 1) {
+    //   //   for (let i = 0; i < notifications.length; i++) {
+    //   //     for (let x = 0; x < obj.notifications.length; x++) {
+    //   //       if (notifications[i].id === obj.notifications[x].id) {
+    //   //         notifications.pop(obj.notifications[x]);
+    //   //       }
+    //   //     }
+    //   //   }
+    //   // }
+    //   setNot(obj.notifications);
 
-      console.log(not);
-    };
+    //   console.log(not);
+    // };
     axios
       .get(host + "/articles/list/path")
       .then((artc) => {
@@ -382,13 +382,16 @@ function Account() {
                         name="file_up"
                       />
                     </div>
-                    {data_profile.profile_picture===null &&<img src={logo} alt={logo}/>}
-                    {data_profile.profile_picture!== null &&
-                    <img
-                      ref={hiddenFileInput}
-                      src={host + data_profile.profile_picture}
-                      alt={host + data_profile.profile_picture}
-                    />}
+                    {data_profile.profile_picture === null && (
+                      <img src={logo} alt={logo} />
+                    )}
+                    {data_profile.profile_picture !== null && (
+                      <img
+                        ref={hiddenFileInput}
+                        src={host + data_profile.profile_picture}
+                        alt={host + data_profile.profile_picture}
+                      />
+                    )}
                   </div>
 
                   {/* //////////////////////////////////////////////////// */}
