@@ -6,7 +6,6 @@ import { saveAs } from "file-saver";
 import axios from "axios";
 import DownloadIcon from "@mui/icons-material/Download";
 var idd = "x";
-var id =65
 
 function Raport() {
   const token = localStorage.getItem("token");

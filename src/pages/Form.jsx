@@ -14,7 +14,6 @@ function Form() {
   const [page, setPage] = useState(0);
   // const [isPrevious,setIsPrevious]= useState(false)
   const [isNext, setIsNext] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
     familyname: "",
@@ -27,6 +26,7 @@ function Form() {
     interests: "",
   });
   const [formErrors, setFormErrors] = useState({});
+  const [bool,setBool]=useState(false)
 
   const DisplayComponent = () => {
     if (page === 0) {
@@ -54,11 +54,11 @@ function Form() {
     setIsNext(true);
   };
 
-  const handleSubmit = () => {
-    setFormErrors(validate(formData));
-    setIsSubmitted(true);
-    //request
-    axios
+
+  useEffect(()=>{
+    if(Object.keys(formErrors).length!=0){setLoading(false)}
+    if(Object.keys(formErrors).length==0){
+      axios
       .post("http://localhost:8000/users/register/", {
         first_name: formData.firstname,
         family_name: formData.familyname,
@@ -70,19 +70,37 @@ function Form() {
         fields_of_interssts: formData.interests,
       })
       .then((response) => {
-       
+           console.log(response)
            setLoading(false)
            navigate('/check')
       
       }).catch(err=>{
         setLoading(false)
         console.log("err")
-
-
+  
+  
       });
-  };
+
+
+    }
+   
+
+
+
+  },[bool])
+
+
+
+  const handleSubmit = () => {
+    setFormErrors(validate(formData));
+    setBool(!bool)
+    //request
+  }
+   
 
   useEffect(() => {
+    console.log(isNext)
+    console.log(formErrors)
     if (Object.keys(formErrors).length == 4 && isNext && page == 0) {
       setPage((currPage) => currPage + 1);
       setFormErrors({
@@ -134,6 +152,11 @@ function Form() {
 
     return errors;
   };
+
+
+
+
+
   return (
     <div className="form">
       <div className="form-container">
