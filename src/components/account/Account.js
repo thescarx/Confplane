@@ -21,6 +21,7 @@ import { notifications } from "../../data";
 import EditIcon from "@mui/icons-material/Edit";
 import Modifier from "../modifier/Modifer";
 import logo from "./ profile.png";
+import conf_logo from "./conference.png"
 
 function Account() {
   const [not, setNot] = useState(notifications);
@@ -65,6 +66,10 @@ function Account() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [bool2, setbool2] = useState(false);
+  const handleClickk = (event) => {
+    hiddenFileInput.current.click();
+  };
+
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -263,7 +268,10 @@ function Account() {
                   )}
                 </div>
                 <div className="downfile_2">
-                  <img src={host + cle.logo} alt="" className="down" />
+                  {cle.logo==="http://127.0.0.1:8000/media/hello" &&
+                  <img src={conf_logo} alt={conf_logo} className="down" />}
+                  {cle.logo !=="http://127.0.0.1:8000/media/hello" &&
+                  <img src={cle.logo} alt={cle.logo} className="down"/>}
                 </div>
               </div>
             </>
@@ -392,36 +400,48 @@ function Account() {
                 <div className="container_acc_l">
                   {/*  ////////////////////////////// */}
                   <div className="container_acc_l_logo">
-                    <div className="form-controll">
-                      <input
-                        style={{ display: "none" }}
-                        ref={hiddenFileInput}
-                        type="file"
-                        onChange={handleUpload}
-                        name="file_up"
-                      />
-                    </div>
+                    <div class="containerr">
                     {image !== null && (
                       <img
                         src={URL.createObjectURL(image)}
                         alt={URL.createObjectURL(image)}
+                        className="profile_pic"
                       />
                     )}
                     {image === null &&
                       data_profile.profile_picture === null && (
-                        <img onClick={handleClick} src={logo} alt={logo} />
+                        <img
+                          onClick={handleClick}
+                          src={logo}
+                          alt={logo}
+                          className="profile_pic"
+                        />
                       )}
                     {!image && data_profile.profile_picture !== null && (
                       <img
                         onClick={handleClick}
                         src={host + data_profile.profile_picture}
                         alt={host + data_profile.profile_picture}
+                        className="profile_pic"
                       />
                     )}
-                  </div>
-
+                      <div class="middle">
+                        <button class="text" onClick={handleClickk}> <input
+                        style={{ display: "none" }}
+                        ref={hiddenFileInput}
+                        type="file"
+                        onChange={handleUpload}
+                        name="file_up"
+                      />Modifier</button>
+                      </div>
+                    </div>
+                    <div className="form-controll">
+                     
+                    </div>
+                    <div className="ddd">
                   {image && (
                     <button
+                    className="btn_upload"
                       onClick={(e) => {
                         upload(e);
                       }}
@@ -429,6 +449,9 @@ function Account() {
                       Upload photo
                     </button>
                   )}
+                  </div>
+                  </div>
+       
 
                   {/* //////////////////////////////////////////////////// */}
 

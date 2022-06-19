@@ -241,7 +241,7 @@ line-height: 100%;
     font-family:'Poppins';
     font-style: italic;
     /* background-color: gold; */
-    min-width: 100%;
+    max-width: 100%;
     height: 100%;
     justify-content: center;
     display: flex;
@@ -299,7 +299,7 @@ line-height: 100%;
     padding-top: 5%;
     flex: 10%;
     /* background: #004E64; */
-    min-width: 100%;
+   max-width: 100%;
     height: 100%;
     justify-content: center;
     display: flex;
@@ -314,7 +314,7 @@ line-height: 100%;
 .catego{
     flex: 1%;
     /* background-color: blue; */
-    min-width: 100%;
+    max-width: 100%;
     /* padding-top: 5%; */
     height: 100%;
     justify-content: center;

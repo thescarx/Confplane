@@ -5,9 +5,11 @@ import { HashLink as Link } from "react-router-hash-link";
 import { saveAs } from "file-saver";
 import axios from "axios";
 import DownloadIcon from "@mui/icons-material/Download";
-var idd = "x";
+var idd = 0;
 
 function Raport() {
+  const { id } = useParams();
+  console.log(id)
   const token = localStorage.getItem("token");
   axios.interceptors.request.use(
     (config) => {
@@ -18,7 +20,7 @@ function Raport() {
       return Promise.reject(error);
     }
   );
-  const { id } = useParams();
+
   let host = "http://127.0.0.1:8000";
   let navigate = useNavigate();
   let navigate_2 = useNavigate();
@@ -33,10 +35,11 @@ function Raport() {
     axios.get("http://127.0.0.1:8000/report/report/"+id)
       .then((artts) => {
         idd = artts["data"].article;
+        console.log("ggg"+idd)
         setraport(artts["data"]);
         setstate(artts["data"].answers)
         console.log(artts["data"])
-        let url = host + "/articles/" + idd;
+        let url = host + "/articles/"+idd;
         axios.get(url).then((resp) => {
           setart(resp["data"]);
           console.log(resp["data"]);
