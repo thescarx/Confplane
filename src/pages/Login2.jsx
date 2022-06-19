@@ -18,7 +18,6 @@ function Login2() {
   const [bool, setBool] = useState(false);
 
   const isMount = useIsMount();
-  const token = localStorage.getItem("token");
 
   // const [formInfo, setFormInfo] = useState({
   //   email: "",
@@ -58,7 +57,7 @@ function Login2() {
             // }
             const accessToken = response?.data?.access;
             const is_admin=response?.data?.is_admin
-            setLoading(false)
+            // setLoading(false)
 
             localStorage.setItem("is_admin", response.data.is_admin);
             localStorage.setItem("token", response.data.access);
@@ -68,8 +67,10 @@ function Login2() {
             setPwd("");
             if (response.data.is_admin === true) {
               navigate("/admin");
+              window.location.reload()
             } else {
               navigate("/");
+              window.location.reload()
             }
             //verifyAdmin(accessToken)
             //navigate(from , ({replace:true}))
@@ -83,7 +84,7 @@ function Login2() {
             // if (err.response.data.status==401) setFormErrors(err.response.data.detail)
           }).catch(err=>{console.log(err.response.data.detail);
             setFormErrors({...formErrors,other:"invalid email or password"})
-            setLoading(false)
+            // setLoading(false)
           });
       }
     }
@@ -95,7 +96,7 @@ function Login2() {
       navigate2('/admin');
     }
     if(localStorage.getItem("is_admin")==='false'){
-      navigate2('/account')
+      navigate2('/')
     }
   
 
@@ -143,7 +144,9 @@ function Login2() {
   };
 
 
-
+useEffect(()=>{
+ 
+},[])
 
 
   

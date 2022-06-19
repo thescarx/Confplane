@@ -4,6 +4,7 @@ import axios from "axios";
 import CommentIcon from '@mui/icons-material/Comment';
 import RapportPop from './RapportPop';
 import { useParams } from "react-router-dom";
+import { saveAs } from "file-saver";
 
 
 function ReviewResultTable() {
@@ -45,6 +46,9 @@ function ReviewResultTable() {
       .get("http://localhost:8000/articles/listforchairman/path/?conference_id="+id+"&status=accepted to review")
       .then((response) => setData(response["data"]));
   }, [bool]);
+  const saveFile = (urll,title) => {
+    saveAs(urll, title);
+  };
 
   return (
     <div className="page" >
@@ -63,7 +67,7 @@ function ReviewResultTable() {
       <tbody>
         {data.map((column, i) => (
           <tr key={i}>
-            <td> <div>{column.title}</div>  </td>
+            <td> <div className="telecharger" onDoubleClick={()=>saveFile(column.article_url,column.title)} >{column.title}</div>  </td>
             <td> <div>{column.user_id}</div>  </td>
              <td  >
               <div>
