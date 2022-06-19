@@ -400,19 +400,7 @@ function Account() {
                 <div className="container_acc_l">
                   {/*  ////////////////////////////// */}
                   <div className="container_acc_l_logo">
-<<<<<<< HEAD
                     <div class="containerr">
-=======
-                    <div className="form-controll">
-                      <input
-                        style={{ display: "none" }}
-                        ref={hiddenFileInput}
-                        type="file"
-                        onChange={handleUpload}
-                        name="file_up"
-                      />
-                    </div>
->>>>>>> 7ab11d1b348dc7f43f2afe17d0d45f8bd34033dd
                     {image !== null && (
                       <img
                         src={URL.createObjectURL(image)}
