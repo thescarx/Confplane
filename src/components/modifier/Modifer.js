@@ -1,11 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
+import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import "./modifier.css";
 import axios from "axios";
 
 const Modifier = (props) => {
   let host = "http://127.0.0.1:8000";
   const [objettt,setobjettt]=useState(props.objet)
+  const [image,setimage]=useState(null)
+  const hiddenFileInput = useRef(null);
+  const handleUpload = (event) => {
+    setimage(event.target.files[0]);
+  
+  };
+  const handleClick = (event) => {
+    hiddenFileInput.current.click();
+    objettt.profile_picture=image;
+  };
 
 
   const Edit_profile=()=>{
@@ -19,7 +30,9 @@ const Modifier = (props) => {
       console.log(response)
     })
 
-    props.setbool2(true)
+    props.setbool2(!props.bool2)
+    props.handelclickclose()
+
      
   }
 
@@ -85,6 +98,20 @@ useEffect(()=>{
             onChange={(e)=>setobjettt({...objettt,bio:e.target.value})}
             />
           </div>
+          {/* <div className="change">
+          <button className="inp2" onClick={handleClick}>
+            <p className="upload">
+              Conference logo (image) <span></span>{" "}
+              {<CloudUploadOutlinedIcon fontSize="large" />}
+            </p>
+          </button>
+          <input
+            ref={hiddenFileInput}
+            type="file"
+            onChange={handleUpload}
+            style={{ display: "none" }}
+          ></input>
+          </div> */}
           <div className="change">
             <button className="edit_btn" onClick={Edit_profile}>
               Confirm
