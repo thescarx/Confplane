@@ -20,6 +20,7 @@ import Modal from "../Notification/Modal";
 import { notifications } from "../../data";
 import EditIcon from "@mui/icons-material/Edit";
 import Modifier from "../modifier/Modifer";
+import logo from "./ profile.png"
 
 function Account() {
   const [not, setNot] = useState(notifications);
@@ -88,10 +89,10 @@ function Account() {
   //  uploadImage()
   // },[bool])
 
-  const [file, setFile] = useState();
-  function handleChange(e) {
-    setFile(URL.createObjectURL(e.target.files[0]));
-  }
+  // const [file, setFile] = useState();
+  // function handleChange(e) {
+  //   setFile(URL.createObjectURL(e.target.files[0]));
+  // }
 
   useEffect(() => {
     axios

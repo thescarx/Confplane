@@ -121,13 +121,13 @@ h1 {
 .container_acc_l_logo {
   flex: 20%;
   justify-content: center;
-  background-color: gold;
+  /* background-color: gold; */
   border-radius: 50%;
-  padding: 30%;
+  /* padding: 30%; */
   margin-left: 100px;
   margin-right: 100px;
   margin-bottom: 10%;
-  padding-top: 100px;
+  /* padding-top: 100px; */
 }
 
 
