@@ -196,16 +196,16 @@ function ApplyForm() {
           title: formValues.title.toString(),
           description: textarea.toString(),
           categories: formValues.categories.toString(),
-          conference_id: id,
-          authors: authorss,
+          // conference_id: id,
+          // authors: authorss,
         };
 
         console.log(bodyFormData);
 
         axios
-          .post("http://127.0.0.1:8000/articles/", bodyFormData)
+          .put("http://127.0.0.1:8000/articles/article/" + id, bodyFormData)
           .then((res) => {
-            let id = res.data["id"];
+            // let id = res.data["id"];
             let data = new FormData();
             data.append("article_url", file);
             console.log(data);
@@ -305,7 +305,7 @@ function ApplyForm() {
             style={{ display: "none" }}
           ></input>
 
-          <div className="originalReviewer">
+          {/* <div className="originalReviewer">
             {indexx != index &&
               authorss.map((author, index) => {
                 const { id } = author;
@@ -364,7 +364,7 @@ function ApplyForm() {
             <button className="add" onClick={handleAdd}>
               <AddOutlinedIcon fontSize="large" />
             </button>
-          </div>
+          </div> */}
 
           {/* <p className="pp">{reviewerTotal}</p> */}
 

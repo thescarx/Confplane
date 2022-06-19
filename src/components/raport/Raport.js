@@ -5,15 +5,11 @@ import { HashLink as Link } from "react-router-hash-link";
 import { saveAs } from "file-saver";
 import axios from "axios";
 import DownloadIcon from "@mui/icons-material/Download";
-<<<<<<< HEAD
-var idd = 0;
-=======
 var idd = "x";
->>>>>>> 7ab11d1b348dc7f43f2afe17d0d45f8bd34033dd
 
 function Raport() {
   const { id } = useParams();
-  console.log(id)
+  console.log(id);
   const token = localStorage.getItem("token");
   axios.interceptors.request.use(
     (config) => {
@@ -31,19 +27,20 @@ function Raport() {
 
   const [raport, setraport] = useState({});
   const [art, setart] = useState({});
-  const [state,setstate]=useState([])
+  const [state, setstate] = useState([]);
 
   useEffect(() => {
     // let url2 = host + "​/report​/report​/"+id ;
     // console.log(url2)
-    axios.get("http://127.0.0.1:8000/report/report/"+id)
+    axios
+      .get("http://127.0.0.1:8000/report/report/" + id)
       .then((artts) => {
         idd = artts["data"].article;
-        console.log("ggg"+idd)
+        console.log("ggg" + idd);
         setraport(artts["data"]);
-        setstate(artts["data"].answers)
-        console.log(artts["data"])
-        let url = host + "/articles/"+idd;
+        setstate(artts["data"].answers);
+        console.log(artts["data"]);
+        let url = host + "/articles/" + idd;
         axios.get(url).then((resp) => {
           setart(resp["data"]);
           console.log(resp["data"]);
@@ -58,7 +55,6 @@ function Raport() {
     saveAs(urlll, "article.pdf");
   };
 
-
   const Question = ({ data }) => {
     return (
       <div>
@@ -70,22 +66,19 @@ function Raport() {
                   <p>. {q.question.question}</p>
                 </div>
                 <div className="chek">
-                  {q.answer===true &&
-                  <input
-                    type="radio"
-                    id="html"
-                    name="answer"
-                    value=""
-                    checked
-                  />}
+                  {q.answer === true && (
+                    <input
+                      type="radio"
+                      id="html"
+                      name="answer"
+                      value=""
+                      checked
+                    />
+                  )}
                     <label for="html">YES</label> {" "}
-                  {q.answer===false&&
-                  <input
-                    type="radio"
-                    id="css"
-                    name="answer"
-                    value="false"
-                  />}
+                  {q.answer === false && (
+                    <input type="radio" id="css" name="answer" value="false" />
+                  )}
                     <label for="css">NO</label>
                 </div>
               </div>
@@ -171,7 +164,9 @@ function Raport() {
                     <p
                       // value={raport.score}
                       className="innpp"
-                    >{raport.score}</p>
+                    >
+                      {raport.score}
+                    </p>
                   </div>
                   <div className="scr_inp_50">/100</div>
                 </div>
