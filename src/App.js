@@ -31,31 +31,27 @@ import EditArticle from "./components/myarticles/EditArticle";
 import { socket, SocketContext } from "./socket";
 import { notifications } from "./data";
 import Edit_art from "./components/edit_Article/Edit_art";
+import EditFromRev from "./components/editfromrev/EditFromRev";
 
 function App() {
   // const socket = useContext(SocketContext);
   const [not, setNot] = useState(notifications);
 
   const [bool, setBool] = useState(false);
-//   socket.onmessage=function(e){
-//     console.log(e)
-//     const obj = JSON.parse(e["data"]);
+  //   socket.onmessage=function(e){
+  //     console.log(e)
+  //     const obj = JSON.parse(e["data"]);
 
-// for (let i = 0; i < obj.notifications.length; i++) {
-// console.log("here");
-// notifications.push(obj.notifications[i]);
-// console.log(notifications);
-// }
-// setNot(obj.notifications);
-// }
-//   useEffect(()=>{
+  // for (let i = 0; i < obj.notifications.length; i++) {
+  // console.log("here");
+  // notifications.push(obj.notifications[i]);
+  // console.log(notifications);
+  // }
+  // setNot(obj.notifications);
+  // }
+  //   useEffect(()=>{
 
-
-      
-     
-
-
-//   },[socket])
+  //   },[socket])
   return (
     <SocketContext.Provider value={socket}>
       <Routes>
@@ -72,6 +68,7 @@ function App() {
             <Route path="CreateConf" element={<CreateConf />} />
             <Route path="/EditConf/:id" element={<EditConf />} />
             <Route path="/Edit_art/:id" element={<Edit_art />} />
+            <Route path="/EditFromRev/:id" element={<EditFromRev />} />
           </Route>
 
           <Route element={<RequireAuth bool={!bool} />}>

@@ -9,7 +9,7 @@ import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 
-function AdminConferences() {
+function AdminConferences({bool2,setBool2}) {
   const accesToken = localStorage.getItem("token");
   const [bool, setBool] = useState(false);
   // const [bool3,setBool3]= useState(false);
@@ -33,13 +33,13 @@ function AdminConferences() {
     axios
       .get("http://localhost:8000/conferences/admin/list/path")
       .then((response) => {setData(response["data"])});
-  }, [bool]);
+  }, [bool,bool2]);
 
 
   useEffect(() => {  
     axios.get("http://localhost:8000/conferences/list/path").then(response=>
       {setData2(response["data"])})
-  }, [bool]);
+  }, [bool,bool2]);
 
 
   // useEffect(() => {
@@ -86,6 +86,7 @@ function AdminConferences() {
         status: "refused",
       })
       .then((response) => {
+        setBool(!bool);
         console.log(response);
       });
   };
@@ -98,7 +99,10 @@ function AdminConferences() {
   
   }
   
-   
+  useEffect(()=>{
+    console.log(accesToken)
+  }) 
+
 
 
 

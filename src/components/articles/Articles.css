@@ -257,3 +257,9 @@
   .rapport-x{
     cursor: pointer;
   }
+  .telecharger{
+    cursor: pointer;
+  }
+  .telecharger:hover{
+    text-decoration: underline;
+  }

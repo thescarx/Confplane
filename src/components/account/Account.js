@@ -30,9 +30,9 @@ function Account() {
     const obj = JSON.parse(e["data"]);
     for (let i = 0; i < obj.notifications.length; i++) {
       notifications.push(obj.notifications[i]);
-      console.log(notifications);
+      console.log(obj.notifications[i]);
     }
-    setNot(notifications);
+    setNot(obj.notifications);
     console.log("done");
   };
 
@@ -70,6 +70,7 @@ function Account() {
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
+    window.location.reload();
   };
 
   // const uploadImage = (e) => {
@@ -108,9 +109,9 @@ function Account() {
   //my articles
   const [article, setarticle] = useState([]);
   useEffect(() => {
-    const socket = new WebSocket(
-      "ws://127.0.0.1:8000/ws/socket-server/?token=" + token
-    );
+    // const socket = new WebSocket(
+    //   "ws://127.0.0.1:8000/ws/socket-server/?token=" + token
+    // );
     // socket.onmessage = function (e) {
     //   const obj = JSON.parse(e["data"]);
     //   console.log(obj.notifications.length);
