@@ -68,6 +68,7 @@ function Raport() {
                   <p>. {q.question}</p>
                 </div>
                 <div className="chek">
+                  {q.answers===true}
                   <input
                     type="radio"
                     id="html"

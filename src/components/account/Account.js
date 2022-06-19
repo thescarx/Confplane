@@ -430,6 +430,7 @@ function Account() {
                           onClick={() => {
                             localStorage.clear();
                             navigate_6("/login");
+                            window.location.reload();
                           }}
                         >
                           Logout
