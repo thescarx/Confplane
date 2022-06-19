@@ -20,22 +20,21 @@ import Modal from "../Notification/Modal";
 import { notifications } from "../../data";
 import EditIcon from "@mui/icons-material/Edit";
 import Modifier from "../modifier/Modifer";
-import logo from "./ profile.png"
+import logo from "./ profile.png";
 
 function Account() {
   const [not, setNot] = useState(notifications);
   const socket = useContext(SocketContext);
 
-  // socket.onmessage=function(e){
-  //   const obj = JSON.parse(e["data"]);
-  //   for (let i = 0; i < obj.notifications.length; i++) {
-  //     notifications.push(obj.notifications[i]);
-  //     console.log(notifications);
-  //   }
-  //   setNot(notifications);
-  //   console.log("done");
-
-  // }
+  socket.onmessage = function (e) {
+    const obj = JSON.parse(e["data"]);
+    for (let i = 0; i < obj.notifications.length; i++) {
+      notifications.push(obj.notifications[i]);
+      console.log(obj.notifications[i]);
+    }
+    setNot(obj.notifications);
+    console.log("done");
+  };
 
   // console.log("this is the data " + data);
   let host = "http://127.0.0.1:8000";
@@ -44,7 +43,6 @@ function Account() {
   let navigate_4 = useNavigate();
   let navigate_5 = useNavigate();
   let navigate_6 = useNavigate();
-  const hiddenFileInput = React.useRef(null);
 
   const token = localStorage.getItem("token");
   const navigate2 = useNavigate();
@@ -57,12 +55,10 @@ function Account() {
     (error) => {
       return Promise.reject(error);
     }
-
   );
 
   // for upload image
 
-  const [image, setimage] = useState([]);
   const [data_profile, setdata_profile] = useState({});
   let path = "";
   const [bool, setbool] = useState(false);
@@ -72,7 +68,20 @@ function Account() {
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
+    // window.location.reload();
   };
+  const [image, setImage] = useState(null);
+  const handleUpload = (event) => {
+    // isImage = true;
+    setImage(event.target.files[0]);
+    // setLogo(event.target.files[0]);
+  };
+
+  const handleClick = (event) => {
+    hiddenFileInput.current.click();
+  };
+
+  const hiddenFileInput = React.useRef(null);
 
   // const uploadImage = (e) => {
   //   const data = new FormData();
@@ -109,38 +118,43 @@ function Account() {
   //  }
   //my articles
   const [article, setarticle] = useState([]);
+
+  const upload = (e) => {
+    e.preventDefault();
+    let data = new FormData();
+    data.append("profile_picture", image);
+    axios.put("http://127.0.0.1:8000/users/profile", data).then((resp) => {
+      console.log(resp["data"]);
+    });
+  };
   useEffect(() => {
-    const socket = new WebSocket(
-      "ws://127.0.0.1:8000/ws/socket-server/?token=" + token
-    );
-    socket.onmessage = function (e) {
-      const obj = JSON.parse(e["data"]);
-      console.log(obj.notifications.length);
+    // const socket = new WebSocket(
+    //   "ws://127.0.0.1:8000/ws/socket-server/?token=" + token
+    // );
+    // socket.onmessage = function (e) {
+    //   const obj = JSON.parse(e["data"]);
+    //   console.log(obj.notifications.length);
 
-      for (let t = 0; t < obj.notifications.length; t++) {
-        notifications.push(obj.notifications[t]);
+    //   for (let i = 0; i < obj.notifications.length; i++) {
+    //     notifications.push(obj.notifications[i]);
+    //   }
+    //   // console.log("all notifications");
+    //   // for(let i = 0;i<obj.notifications.length-1;i++){
+    //   //   for(let y = 0; y<obj.notifications)
+    //   // }
+    //   // if (notifications.length > 1) {
+    //   //   for (let i = 0; i < notifications.length; i++) {
+    //   //     for (let x = 0; x < obj.notifications.length; x++) {
+    //   //       if (notifications[i].id === obj.notifications[x].id) {
+    //   //         notifications.pop(obj.notifications[x]);
+    //   //       }
+    //   //     }
+    //   //   }
+    //   // }
+    //   setNot(obj.notifications);
 
-
-      }
-      console.log(notifications)
-
-      // console.log("all notifications");
-      // for(let i = 0;i<obj.notifications.length-1;i++){
-      //   for(let y = 0; y<obj.notifications)
-      // }
-      if (notifications.length > 1) {
-        for (let i = 0; i < notifications.length; i++) {
-          for (let x = 0; x < obj.notifications.length; x++) {
-            if (notifications[i].id === obj.notifications[x].id) {
-              notifications.pop(obj.notifications[x]);
-            }
-          }
-        }
-      }
-      setNot(not);
-
-      console.log(not);
-    };
+    //   console.log(not);
+    // };
     axios
       .get(host + "/articles/list/path")
       .then((artc) => {
@@ -380,21 +394,40 @@ function Account() {
                   <div className="container_acc_l_logo">
                     <div className="form-controll">
                       <input
+                        style={{ display: "none" }}
+                        ref={hiddenFileInput}
                         type="file"
-                        onChange={() => {
-                          setbool(!bool);
-                        }}
+                        onChange={handleUpload}
                         name="file_up"
                       />
                     </div>
-                    {data_profile.profile_picture===null &&<img src={logo} alt={logo}/>}
-                    {data_profile.profile_picture!== null &&
-                    <img
-                      ref={hiddenFileInput}
-                      src={host + data_profile.profile_picture}
-                      alt={host + data_profile.profile_picture}
-                    />}
+                    {data_profile.profile_picture === null &&
+                      image !== null && (
+                        <img
+                          src={URL.createObjectURL(image)}
+                          alt={URL.createObjectURL(image)}
+                        />
+                      )}
+                    {image === null &&
+                      data_profile.profile_picture === null && (
+                        <img onClick={handleClick} src={logo} alt={logo} />
+                      )}
+                    {data_profile.profile_picture !== null && (
+                      <img
+                        onClick={handleClick}
+                        src={host + data_profile.profile_picture}
+                        alt={host + data_profile.profile_picture}
+                      />
+                    )}
                   </div>
+
+                  <button
+                    onClick={(e) => {
+                      upload(e);
+                    }}
+                  >
+                    Upload photo
+                  </button>
 
                   {/* //////////////////////////////////////////////////// */}
 
@@ -435,7 +468,7 @@ function Account() {
                           onClick={() => {
                             localStorage.clear();
                             navigate_6("/login");
-                            window.location.reload()
+                            window.location.reload();
                           }}
                         >
                           Logout
