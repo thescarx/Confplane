@@ -70,7 +70,7 @@ function Account() {
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
-    window.location.reload();
+    // window.location.reload();
   };
 
   // const uploadImage = (e) => {
