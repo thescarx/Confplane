@@ -401,31 +401,17 @@ function Account() {
                         name="file_up"
                       />
                     </div>
-<<<<<<< HEAD
-                    {
-                      image !== null && (
-                        <img
-                          src={URL.createObjectURL(image)}
-                          alt={URL.createObjectURL(image)}
-                        />
-                      )}
-=======
                     {image !== null && (
                       <img
                         src={URL.createObjectURL(image)}
                         alt={URL.createObjectURL(image)}
                       />
                     )}
->>>>>>> c4404a78e02c6df18c47ee2f01981c228c72359e
                     {image === null &&
                       data_profile.profile_picture === null && (
                         <img onClick={handleClick} src={logo} alt={logo} />
                       )}
-<<<<<<< HEAD
-                    {!image&&data_profile.profile_picture !== null && (
-=======
                     {!image && data_profile.profile_picture !== null && (
->>>>>>> c4404a78e02c6df18c47ee2f01981c228c72359e
                       <img
                         onClick={handleClick}
                         src={host + data_profile.profile_picture}
