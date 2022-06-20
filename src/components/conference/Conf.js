@@ -178,8 +178,13 @@ function Conf() {
           </div>
 
           <div className="confdesc">
+            <div className="confff">
             <h1>{conf.title}</h1>
+            </div>
+          
+          <div className="conff">
             <p>{conf.description}</p>
+            </div>
           </div>
         </div>
       )}

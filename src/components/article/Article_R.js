@@ -10,7 +10,7 @@ function ArticleR(props) {
         <p className="left_item_text_r">{props.para}</p>
       </div>
       <div className="right_item_rr">
-        <img src={img} className="photo_rr" />
+        <img src={props.image} className="photo_rr" />
       </div>
     </div>
   );

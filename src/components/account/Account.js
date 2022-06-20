@@ -21,7 +21,7 @@ import { notifications } from "../../data";
 import EditIcon from "@mui/icons-material/Edit";
 import Modifier from "../modifier/Modifer";
 import logo from "./ profile.png";
-import conf_logo from "./conference.png"
+import conf_logo from "./conference.png";
 
 function Account() {
   const [not, setNot] = useState(notifications);
@@ -69,7 +69,6 @@ function Account() {
   const handleClickk = (event) => {
     hiddenFileInput.current.click();
   };
-
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -210,12 +209,12 @@ function Account() {
                     ""
                   )}
                 </div>
-                <div className="downfile">
+                <div className="downfile2">
                   <img
                     src={image_down}
                     alt=""
                     onClick={() => saveFile(cle.article_url)}
-                    className="down"
+                    className="down2"
                   />
                 </div>
               </div>
@@ -268,10 +267,12 @@ function Account() {
                   )}
                 </div>
                 <div className="downfile_2">
-                  {cle.logo==="http://127.0.0.1:8000/media/hello" &&
-                  <img src={conf_logo} alt={conf_logo} className="down" />}
-                  {cle.logo !=="http://127.0.0.1:8000/media/hello" &&
-                  <img src={cle.logo} alt={cle.logo} className="down"/>}
+                  {cle.logo === "http://127.0.0.1:8000/media/hello" && (
+                    <img src={conf_logo} alt={conf_logo} className="down" />
+                  )}
+                  {cle.logo !== "http://127.0.0.1:8000/media/hello" && (
+                    <img src={cle.logo} alt={cle.logo} className="down" />
+                  )}
                 </div>
               </div>
             </>
@@ -298,8 +299,7 @@ function Account() {
             <>
               <div
                 className="confDiv_3"
-                key={id}
-                onClick={() => navigate_4("/Edit_art/" + id)}
+               
               >
                 <div className="info_3">
                   <div className="test_3">
@@ -312,12 +312,17 @@ function Account() {
                   </div>
                 </div>
                 <div className="downfile_3">
+                
+                  <button className="btnnn"  key={id}
+                onClick={() => navigate_4("/Edit_art/" + id)}>Write report</button>
                   <img
                     src={image_down}
                     alt=""
                     onClick={() => saveFile(cle.article_url)}
-                    className="down"
+                    className="down2"
                   />
+                 
+                 
                 </div>
               </div>
             </>
@@ -401,57 +406,58 @@ function Account() {
                   {/*  ////////////////////////////// */}
                   <div className="container_acc_l_logo">
                     <div class="containerr">
-                    {image !== null && (
-                      <img
-                        src={URL.createObjectURL(image)}
-                        alt={URL.createObjectURL(image)}
-                        className="profile_pic"
-                      />
-                    )}
-                    {image === null &&
-                      data_profile.profile_picture === null && (
+                      {image !== null && (
                         <img
-                          onClick={handleClick}
-                          src={logo}
-                          alt={logo}
+                          src={URL.createObjectURL(image)}
+                          alt={URL.createObjectURL(image)}
                           className="profile_pic"
                         />
                       )}
-                    {!image && data_profile.profile_picture !== null && (
-                      <img
-                        onClick={handleClick}
-                        src={host + data_profile.profile_picture}
-                        alt={host + data_profile.profile_picture}
-                        className="profile_pic"
-                      />
-                    )}
+                      {image === null &&
+                        data_profile.profile_picture === null && (
+                          <img
+                            onClick={handleClick}
+                            src={logo}
+                            alt={logo}
+                            className="profile_pic"
+                          />
+                        )}
+                      {!image && data_profile.profile_picture !== null && (
+                        <img
+                          onClick={handleClick}
+                          src={host + data_profile.profile_picture}
+                          alt={host + data_profile.profile_picture}
+                          className="profile_pic"
+                        />
+                      )}
                       <div class="middle">
-                        <button class="text" onClick={handleClickk}> <input
-                        style={{ display: "none" }}
-                        ref={hiddenFileInput}
-                        type="file"
-                        onChange={handleUpload}
-                        name="file_up"
-                      />Modifier</button>
+                        <button class="text" onClick={handleClickk}>
+                          {" "}
+                          <input
+                            style={{ display: "none" }}
+                            ref={hiddenFileInput}
+                            type="file"
+                            onChange={handleUpload}
+                            name="file_up"
+                          />
+                          Modifier
+                        </button>
                       </div>
                     </div>
-                    <div className="form-controll">
-                     
-                    </div>
+                    <div className="form-controll"></div>
                     <div className="ddd">
-                  {image && (
-                    <button
-                    className="btn_upload"
-                      onClick={(e) => {
-                        upload(e);
-                      }}
-                    >
-                      Upload photo
-                    </button>
-                  )}
+                      {image && (
+                        <button
+                          className="btn_upload"
+                          onClick={(e) => {
+                            upload(e);
+                          }}
+                        >
+                          Upload photo
+                        </button>
+                      )}
+                    </div>
                   </div>
-                  </div>
-       
 
                   {/* //////////////////////////////////////////////////// */}
 

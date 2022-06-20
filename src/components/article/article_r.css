@@ -8,10 +8,12 @@
     height: 30vh;
     width: 80%;
 }
-.container_rr .right_item_rr{
+.right_item_rr{
     flex: 40%;
     height: 30vh;
     text-align: center;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.122);
 }
 
 

@@ -4,6 +4,9 @@ import Footer from "../footer/Footer";
 import ArticleL from "../article/Article_L"
 import ArticleR from "..//article/Article_R"
 import Navbar from "../navbar/Navbar";
+import image_1 from "./../article/conferences.png"
+import image_2 from "./../article/Review an article.png"
+import image_3 from "./../article/conference page (nrml users).png"
 
 
 
@@ -30,6 +33,7 @@ function Home (){
                 you can use the filters to find the best one
                 for you, pick then click apply
                 for conference to submit your article."
+                image={image_1}
             />
             <ArticleR
                 titre="Apply for a conference"
@@ -37,6 +41,8 @@ function Home (){
                 apply for it, upload your articles, answer some
                 few questions and wait for review, you can check 
                 the status of these articles from your profile page."
+                image={image_3}
+
             />
             <ArticleL
                titre="Wait for results" 
@@ -46,6 +52,7 @@ function Home (){
                process, as soon as the review is over, you will
                be notified about the status of your
                application."
+               image={image_2}
             />
             </div>
             <Footer/>
