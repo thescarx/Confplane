@@ -6,11 +6,13 @@ import { saveAs } from "file-saver";
 import axios from "axios";
 import DownloadIcon from "@mui/icons-material/Download";
 import Popup from "../popup/Popup";
+import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 var idd = "x";
 
 var objett = {};
 
 function Edit_art() {
+  let navigate_100 = useNavigate();
   var [dics, setDics] = useState([]);
   const [dic, setDic] = useState([
     //   {
@@ -126,6 +128,13 @@ function Edit_art() {
   const [score, setscore] = useState(0);
   const [done, setdone] = useState(false);
 
+  const hh =(e)=>{
+    setdone(!done)
+    navigate_100("/account")
+
+
+  }
+
   const putscor=(e)=>{
     // e.preventDefault();
     
@@ -155,6 +164,9 @@ function Edit_art() {
 
   return (
     <div className="edit_page">
+      {isOpen &&(<Popup 
+        handelclickclose={togglePopup}
+      />)}
       <div className="fornav">
         <nav className="navbar_11">
           <ul className="navbar_list_11">
@@ -221,7 +233,7 @@ function Edit_art() {
               <Question data={qst} />
               <div className="scr_50">
                 <div className="scr_p">
-                  <p>. From 0 to 50 whats your rating for the article ?</p>
+                  <p>. From 0 to 100 whats your rating for the article ?</p>
                 </div>
                 <div className="scr_inp">
                   <div className="scr_inp_inp">
@@ -250,7 +262,7 @@ function Edit_art() {
             </div>
             <div className="space_btn">
               <div className="Submit_div">
-                <button className="Submit_btn" onClick={() => setdone(!done)}>
+                <button className="Submit_btn" onClick={hh}>
                   <p>Submit result</p>
                 </button>
               </div>

@@ -1,5 +1,6 @@
 import React, {Component } from "react";
 import "./home.css"
+import { useNavigate } from "react-router-dom";
 import Footer from "../footer/Footer";
 import ArticleL from "../article/Article_L"
 import ArticleR from "..//article/Article_R"
@@ -13,6 +14,7 @@ import image_3 from "./../article/conference page (nrml users).png"
 
 
 function Home (){
+    let navigate_10 = useNavigate();
    
     return (
          <div className="home" id="home">
@@ -23,7 +25,9 @@ function Home (){
                  <div className="img"></div>
                  </div>
                  <h5 className="paragrahe">Find a Conference, Apply and Participate</h5>
-                 <button className="btn_t"><p>View Conferences</p></button>    
+                 <button className="btn_t" onClick={() => {
+                    navigate_10("/MainConf");
+                  }}><p>View Conferences</p></button>    
             </div>
             <div className="classarticle">
             <ArticleL 

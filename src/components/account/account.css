@@ -238,7 +238,7 @@ h1 {
   justify-content: center;
 }
 .profile_info_det_div {
-  width: 75%;
+  max-width: 75%;
   justify-content: left;
   margin-bottom: 2%;
   margin-left: 20%;
@@ -326,6 +326,7 @@ flex-direction: row;}
   justify-content: left;
   margin-left: 5%;
   align-items: center;
+  min-width: 100px;
   /* padding: 30%; */
 }
 .btnnn{
@@ -335,6 +336,10 @@ flex-direction: row;}
   box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   color: aliceblue;
+}
+.down22{
+  width: 25%;
+  height: 25%;
 }
 .down2{
   width: 25%;
@@ -396,7 +401,7 @@ flex-direction: row;}
   align-items: center;
   /* background-color: #0FEC3F; */
 }
-.icon1 ,.icon2 ,.icon3,.icon4{
+.icon1 ,.icon2 ,.icon3,.icon4,.icon5{
   min-height: 30%;
   min-width: 30%;
 }
@@ -407,6 +412,7 @@ flex-direction: row;}
 .icon2{color: #0FEC3F;}
 .icon3{color: red;}
 .icon4{color: gold}
+.icon5{color: rgba(0, 34, 255, 0.651);}
 .downfile_2{
   /* background-color: gold; */
   flex: 20%;
