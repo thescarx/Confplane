@@ -8,6 +8,7 @@ import { HashLink as Link } from "react-router-hash-link";
 import { useNavigate } from "react-router-dom";
 import Conf from "./Conf";
 import axios from "axios";
+import imagg from "./../account/conference.png"
 
 import { format } from "date-fns";
 
@@ -112,7 +113,13 @@ function MainConf() {
                   <div className="category"> Category : {conf.categories}</div>
                 </div>
                 <div className="imgDiv">
-                  <img className="image" src={conf.logo} alt={conf.logo} />
+                {conf.logo === "http://127.0.0.1:8000/media/hello" && (
+                    <img src={imagg} alt={imagg} className="downnn" />
+                  )}
+                  {conf.logo !== "http://127.0.0.1:8000/media/hello" && (
+                    <img src={conf.logo} alt={conf.logo} className="downnn" />
+                  )}
+                  {/* <img className="image" src={conf.logo} alt={conf.logo} /> */}
                 </div>
               </div>
             );

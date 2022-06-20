@@ -127,20 +127,17 @@ function Edit_art() {
   const [cmnt, setcmnt] = useState("");
   const [score, setscore] = useState(0);
   const [done, setdone] = useState(false);
+  const  [bool,setbool]=useState(false)
 
-  const hh =(e)=>{
-    setdone(!done)
-    navigate_100("/account")
+  const hh = (e) => {
+    setdone(!done);
+  };
 
-
-  }
-
-  const putscor=(e)=>{
+  const putscor = (e) => {
     // e.preventDefault();
-    
-    setscore(e)
- 
-  }
+
+    setscore(e);
+  };
 
   const changecmnt = (e) => {
     // e.preventDefault();
@@ -157,16 +154,15 @@ function Edit_art() {
     };
     console.log(objet);
     axios.post(host + "/report/report/", objet).then((rr) => {
+      // navigate_100("/account");
+      setbool(!bool)
       console.log(rr);
     });
   }, [done]);
 
-
   return (
     <div className="edit_page">
-      {isOpen &&(<Popup 
-        handelclickclose={togglePopup}
-      />)}
+      {isOpen && <Popup handelclickclose={togglePopup} />}
       <div className="fornav">
         <nav className="navbar_11">
           <ul className="navbar_list_11">
@@ -238,13 +234,14 @@ function Edit_art() {
                 <div className="scr_inp">
                   <div className="scr_inp_inp">
                     <form>
-                    <input
-                      type="number"
-                      max={100}
-                      min={0}
-                      className="innp"
-                      onChange={(event) => putscor(event.target.value)}
-                    /></form>
+                      <input
+                        type="number"
+                        max={100}
+                        min={0}
+                        className="innp"
+                        onChange={(event) => putscor(event.target.value)}
+                      />
+                    </form>
                   </div>
                   <div className="scr_inp_50">/100</div>
                 </div>
@@ -256,7 +253,7 @@ function Edit_art() {
               <textarea
                 name="description"
                 className="spec_art"
-                onChange={(e)=>changecmnt(e.target.value)}
+                onChange={(e) => changecmnt(e.target.value)}
                 placeholder="Comment"
               />
             </div>
@@ -272,6 +269,16 @@ function Edit_art() {
                 </button>
                 {isOpen && <Popup handelclickclose={togglePopup} />}
               </div>
+              {bool&&(
+              <div class="alert">
+                <span
+                  class="closebtn"
+                  // onclick="this.parentElement.style.display='none';"
+                >
+                  &times;
+                </span>
+                <strong>Success!</strong> your report is submited
+              </div>)}
             </div>
           </div>
         </div>

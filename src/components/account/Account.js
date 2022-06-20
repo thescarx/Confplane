@@ -78,6 +78,7 @@ function Account() {
     // window.location.reload();
   };
   const [image, setImage] = useState(null);
+  const [boool,setboool]=useState(true)
   const handleUpload = (event) => {
     // isImage = true;
     setImage(event.target.files[0]);
@@ -346,6 +347,7 @@ function Account() {
 
   return (
     <div className="nnn">
+      {loading && <div className="bb"><LoadingSpinner/><p>   Loading...</p></div>}
       {isOpen && (
         <Modifier
           setbool2={setbool2}

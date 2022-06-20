@@ -77,7 +77,13 @@ function Raport() {
                   )}
                     <label for="html">YES</label> {" "}
                   {q.answer === false && (
-                    <input type="radio" id="css" name="answer" value="false" />
+                    <input
+                      type="radio"
+                      id="css"
+                      name="answer"
+                      value="false"
+                      checked
+                    />
                   )}
                     <label for="css">NO</label>
                 </div>
