@@ -35,7 +35,7 @@ function AssignArticles() {
   useEffect(() => {
     axios
     .get(
-      "http://localhost:8000/articles/listforchairman/path/?conference_id="+id+"&status=accepted to review"
+      "http://192.168.8.100:8000/articles/listforchairman/path/?conference_id="+id+"&status=accepted to review"
     )
     .then((response) => {
       setData(response["data"]);
@@ -47,7 +47,7 @@ function AssignArticles() {
   const handleDeleteRev = (id1, id2) => {
      axios
       .post(
-        "http://localhost:8000/articles/remove_reviewer_from_article_reviewers",
+        "http://192.168.8.100:8000/articles/remove_reviewer_from_article_reviewers",
         {
           article: id1,
           user: id2,

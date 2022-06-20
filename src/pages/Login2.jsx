@@ -35,7 +35,7 @@ function Login2() {
   // },[])
 
   // const verifyAdmin=()=>{
-  //      axios.get('http://localhost:8000/users/profile').then((response)=>{
+  //      axios.get('http://192.168.8.100:8000/users/profile').then((response)=>{
   //       if(response["data"]["is_admin"]==true) {navigate('/admin')}
   //       else {navigate('/account')}
   //   }
@@ -50,7 +50,7 @@ function Login2() {
       // if(Object.keys(formErrors)!=0){setLoading(false)}
       if (Object.keys(formErrors).length == 0) {
         axios
-          .post("http://localhost:8000/users/login/token/", {
+          .post("http://192.168.8.100:8000/users/login/token/", {
             email: user,
             password: pwd,
           })
@@ -148,7 +148,7 @@ function Login2() {
         
         
         <span className="login_text">
-          <a href="http://localhost:3000/signup">don't have an account?</a>{" "}
+          <a href="./signup">don't have an account?</a>{" "}
         </span>
       </div>
       <div className="rightSide"></div>

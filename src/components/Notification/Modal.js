@@ -27,7 +27,7 @@ function Modal({ setOpenModal }) {
   );
   const [accepted, setAccepted] = useState(false);
   const [refused, setRefused] = useState(false);
-  const host = "http://127.0.0.1:8000";
+  const host = "http://192.168.8.100:8000";
   const handleAccept = (conf_id, id) => {
     axios
       .post(host + "/conferences/accepte_to_review/" + id, {

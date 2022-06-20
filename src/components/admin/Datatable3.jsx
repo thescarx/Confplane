@@ -18,13 +18,13 @@ function Datatable3({data,setData}) {
  )
 
 const handleDelete= (id)=>{
-  axios.delete("http://localhost:8000/conferences/admin/"+id).then(response=>{console.log(response);setBool3(!bool3)})
+  axios.delete("http://192.168.8.100:8000/conferences/admin/"+id).then(response=>{console.log(response);setBool3(!bool3)})
 
 
 }
 
  useEffect(() => {  
-  axios.get("http://localhost:8000/conferences/list/path").then(response=>
+  axios.get("http://192.168.8.100:8000/conferences/list/path").then(response=>
     setData(response["data"]))
 }, [bool3]);
 

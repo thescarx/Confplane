@@ -27,7 +27,7 @@ function MainConf() {
   let navigate_2 = useNavigate();
   let navigate = useNavigate();
   let navigate_3 = useNavigate();
-  const url = "http://127.0.0.1:8000/conferences/list/path";
+  const url = "http://192.168.8.100:8000/conferences/list/path";
   useEffect(() => {
     axios.get(url).then((resp) => {
       console.log(resp["data"]);

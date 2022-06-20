@@ -5,7 +5,7 @@ import "./modifier.css";
 import axios from "axios";
 
 const Modifier = (props) => {
-  let host = "http://127.0.0.1:8000";
+  let host = "http://192.168.8.100:8000";
   const [objettt,setobjettt]=useState(props.objet)
   const [image,setimage]=useState(null)
   const hiddenFileInput = useRef(null);

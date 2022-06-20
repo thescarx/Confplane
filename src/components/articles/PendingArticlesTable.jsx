@@ -23,7 +23,7 @@ function PendingArticlesTable() {
 
 
   useEffect(() => {
-    let url = "http://localhost:8000/articles/listforchairman/path/?conference_id="+id+"&status=pending";
+    let url = "http://192.168.8.100:8000/articles/listforchairman/path/?conference_id="+id+"&status=pending";
     console.log(url)
     axios
       .get(url)
@@ -32,7 +32,7 @@ function PendingArticlesTable() {
   }, [bool]);
 
   // const getName = async (id) => {
-  //   const res = await axios.get("http://localhost:8000/users/" + id);
+  //   const res = await axios.get("http://192.168.8.100:8000/users/" + id);
   //   return res["data"].first_name;
 
     // .then((response)=>{
@@ -45,14 +45,14 @@ function PendingArticlesTable() {
 
   const handleDecline = (id) => {
     axios
-      .put("http://localhost:8000/articles/" + id, { status: "refused" })
+      .put("http://192.168.8.100:8000/articles/" + id, { status: "refused" })
       .then((response) => {
         setBool(!bool)
       });
   };
   const handleAccept = (id) => {
     axios
-      .put("http://localhost:8000/articles/" + id, {
+      .put("http://192.168.8.100:8000/articles/" + id, {
         status: "accepted to review",
       })
       .then((response) => {

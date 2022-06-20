@@ -21,7 +21,7 @@ function Datatable({ data, setData }) {
     }
   );
   const handleDelete = (id) => {
-    axios.delete("http://localhost:8000/users/admin/" + id).then((response) => {
+    axios.delete("http://192.168.8.100:8000/users/admin/" + id).then((response) => {
       if (response.status == 200) {
         setBool(!bool);
         console.log("done");
@@ -30,7 +30,7 @@ function Datatable({ data, setData }) {
   };
   const handleBlock = (id) => {
     axios
-      .put("http://localhost:8000/users/admin/" + id, { is_active: false })
+      .put("http://192.168.8.100:8000/users/admin/" + id, { is_active: false })
       .then((response) => {
         if (response.status == 200) {
           setBool(!bool);
@@ -39,7 +39,7 @@ function Datatable({ data, setData }) {
   };
   const handleDeblock = (id) => {
     axios
-      .put("http://localhost:8000/users/admin/" + id, { is_active: true })
+      .put("http://192.168.8.100:8000/users/admin/" + id, { is_active: true })
       .then((response) => {
         if (response.status == 200) {
           setBool(!bool);
@@ -49,7 +49,7 @@ function Datatable({ data, setData }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/users/listforadmin/path")
+      .get("http://192.168.8.100:8000/users/listforadmin/path")
       .then((response) => setData(response["data"]));
   }, [bool]);
 

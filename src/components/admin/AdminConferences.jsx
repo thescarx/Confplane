@@ -8,11 +8,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import { useNavigate } from "react-router-dom";
 
 function AdminConferences({bool2,setBool2}) {
   const accesToken = localStorage.getItem("token");
   const [bool, setBool] = useState(false);
   // const [bool3,setBool3]= useState(false);
+  const navigate=useNavigate();
 
 
   axios.interceptors.request.use(
@@ -31,23 +33,23 @@ function AdminConferences({bool2,setBool2}) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/conferences/admin/list/path")
+      .get("http://192.168.8.100:8000/conferences/admin/list/path")
       .then((response) => {setData(response["data"])});
   }, [bool,bool2]);
 
 
   useEffect(() => {  
-    axios.get("http://localhost:8000/conferences/list/path").then(response=>
+    axios.get("http://192.168.8.100:8000/conferences/list/path").then(response=>
       {setData2(response["data"])})
   }, [bool,bool2]);
 
 
   // useEffect(() => {
   //   axios
-  //     .get("http://localhost:8000/conferences/admin/list/path")
+  //     .get("http://192.168.8.100:8000/conferences/admin/list/path")
   //     .then((response) => setData(response["data"]));
   //   axios
-  //     .get("http://localhost:8000/conferences/list/path")
+  //     .get("http://192.168.8.100:8000/conferences/list/path")
   //     .then((response) => setData2(response["data"]));
   // }, []);
 
@@ -57,13 +59,13 @@ function AdminConferences({bool2,setBool2}) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/conferences/admin/list/path?search=" + q)
+      .get("http://192.168.8.100:8000/conferences/admin/list/path?search=" + q)
       .then((response) => setData(response["data"]));
   }, [q]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/conferences/list/path?search=" + q2)
+      .get("http://192.168.8.100:8000/conferences/list/path?search=" + q2)
       .then((response) => setData2(response["data"]));
   }, [q2]);
 
@@ -72,7 +74,7 @@ function AdminConferences({bool2,setBool2}) {
 
   const handleAccept = (id) => {
     axios
-      .put("http://localhost:8000/conferences/admin/" + id, {
+      .put("http://192.168.8.100:8000/conferences/admin/" + id, {
         status: "accepted",
       })
       .then((response) => {
@@ -82,7 +84,7 @@ function AdminConferences({bool2,setBool2}) {
   
   const handleRefuse = (id) => {
     axios
-      .put("http://localhost:8000/conferences/admin/" + id, {
+      .put("http://192.168.8.100:8000/conferences/admin/" + id, {
         status: "refused",
       })
       .then((response) => {
@@ -93,7 +95,7 @@ function AdminConferences({bool2,setBool2}) {
 
 
   const handleDelete= (id)=>{
-    axios.delete("http://localhost:8000/conferences/admin/"+id)
+    axios.delete("http://192.168.8.100:8000/conferences/admin/"+id)
     .then(response=>{console.log(response);setBool(!bool)})
   
   
@@ -153,7 +155,9 @@ function AdminConferences({bool2,setBool2}) {
                     </div>
                     
                   </td>
-                  <td> <div>lien vers conference</div> </td>
+                  <td> <div className="lien-conf" onClick={()=>{
+                    navigate('/Conf/'+column.id)
+                  }} >lien vers conference</div> </td>
                 </tr>
               ))}
             </tbody>
@@ -203,7 +207,9 @@ function AdminConferences({bool2,setBool2}) {
                    
                     
                   </td>
-                  <td> <div> lien vers conference</div> </td>
+                  <td> <div className="lien-conf" onClick={()=>{
+                     navigate('/Conf/'+column.id)
+                  }} > lien vers conference</div> </td>
                 </tr>
               ))}
             </tbody>

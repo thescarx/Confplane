@@ -48,7 +48,7 @@ const handleSignout = ()=>{
 
     <div className='front' >
       <div className='adminsidebar' >
-      <h3 className='logo' > ConfePlan </h3>
+      <h3 className='logo' > ConfPlan </h3>
           <div className='adminsidebarmenu' >
             
             <div className='menulist' >

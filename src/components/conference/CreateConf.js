@@ -239,7 +239,7 @@ function CreateConf() {
 
     // if()
   };
-  const url = "http://127.0.0.1:8000/users/list/path";
+  const url = "http://192.168.8.100:8000/users/list/path";
 
   useEffect(() => {
     index = index + 2;
@@ -300,14 +300,14 @@ function CreateConf() {
       // console.log(bodyFormData)
       try {
         axios
-          .post("http://127.0.0.1:8000/conferences/", bodyFormData)
+          .post("http://192.168.8.100:8000/conferences/", bodyFormData)
           .then((response) => {
             if (isImage) {
               let data = new FormData();
               data.append("logo", logo);
               console.log(data);
               axios.put(
-                "http://127.0.0.1:8000/conferences/" + response.data["id"],
+                "http://192.168.8.100:8000/conferences/" + response.data["id"],
                 data
               );
 
@@ -317,7 +317,7 @@ function CreateConf() {
                   conference: response.data["id"],
                 };
                 axios
-                  .post("http://127.0.0.1:8000/report/question/", objet)
+                  .post("http://192.168.8.100:8000/report/question/", objet)
                   .then((resp) => {
                     console.log(resp);
                   });
@@ -628,16 +628,20 @@ function CreateConf() {
                 return (
                   <div className="userDiv" key={id}>
                     <div className="test">
-                      <div className="title">{reviewer.first_name}</div>
+                      <div className="title">{reviewer.first_name} {reviewer.family_name}</div>
 
                       <div className="host">
-                        Hosted by {reviewer.id}, Location -{" "}
-                        {reviewer.linked_in_username} to {reviewer.id}
+                        Email : {reviewer.email}
+                        
                       </div>
 
                       <div className="category">
                         {" "}
-                        Category: {reviewer.family_name}
+                        LinkedIn: {reviewer.linked_in_username}
+                      </div>
+                      <div className="category">
+                        {" "}
+                        Interests : {reviewer.fields_of_interssts}
                       </div>
 
                       {/* <div className="addremove"> */}
@@ -650,11 +654,11 @@ function CreateConf() {
                       {/* </div> */}
                     </div>
 
-                    <img
+                    {/* <img
                       className="image"
                       src={reviewer.profile_picture}
                       alt={reviewer.profile_picture}
-                    />
+                    /> */}
                   </div>
                 );
               })}

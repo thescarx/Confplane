@@ -4,7 +4,7 @@ import { notifications } from "./components/Notification/data";
 
 const token = localStorage.getItem("token");
 export const socket = new WebSocket(
-  "ws://127.0.0.1:8000/ws/socket-server/?token=" + token
+  "ws://192.168.8.100:8000/ws/socket-server/?token=" + token
 );
 export const SocketContext = React.createContext();
 

@@ -72,7 +72,7 @@ export const users = [
     linked_in_username: "string",
     fields_of_interssts: "string",
     bio: "this is bio",
-    profile_picture: "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+    profile_picture: "http://192.168.8.100:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false
   },
   {
@@ -85,7 +85,7 @@ export const users = [
     linked_in_username: "string",
     fields_of_interssts: "string",
     bio: "this is bio",
-    profile_picture: "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+    profile_picture: "http://192.168.8.100:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false
   },
   {
@@ -98,7 +98,7 @@ export const users = [
     linked_in_username: "string",
     fields_of_interssts: "string",
     bio: "this is bio",
-    profile_picture: "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+    profile_picture: "http://192.168.8.100:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false
   },
   {
@@ -111,7 +111,7 @@ export const users = [
     linked_in_username: "string",
     fields_of_interssts: "string",
     bio: "this is bio",
-    profile_picture: "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+    profile_picture: "http://192.168.8.100:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false
   },
   {
@@ -124,7 +124,7 @@ export const users = [
     linked_in_username: "string",
     fields_of_interssts: "string",
     bio: "this is bio",
-    profile_picture: "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+    profile_picture: "http://192.168.8.100:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false
   },
   {
@@ -137,7 +137,7 @@ export const users = [
     linked_in_username: "string",
     fields_of_interssts: "string",
     bio: "this is bio",
-    profile_picture: "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+    profile_picture: "http://192.168.8.100:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false
   },
   { 
@@ -211,7 +211,7 @@ export const users = [
       linked_in_username: "string",
       fields_of_interssts: "string",
       bio: "this is bio",
-      profile_picture: "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+      profile_picture: "http://192.168.8.100:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
       is_admin: false
     },
     {
@@ -224,7 +224,7 @@ export const users = [
       linked_in_username: "string",
       fields_of_interssts: "string",
       bio: "this is bio",
-      profile_picture: "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+      profile_picture: "http://192.168.8.100:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
       is_admin: false
     },
     {
@@ -237,7 +237,7 @@ export const users = [
       linked_in_username: "string",
       fields_of_interssts: "string",
       bio: "this is bio",
-      profile_picture: "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+      profile_picture: "http://192.168.8.100:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
       is_admin: false
     }
 ];

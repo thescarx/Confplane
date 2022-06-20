@@ -21,7 +21,7 @@ function Confirm() {
             </div>
 
             <div className="login_text">
-              <a href="http://localhost:3000/login">Login</a>
+              <a href="./login">Login</a>
             </div>
           </div>
         </div>

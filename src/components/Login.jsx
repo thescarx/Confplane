@@ -19,7 +19,7 @@ function Login() {
   const handleSubmit = () => {
     setFormErrors(validate(formInfo));
     axios
-      .post("http://localhost:8000/users/login/token/", {
+      .post("http://192.168.8.100:8000/users/login/token/", {
         email: formInfo.email,
         password: formInfo.password,
       })
@@ -72,7 +72,7 @@ function Login() {
         </button>
         <span className="login_text">
           {" "}
-          <a href="http://localhost:3000/">don't have an account?</a>{" "}
+          <a href="./">don't have an account?</a>{" "}
         </span>
       </div>
       <div className="rightSide"></div>
