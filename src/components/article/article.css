@@ -14,11 +14,12 @@
 }
 
 .left_item{
-    /* background-color: aqua; */
     flex: 40%;
     background-repeat: no-repeat;
     height: 30vh;
     text-align: right;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.32);
 }
 .left_item .photo{
     /* background-color: red; */

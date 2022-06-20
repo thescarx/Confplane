@@ -209,12 +209,12 @@ function Account() {
                     ""
                   )}
                 </div>
-                <div className="downfile">
+                <div className="downfile2">
                   <img
                     src={image_down}
                     alt=""
                     onClick={() => saveFile(cle.article_url)}
-                    className="down"
+                    className="down2"
                   />
                 </div>
               </div>
@@ -299,8 +299,7 @@ function Account() {
             <>
               <div
                 className="confDiv_3"
-                key={id}
-                onClick={() => navigate_4("/Edit_art/" + id)}
+               
               >
                 <div className="info_3">
                   <div className="test_3">
@@ -313,12 +312,17 @@ function Account() {
                   </div>
                 </div>
                 <div className="downfile_3">
+                
+                  <button className="btnnn"  key={id}
+                onClick={() => navigate_4("/Edit_art/" + id)}>Write report</button>
                   <img
                     src={image_down}
                     alt=""
                     onClick={() => saveFile(cle.article_url)}
-                    className="down"
+                    className="down2"
                   />
+                 
+                 
                 </div>
               </div>
             </>

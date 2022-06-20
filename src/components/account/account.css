@@ -146,15 +146,16 @@ h1 {
   position: relative;
   width: 100%;
   flex: 90%;
-  border-style: solid 1px;
-  border-color: #0FEC3F;
+  border-style: solid ;
+  border-radius: 50%;
+  border-color: #3438346f;
 }
 
 .profile_pic {
   opacity: 1;
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   /* transition: .5s ease; */
   backface-visibility: hidden;
 }
@@ -293,11 +294,12 @@ flex-direction: row;}
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 24px;
   /* background-color: #0FEC3F; */
 }
 .icon1 ,.icon2 ,.icon3,.icon4{
-  min-height: 25%;
-  min-width: 25%;
+  min-height: 15%;
+  min-width: 15%;
 }
 .icon1{
   color:#FF8514;
@@ -317,6 +319,31 @@ flex-direction: row;}
 .down{
   width: 25%;
   height: 25%;
+}
+.downfile2{
+  flex: 17%;
+  display: flex;
+  justify-content: left;
+  margin-left: 5%;
+  align-items: center;
+  /* padding: 30%; */
+}
+.btnnn{
+  width: 120px;
+  height: 42px;
+  background: rgba(0, 78, 100, 0.92);
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  color: aliceblue;
+}
+.down2{
+  width: 25%;
+  height: 25%;
+  padding-left: 30px;
+  margin-left: 120px;
+  padding-right: 20px;
+  display: flex;
+  /* justify-content: right; */
 }
 .title_1 {
   text-align: start;
@@ -435,17 +462,18 @@ flex-direction: row;}
   border-radius: 15px;
 }
 .info_3{
-  flex: 80%;
+  flex: 65%;
   /* background-color: #FF8514; */
 }
 .downfile_3{
   /* background-color: gold; */
-  flex: 20%;
+  flex: 35%;
   display: flex;
   justify-content: left;
   margin-left: 5%;
   align-items: center;
 }
+
 .down{
   width: 25%;
   height: 25%;

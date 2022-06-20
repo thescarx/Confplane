@@ -40,10 +40,26 @@
     /* background-color: blueviolet; */
     margin: 1%;
     justify-content: center;
-    /* display: flex; */
+    display: flex;
+    flex-direction: column;
+    min-width: 80%;
 
 }
-.confdesc h1  {
+.confff{
+    flex: 15%;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    /* background-color: aqua; */
+}
+.conff{
+    display: flex;
+    justify-content: center;
+    /* padding-top: 20px; */
+    flex: 85%;
+    /* background-color: blueviolet; */
+}
+.confff h1  {
         text-align: center;
         font-family: 'Poppins';
         font-size: 50px;
@@ -54,7 +70,7 @@
 * {
     font-family: 'Poppins'
 }
-.confdesc p {
+.conff p {
     margin-left: 4%;
     margin-top: 5%;
 }
