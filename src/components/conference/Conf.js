@@ -4,7 +4,6 @@ import "./Conf.css";
 import "./MainConf.css";
 
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LanguageIcon from "@mui/icons-material/Language";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -14,6 +13,7 @@ import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { conferences } from "./data";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import imageee from "./../account/conference.png"
 
 function Conf() {
   const [loading, setLoading] = useState(true);

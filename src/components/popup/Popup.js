@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./popup.css"
 import DatePicker from "react-datepicker";
 import axios from "axios";
-
+import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 import { format } from "date-fns";
 import { useParams } from "react-router-dom";
 
@@ -43,9 +43,7 @@ const Popup = (props) => {
   return (
     <div className="popup-box">
       <div className="box">
-        <button className="close-icon" onClick={props.handelclickclose}>
-          x
-        </button>
+        <CancelRoundedIcon onClick={props.handelclickclose} className="close-icon"/>
         <div className="popp">
           <div className="poppp">
           <textarea

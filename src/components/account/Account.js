@@ -16,16 +16,19 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { SocketContext } from "../../socket";
 import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import Modal from "../Notification/Modal";
 import { notifications } from "../../data";
 import EditIcon from "@mui/icons-material/Edit";
 import Modifier from "../modifier/Modifer";
 import logo from "./ profile.png";
 import conf_logo from "./conference.png";
+import LoadingSpinner from "../LoadingSpinner"
 
 function Account() {
   const [not, setNot] = useState(notifications);
   const socket = useContext(SocketContext);
+  const [loading,setLoading]=useState(false)
 
   socket.onmessage = function (e) {
     const obj = JSON.parse(e["data"]);
@@ -109,10 +112,12 @@ function Account() {
   // }
 
   useEffect(() => {
+    setLoading(true)
     axios
       .get(host + "/users/profile")
       .then((reponse) => {
         setdata_profile(reponse["data"]);
+        setLoading(false)
       })
       .catch((err) => {});
   }, [bool2]);
@@ -197,7 +202,7 @@ function Account() {
                   </div>
                 </div>
                 <div className="etat">
-                  {cle.status === "waiting for authors" ? (
+                  {cle.status === "pending" ? (
                     <HistoryIcon className="icon1" />
                   ) : cle.status === "accepted" ? (
                     <CheckCircleOutlineIcon className="icon2" />
@@ -205,16 +210,16 @@ function Account() {
                     <DoDisturbIcon className="icon3" />
                   ) : cle.status === "accepted to review" ? (
                     <HourglassBottomIcon className="icon4" />
-                  ) : (
-                    ""
-                  )}
+                  ) : cle.status === "waiting for authors" ? (
+                    <HourglassTopIcon className="icon5"/>
+                  ):""}
                 </div>
                 <div className="downfile2">
                   <img
                     src={image_down}
                     alt=""
                     onClick={() => saveFile(cle.article_url)}
-                    className="down2"
+                    className="down22"
                   />
                 </div>
               </div>
@@ -395,7 +400,7 @@ function Account() {
               </ul>
             </nav>
           )}
-
+            
           <div className="proff">
             {isOpenModal && <Modal setOpenModal={setOpenModal}></Modal>}
 
@@ -471,7 +476,7 @@ function Account() {
                     <div className="profile_info_det">
                       <div className="profile_info_det_div">
                         <LocationOnIcon className="icon"></LocationOnIcon>
-                        <p>{data_profile.full_adress}</p>
+                        <p> {data_profile.full_adress}</p>
                       </div>
                       <div className="profile_info_det_div">
                         <AlternateEmailIcon className="icon_p"></AlternateEmailIcon>
