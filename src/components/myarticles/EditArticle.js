@@ -154,7 +154,7 @@ function ApplyForm() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get("http://192.168.8.100:8000/articles/" + id).then((resp) => {
+    axios.get("http://192.168.8.101:8000/articles/" + id).then((resp) => {
       setFormValues({
         title: resp.data.title,
         categories: resp.data.categories,
@@ -203,14 +203,14 @@ function ApplyForm() {
         console.log(bodyFormData);
 
         axios
-          .put("http://192.168.8.100:8000/articles/article/" + id, bodyFormData)
+          .put("http://192.168.8.101:8000/articles/article/" + id, bodyFormData)
           .then((res) => {
             // let id = res.data["id"];
             let data = new FormData();
             data.append("article_url", file);
             console.log(data);
             axios
-              .post("http://192.168.8.100:8000/articles/upload_article/" + id, data)
+              .post("http://192.168.8.101:8000/articles/upload_article/" + id, data)
               .then((resp) => {
                 console.log(resp.status);
               });

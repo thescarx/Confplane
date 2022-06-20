@@ -191,14 +191,14 @@ function ApplyForm() {
         console.log(bodyFormData);
 
         axios
-          .post("http://192.168.8.100:8000/articles/", bodyFormData)
+          .post("http://192.168.8.101:8000/articles/", bodyFormData)
           .then((res) => {
             let id = res.data["id"];
             let data = new FormData();
             data.append("article_url", file);
             console.log(data);
             axios
-              .post("http://192.168.8.100:8000/articles/upload_article/" + id, data)
+              .post("http://192.168.8.101:8000/articles/upload_article/" + id, data)
               .then((resp) => {
                 console.log(resp.status);
               });

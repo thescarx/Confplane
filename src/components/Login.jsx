@@ -19,7 +19,7 @@ function Login() {
   const handleSubmit = () => {
     setFormErrors(validate(formInfo));
     axios
-      .post("http://192.168.8.100:8000/users/login/token/", {
+      .post("http://192.168.8.101:8000/users/login/token/", {
         email: formInfo.email,
         password: formInfo.password,
       })

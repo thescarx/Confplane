@@ -8,7 +8,7 @@ function PopUp({ id, refresh, setRefresh, trigger, pop, setPop, articleN }) {
   const article = articleN;
   useEffect(() => {
     axios
-      .post("http://192.168.8.100:8000/conferences/reviewers/list/" + id)
+      .post("http://192.168.8.101:8000/conferences/reviewers/list/" + id)
       .then((response) => {
         setData(response["data"]);
       });
@@ -16,7 +16,7 @@ function PopUp({ id, refresh, setRefresh, trigger, pop, setPop, articleN }) {
 
   const handleAdd = (id) => {
     axios
-      .post("http://192.168.8.100:8000/articles/affect_article_to_reviewer", {
+      .post("http://192.168.8.101:8000/articles/affect_article_to_reviewer", {
         article: article,
         user: id,
       })

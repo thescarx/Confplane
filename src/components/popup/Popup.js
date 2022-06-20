@@ -22,7 +22,7 @@ const Popup = (props) => {
   };
   // const [form,setform]=useState(initialValues)
   const [deadline,setdeadline]=useState(new Date())
-  let host = "http://192.168.8.100:8000";
+  let host = "http://192.168.8.101:8000";
  
  useEffect((e)=>{
   let objet={

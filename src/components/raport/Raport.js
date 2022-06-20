@@ -21,7 +21,7 @@ function Raport() {
     }
   );
 
-  let host = "http://192.168.8.100:8000";
+  let host = "http://192.168.8.101:8000";
   let navigate = useNavigate();
   let navigate_2 = useNavigate();
 
@@ -33,7 +33,7 @@ function Raport() {
     // let url2 = host + "​/report​/report​/"+id ;
     // console.log(url2)
     axios
-      .get("http://192.168.8.100:8000/report/report/" + id)
+      .get("http://192.168.8.101:8000/report/report/" + id)
       .then((artts) => {
         idd = artts["data"].article;
         console.log("ggg" + idd);

@@ -51,8 +51,8 @@ function Conf() {
   });
 
   const { id } = useParams();
-  const host = "http://192.168.8.100:8000";
-  const url = "http://192.168.8.100:8000/conferences/" + id;
+  const host = "http://192.168.8.101:8000";
+  const url = "http://192.168.8.101:8000/conferences/" + id;
 
   useEffect(() => {
     axios.get(url).then((resp) => {

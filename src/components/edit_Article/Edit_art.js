@@ -29,7 +29,7 @@ function Edit_art() {
     }
   );
   const { id } = useParams();
-  let host = "http://192.168.8.100:8000";
+  let host = "http://192.168.8.101:8000";
   let navigate = useNavigate();
   let navigate_2 = useNavigate();
   const [isOpen, setIsOpen] = useState(false);

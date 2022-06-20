@@ -20,7 +20,7 @@ function AdminUsers({setBool2,bool2}) {
 
 const VerifyToken=(token)=>{
    
-    axios.post("http://192.168.8.100:8000/api/token/verify/",{token:token}).then(
+    axios.post("http://192.168.8.101:8000/api/token/verify/",{token:token}).then(
         response=>{
           if (response.status===401){
             console.log('expired')
@@ -62,14 +62,14 @@ const VerifyToken=(token)=>{
   useEffect(() => {
 
     axios
-      .get("http://192.168.8.100:8000/users/listforadmin/path")
+      .get("http://192.168.8.101:8000/users/listforadmin/path")
       .then((response) => {setData(response["data"])})
     
   }, [bool,bool2]);
 
   // useEffect(() => {
   //   axios
-  //     .get("http://192.168.8.100:8000/users/listforadmin/path")
+  //     .get("http://192.168.8.101:8000/users/listforadmin/path")
   //     .then((response) => setData(response["data"]));
   // }, []);
 
@@ -78,19 +78,19 @@ const VerifyToken=(token)=>{
   useEffect(() => {
     if (q===""){
       axios
-      .get("http://192.168.8.100:8000/users/listforadmin/path")
+      .get("http://192.168.8.101:8000/users/listforadmin/path")
       .then((response) => setData(response["data"]));
       console.log('sans search')
 
     }
     else {
       axios
-      .get("http://192.168.8.100:8000/users/listforadmin/path?search=" + q)
+      .get("http://192.168.8.101:8000/users/listforadmin/path?search=" + q)
       .then((response) => setData(response["data"]));
       console.log('search')
     }
     // axios
-    //   .get("http://192.168.8.100:8000/users/listforadmin/path?search=" + q)
+    //   .get("http://192.168.8.101:8000/users/listforadmin/path?search=" + q)
     //   .then((response) => setData(response["data"]));
   }, [q]);
 
@@ -98,7 +98,7 @@ const VerifyToken=(token)=>{
   
   const handleDelete = (id) => {
   
-    axios.delete("http://192.168.8.100:8000/users/admin/" + id).then((response) => {
+    axios.delete("http://192.168.8.101:8000/users/admin/" + id).then((response) => {
       if (response.status === 200) {
         setBool(!bool);
       }
@@ -107,7 +107,7 @@ const VerifyToken=(token)=>{
   const handleBlock = (id) => {
     VerifyToken(accesToken)
     axios
-      .put("http://192.168.8.100:8000/users/admin/" + id, { is_active: false })
+      .put("http://192.168.8.101:8000/users/admin/" + id, { is_active: false })
       .then((response) => {
         if (response.status == 200) {
           setBool(!bool);
@@ -118,7 +118,7 @@ const VerifyToken=(token)=>{
   const handleDeblock = (id) => {
     VerifyToken(accesToken)
     axios
-      .put("http://192.168.8.100:8000/users/admin/" + id, { is_active: true })
+      .put("http://192.168.8.101:8000/users/admin/" + id, { is_active: true })
       .then((response) => {
         if (response.status == 200) {
           setBool(!bool);

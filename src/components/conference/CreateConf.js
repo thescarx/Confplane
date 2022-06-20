@@ -239,7 +239,7 @@ function CreateConf() {
 
     // if()
   };
-  const url = "http://192.168.8.100:8000/users/list/path";
+  const url = "http://192.168.8.101:8000/users/list/path";
 
   useEffect(() => {
     index = index + 2;
@@ -300,14 +300,14 @@ function CreateConf() {
       // console.log(bodyFormData)
       try {
         axios
-          .post("http://192.168.8.100:8000/conferences/", bodyFormData)
+          .post("http://192.168.8.101:8000/conferences/", bodyFormData)
           .then((response) => {
             if (isImage) {
               let data = new FormData();
               data.append("logo", logo);
               console.log(data);
               axios.put(
-                "http://192.168.8.100:8000/conferences/" + response.data["id"],
+                "http://192.168.8.101:8000/conferences/" + response.data["id"],
                 data
               );
 
@@ -317,7 +317,7 @@ function CreateConf() {
                   conference: response.data["id"],
                 };
                 axios
-                  .post("http://192.168.8.100:8000/report/question/", objet)
+                  .post("http://192.168.8.101:8000/report/question/", objet)
                   .then((resp) => {
                     console.log(resp);
                   });

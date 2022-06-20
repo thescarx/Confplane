@@ -234,7 +234,7 @@ function EditConf() {
   };
   const [conf, setConf] = useState({});
   const { id } = useParams();
-  const url = "http://192.168.8.100:8000/conferences/" + id;
+  const url = "http://192.168.8.101:8000/conferences/" + id;
 
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -314,7 +314,7 @@ function EditConf() {
 
       console.log(bodyFormData);
       try {
-        let url = "http://192.168.8.100:8000/conferences/" + id;
+        let url = "http://192.168.8.101:8000/conferences/" + id;
         console.log(url);
         axios.put(url, bodyFormData).then((response) => {
           console.log("1 done");
@@ -324,7 +324,7 @@ function EditConf() {
             data.append("logo", logo);
             console.log(data);
             axios
-              .put("http://192.168.8.100:8000/conferences/" + id, data)
+              .put("http://192.168.8.101:8000/conferences/" + id, data)
               .then((res) => console.log(res.toString()));
           }
           // console.log(response['data'])

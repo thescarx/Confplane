@@ -38,7 +38,7 @@ function Account() {
   };
 
   // console.log("this is the data " + data);
-  let host = "http://192.168.8.100:8000";
+  let host = "http://192.168.8.101:8000";
   let navigate = useNavigate();
   let navigate_2 = useNavigate();
   let navigate_4 = useNavigate();
@@ -127,13 +127,13 @@ function Account() {
     e.preventDefault();
     let data = new FormData();
     data.append("profile_picture", image);
-    axios.put("http://192.168.8.100:8000/users/profile", data).then((resp) => {
+    axios.put("http://192.168.8.101:8000/users/profile", data).then((resp) => {
       console.log(resp["data"]);
     });
   };
   useEffect(() => {
     // const socket = new WebSocket(
-    //   "ws://192.168.8.100:8000/ws/socket-server/?token=" + token
+    //   "ws://192.168.8.101:8000/ws/socket-server/?token=" + token
     // );
     // socket.onmessage = function (e) {
     //   const obj = JSON.parse(e["data"]);
@@ -267,10 +267,10 @@ function Account() {
                   )}
                 </div>
                 <div className="downfile_2">
-                  {cle.logo === "http://192.168.8.100:8000/media/hello" && (
+                  {cle.logo === "http://192.168.8.101:8000/media/hello" && (
                     <img src={conf_logo} alt={conf_logo} className="down" />
                   )}
-                  {cle.logo !== "http://192.168.8.100:8000/media/hello" && (
+                  {cle.logo !== "http://192.168.8.101:8000/media/hello" && (
                     <img src={cle.logo} alt={cle.logo} className="down" />
                   )}
                 </div>

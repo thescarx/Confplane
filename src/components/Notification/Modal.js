@@ -27,7 +27,7 @@ function Modal({ setOpenModal }) {
   );
   const [accepted, setAccepted] = useState(false);
   const [refused, setRefused] = useState(false);
-  const host = "http://192.168.8.100:8000";
+  const host = "http://192.168.8.101:8000";
   const handleAccept = (conf_id, id) => {
     axios
       .post(host + "/conferences/accepte_to_review/" + id, {
@@ -36,6 +36,7 @@ function Modal({ setOpenModal }) {
       })
       .then((resp) => console.log("this is the resp " + resp));
     setAccepted(true);
+    window.location.reload()
   };
   const handleRefuse = (conf_id, id) => {
     axios
@@ -45,6 +46,8 @@ function Modal({ setOpenModal }) {
       })
       .then((resp) => console.log("this is the resp " + resp));
     setRefused(true);
+    window.location.reload()
+
   };
   const [notif, setNotif] = useState(notifications);
   let navigate = useNavigate();
@@ -86,15 +89,7 @@ function Modal({ setOpenModal }) {
             console.log(id);
             return (
               <div
-                onClick={() => {
-                  handleNotifications(
-                    conference_id,
-                    id,
-                    invitation_status,
-                    request_to_edit_article_id,
-                    type
-                  );
-                }}
+                
                 className="notificationDiv"
               >
                 <div className="icon">
@@ -103,7 +98,15 @@ function Modal({ setOpenModal }) {
                     fontSize="large"
                   />
                 </div>
-                <div className="subject">{nott.subject}</div>
+                <div onClick={() => {
+                  handleNotifications(
+                    conference_id,
+                    id,
+                    invitation_status,
+                    request_to_edit_article_id,
+                    type
+                  );
+                }} className="subject">{nott.subject}</div>
                 {nott.type === "request_to_edit" && (
                   <div className="icons">
                     <EditIcon fontSize="large" />

@@ -27,7 +27,7 @@ function MainConf() {
   let navigate_2 = useNavigate();
   let navigate = useNavigate();
   let navigate_3 = useNavigate();
-  const url = "http://192.168.8.100:8000/conferences/list/path";
+  const url = "http://192.168.8.101:8000/conferences/list/path";
   useEffect(() => {
     axios.get(url).then((resp) => {
       console.log(resp["data"]);
@@ -112,7 +112,7 @@ function MainConf() {
                   <div className="category"> Category : {conf.categories}</div>
                 </div>
                 <div className="imgDiv">
-                  <img className="image" src={conf.logo} alt={conf.logo} />
+                {conf.logo !== "http://192.168.8.101:8000/media/hello" && <img className="image" src={conf.logo} alt={conf.logo} />}
                 </div>
               </div>
             );
