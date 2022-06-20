@@ -34,6 +34,7 @@ import Edit_art from "./components/edit_Article/Edit_art";
 import EditFromRev from "./components/editfromrev/EditFromRev";
 import Raport from "./components/raport/Raport";
 import Check from "./components/Signup/Check";
+import AuthorThnx from "./components/AuthorThnx";
 
 function App() {
   // const socket = useContext(SocketContext);
@@ -89,6 +90,8 @@ function App() {
 
           <Route path="MainConf" element={<MainConf />} />
           <Route path="/check" element={<Check />} />
+          <Route path="/author" element={<AuthorThnx />} />
+
           {/* <Route path="/account" element={<Account/>}/> */}
         </Route>
       </Routes>

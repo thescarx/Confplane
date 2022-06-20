@@ -28,26 +28,24 @@ function AssignArticles() {
     }
   );
 
-  const getData = async () => {
-    await axios
-      .get(
-        "http://localhost:8000/articles/listforchairman/path/?conference_id="+id+"&status=accepted to review"
-      )
-      .then((response) => {
-        setData(response["data"]);
-
-        console.log("refreshed data");
-      });
-  };
+  // const getData =  () => {
+    
+  // };
 
   useEffect(() => {
-    getData();
+    axios
+    .get(
+      "http://localhost:8000/articles/listforchairman/path/?conference_id="+id+"&status=accepted to review"
+    )
+    .then((response) => {
+      setData(response["data"]);
+    });
   }, [refresh]);
   const {id} = useParams();
 
 
-  const handleDeleteRev = async (id1, id2) => {
-    await axios
+  const handleDeleteRev = (id1, id2) => {
+     axios
       .post(
         "http://localhost:8000/articles/remove_reviewer_from_article_reviewers",
         {
