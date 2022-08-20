@@ -25,14 +25,14 @@ function ReviewResultTable() {
   const {id} = useParams();
    const handleDecline = (id) => {
     axios
-      .put("http://192.168.8.101:8000/articles/" + id, { status: "refused" })
+      .put("http://127.0.0.1:8000/articles/" + id, { status: "refused" })
       .then((response) => {
         setBool(!bool)
       });
   };
   const handleAccept = (id) => {
     axios
-      .put("http://192.168.8.101:8000/articles/" + id, {
+      .put("http://127.0.0.1:8000/articles/" + id, {
         status: "accepted",
       })
       .then((response) => {
@@ -43,7 +43,7 @@ function ReviewResultTable() {
 
   useEffect(() => {
     axios
-      .get("http://192.168.8.101:8000/articles/listforchairman/path/?conference_id="+id+"&status=accepted to review")
+      .get("http://127.0.0.1:8000/articles/listforchairman/path/?conference_id="+id+"&status=accepted to review")
       .then((response) => setData(response["data"]));
   }, [bool]);
   const saveFile = (urll,title) => {

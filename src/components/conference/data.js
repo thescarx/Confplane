@@ -7,7 +7,7 @@ export const conferences = [
     end_date: "2022-07-02T12:00:00Z",
     id: 63,
     location: "Barcelona, Spain",
-    logo: "http://192.168.8.101:8000/media/logos/conf1.jpg",
+    logo: "http://127.0.0.1:8000/media/logos/conf1.jpg",
     name_of_host: "EFI",
     reviewers: [],
     site: "https://efi.int/membership/ac",
@@ -31,7 +31,7 @@ export const confreviewers = [
     fields_of_interssts: "string",
     bio: "this is bio",
     profile_picture:
-      "http://192.168.8.101:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+      "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false,
   },
 ];
@@ -48,7 +48,7 @@ export const users = [
     fields_of_interssts: "string",
     bio: "this is bio",
     profile_picture:
-      "http://192.168.8.101:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+      "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false,
   },
   {
@@ -62,7 +62,7 @@ export const users = [
     fields_of_interssts: "string",
     bio: "this is bio",
     profile_picture:
-      "http://192.168.8.101:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+      "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false,
   },
   {
@@ -76,7 +76,7 @@ export const users = [
     fields_of_interssts: "string",
     bio: "this is bio",
     profile_picture:
-      "http://192.168.8.101:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+      "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false,
   },
   {
@@ -90,7 +90,7 @@ export const users = [
     fields_of_interssts: "string",
     bio: "this is bio",
     profile_picture:
-      "http://192.168.8.101:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+      "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false,
   },
   {
@@ -104,7 +104,7 @@ export const users = [
     fields_of_interssts: "string",
     bio: "this is bio",
     profile_picture:
-      "http://192.168.8.101:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+      "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false,
   },
   {
@@ -118,7 +118,7 @@ export const users = [
     fields_of_interssts: "string",
     bio: "this is bio",
     profile_picture:
-      "http://192.168.8.101:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
+      "http://127.0.0.1:8000/media/profile_pictures/consult-declar_nKXwXRI.png",
     is_admin: false,
   },
 ];

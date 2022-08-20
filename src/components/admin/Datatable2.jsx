@@ -24,7 +24,7 @@ function Datatable2({ data, setData }) {
   // }
   const handleAccept = (id) => {
     axios
-      .put("http://192.168.8.101:8000/conferences/admin/" + id, {
+      .put("http://127.0.0.1:8000/conferences/admin/" + id, {
         status: "accepted",
       })
       .then((response) => {
@@ -35,7 +35,7 @@ function Datatable2({ data, setData }) {
   
   const handleRefuse = (id) => {
     axios
-      .put("http://192.168.8.101:8000/conferences/admin/" + id, {
+      .put("http://127.0.0.1:8000/conferences/admin/" + id, {
         status: "refused",
       })
       .then((response) => {
@@ -45,7 +45,7 @@ function Datatable2({ data, setData }) {
 
   useEffect(() => {
     axios
-      .get("http://192.168.8.101:8000/conferences/admin/list/path")
+      .get("http://127.0.0.1:8000/conferences/admin/list/path")
       .then((response) => setData(response["data"]));
   }, [bool2]);
 

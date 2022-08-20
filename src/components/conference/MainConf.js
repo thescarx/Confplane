@@ -8,6 +8,7 @@ import { HashLink as Link } from "react-router-hash-link";
 import { useNavigate } from "react-router-dom";
 import Conf from "./Conf";
 import axios from "axios";
+import imagg from "./../account/conference.png"
 
 import { format } from "date-fns";
 
@@ -27,7 +28,7 @@ function MainConf() {
   let navigate_2 = useNavigate();
   let navigate = useNavigate();
   let navigate_3 = useNavigate();
-  const url = "http://192.168.8.101:8000/conferences/list/path";
+  const url = "http://127.0.0.1:8000/conferences/list/path";
   useEffect(() => {
     axios.get(url).then((resp) => {
       console.log(resp["data"]);
@@ -112,7 +113,13 @@ function MainConf() {
                   <div className="category"> Category : {conf.categories}</div>
                 </div>
                 <div className="imgDiv">
-                {conf.logo !== "http://192.168.8.101:8000/media/hello" && <img className="image" src={conf.logo} alt={conf.logo} />}
+                {conf.logo === "http://127.0.0.1:8000/media/hello" && (
+                    <img src={imagg} alt={imagg} className="downnn" />
+                  )}
+                  {conf.logo !== "http://127.0.0.1:8000/media/hello" && (
+                    <img src={conf.logo} alt={conf.logo} className="downnn" />
+                  )}
+                  {/* <img className="image" src={conf.logo} alt={conf.logo} /> */}
                 </div>
               </div>
             );

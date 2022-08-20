@@ -33,7 +33,7 @@ function Raport() {
     // let url2 = host + "​/report​/report​/"+id ;
     // console.log(url2)
     axios
-      .get("http://192.168.8.101:8000/report/report/" + id)
+      .get("http://127.0.0.1:8000/report/report/" + id)
       .then((artts) => {
         idd = artts["data"].article;
         console.log("ggg" + idd);
@@ -77,7 +77,13 @@ function Raport() {
                   )}
                     <label for="html">YES</label> {" "}
                   {q.answer === false && (
-                    <input type="radio" id="css" name="answer" value="false" />
+                    <input
+                      type="radio"
+                      id="css"
+                      name="answer"
+                      value="false"
+                      checked
+                    />
                   )}
                     <label for="css">NO</label>
                 </div>

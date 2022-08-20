@@ -14,7 +14,7 @@ function EditFromRev() {
 
   const modify = () => {
     console.log("yahah");
-    let urll = "http://192.168.8.101:8000/articles/edit_article/" + article.article;
+    let urll = "http://127.0.0.1:8000/articles/edit_article/" + article.article;
     let data = new FormData();
     data.append("article_url", file);
     data.append("request_to_edit", id);
@@ -34,7 +34,7 @@ function EditFromRev() {
   const { id } = useParams();
   const [date, setDate] = useState("");
   useEffect(() => {
-    let url = "http://192.168.8.101:8000/articles/get/request_to_edit/" + id;
+    let url = "http://127.0.0.1:8000/articles/get/request_to_edit/" + id;
     axios.get(url).then((resp) => {
       console.log(resp)
       if (resp.status === 200) {

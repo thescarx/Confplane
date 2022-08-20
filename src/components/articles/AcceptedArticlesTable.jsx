@@ -30,14 +30,14 @@ function AcceptedArticlesTable() {
 
   const handleDelete = (id) => {
     axios
-      .put("http://192.168.8.101:8000/articles/" + id, { status: "refused" })
+      .put("http://127.0.0.1:8000/articles/" + id, { status: "refused" })
       .then((response) => {
         setBool(!bool)
       });
   };
 
   useEffect(() => {
-    let url ="http://192.168.8.101:8000/articles/listforchairman/path/?conference_id="+id+"&status=accepted"; 
+    let url ="http://127.0.0.1:8000/articles/listforchairman/path/?conference_id="+id+"&status=accepted"; 
     console.log(url)
     axios
       .get(url)

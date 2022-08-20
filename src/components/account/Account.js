@@ -41,7 +41,7 @@ function Account() {
   };
 
   // console.log("this is the data " + data);
-  let host = "http://192.168.8.101:8000";
+  let host = "http://127.0.0.1:8000";
   let navigate = useNavigate();
   let navigate_2 = useNavigate();
   let navigate_4 = useNavigate();
@@ -78,6 +78,7 @@ function Account() {
     // window.location.reload();
   };
   const [image, setImage] = useState(null);
+  const [boool,setboool]=useState(true)
   const handleUpload = (event) => {
     // isImage = true;
     setImage(event.target.files[0]);
@@ -132,7 +133,7 @@ function Account() {
     e.preventDefault();
     let data = new FormData();
     data.append("profile_picture", image);
-    axios.put("http://192.168.8.101:8000/users/profile", data).then((resp) => {
+    axios.put("http://127.0.0.1:8000/users/profile", data).then((resp) => {
       console.log(resp["data"]);
     });
   };
@@ -272,10 +273,10 @@ function Account() {
                   )}
                 </div>
                 <div className="downfile_2">
-                  {cle.logo === "http://192.168.8.101:8000/media/hello" && (
+                  {cle.logo === "http://127.0.0.1:8000/media/hello" && (
                     <img src={conf_logo} alt={conf_logo} className="down" />
                   )}
-                  {cle.logo !== "http://192.168.8.101:8000/media/hello" && (
+                  {cle.logo !== "http://127.0.0.1:8000/media/hello" && (
                     <img src={cle.logo} alt={cle.logo} className="down" />
                   )}
                 </div>
@@ -346,6 +347,7 @@ function Account() {
 
   return (
     <div className="nnn">
+      {loading && <div className="bb"><LoadingSpinner/><p>   Loading...</p></div>}
       {isOpen && (
         <Modifier
           setbool2={setbool2}

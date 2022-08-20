@@ -35,7 +35,7 @@ function Login2() {
   // },[])
 
   // const verifyAdmin=()=>{
-  //      axios.get('http://192.168.8.101:8000/users/profile').then((response)=>{
+  //      axios.get('http://127.0.0.1:8000/users/profile').then((response)=>{
   //       if(response["data"]["is_admin"]==true) {navigate('/admin')}
   //       else {navigate('/account')}
   //   }
@@ -50,7 +50,7 @@ function Login2() {
       // if(Object.keys(formErrors)!=0){setLoading(false)}
       if (Object.keys(formErrors).length == 0) {
         axios
-          .post("http://192.168.8.101:8000/users/login/token/", {
+          .post("http://127.0.0.1:8000/users/login/token/", {
             email: user,
             password: pwd,
           })

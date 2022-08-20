@@ -59,7 +59,7 @@ function Form() {
     if(Object.keys(formErrors).length!=0){setLoading(false)}
     if(Object.keys(formErrors).length==0){
       axios
-      .post("http://192.168.8.101:8000/users/register/", {
+      .post("http://127.0.0.1:8000/users/register/", {
         first_name: formData.firstname,
         family_name: formData.familyname,
         email: formData.email,

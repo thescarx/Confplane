@@ -33,23 +33,23 @@ function AdminConferences({bool2,setBool2}) {
 
   useEffect(() => {
     axios
-      .get("http://192.168.8.101:8000/conferences/admin/list/path")
+      .get("http://127.0.0.1:8000/conferences/admin/list/path")
       .then((response) => {setData(response["data"])});
   }, [bool,bool2]);
 
 
   useEffect(() => {  
-    axios.get("http://192.168.8.101:8000/conferences/list/path").then(response=>
+    axios.get("http://127.0.0.1:8000/conferences/list/path").then(response=>
       {setData2(response["data"])})
   }, [bool,bool2]);
 
 
   // useEffect(() => {
   //   axios
-  //     .get("http://192.168.8.101:8000/conferences/admin/list/path")
+  //     .get("http://127.0.0.1:8000/conferences/admin/list/path")
   //     .then((response) => setData(response["data"]));
   //   axios
-  //     .get("http://192.168.8.101:8000/conferences/list/path")
+  //     .get("http://127.0.0.1:8000/conferences/list/path")
   //     .then((response) => setData2(response["data"]));
   // }, []);
 
@@ -59,13 +59,13 @@ function AdminConferences({bool2,setBool2}) {
 
   useEffect(() => {
     axios
-      .get("http://192.168.8.101:8000/conferences/admin/list/path?search=" + q)
+      .get("http://127.0.0.1:8000/conferences/admin/list/path?search=" + q)
       .then((response) => setData(response["data"]));
   }, [q]);
 
   useEffect(() => {
     axios
-      .get("http://192.168.8.101:8000/conferences/list/path?search=" + q2)
+      .get("http://127.0.0.1:8000/conferences/list/path?search=" + q2)
       .then((response) => setData2(response["data"]));
   }, [q2]);
 
@@ -74,7 +74,7 @@ function AdminConferences({bool2,setBool2}) {
 
   const handleAccept = (id) => {
     axios
-      .put("http://192.168.8.101:8000/conferences/admin/" + id, {
+      .put("http://127.0.0.1:8000/conferences/admin/" + id, {
         status: "accepted",
       })
       .then((response) => {
@@ -84,7 +84,7 @@ function AdminConferences({bool2,setBool2}) {
   
   const handleRefuse = (id) => {
     axios
-      .put("http://192.168.8.101:8000/conferences/admin/" + id, {
+      .put("http://127.0.0.1:8000/conferences/admin/" + id, {
         status: "refused",
       })
       .then((response) => {
@@ -95,7 +95,7 @@ function AdminConferences({bool2,setBool2}) {
 
 
   const handleDelete= (id)=>{
-    axios.delete("http://192.168.8.101:8000/conferences/admin/"+id)
+    axios.delete("http://127.0.0.1:8000/conferences/admin/"+id)
     .then(response=>{console.log(response);setBool(!bool)})
   
   

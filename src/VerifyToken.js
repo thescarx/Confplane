@@ -7,7 +7,7 @@ export const VerifyContext=React.createContext();
 
 export const VerifyToken=(token)=>{
    
-  axios.post("http://192.168.8.101:8000/api/token/verify/",{token:token}).then(
+  axios.post("http://127.0.0.1:8000/api/token/verify/",{token:token}).then(
       response=>{
         if (response.status===401){
           console.log('expired')
